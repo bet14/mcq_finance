@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corporate Finance & IT Management - MCQ Quiz</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; }
+  header { background: linear-gradient(135deg, #1a3c6e, #2d6abf); color: white; padding: 24px 32px; }
+  header h1 { font-size: 1.6rem; }
+  header p { font-size: 0.95rem; opacity: 0.85; margin-top: 6px; }
+  .sticky-bar { position: sticky; top: 0; z-index: 100; background: #1a3c6e; color: white;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 32px; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  .sticky-bar .score-info span { margin-right: 18px; }
+  .sticky-bar button { background: #f0a500; border: none; color: #1a3c6e;
+    font-weight: bold; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-size: 0.95rem; }
+  .sticky-bar button:hover { background: #ffc233; }
+  .progress-wrap { background: #0d2244; height: 6px; }
+  .progress-bar { height: 6px; background: #4caf50; transition: width 0.3s; width: 0%; }
+  .container { max-width: 860px; margin: 30px auto; padding: 0 16px 60px; }
+  .section-title { font-size: 1.1rem; font-weight: bold; color: #1a3c6e;
+    border-left: 5px solid #2d6abf; padding-left: 12px; margin: 32px 0 14px; }
+  .question-card { background: white; border-radius: 10px; padding: 20px 24px;
+    margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #ccc; }
+  .question-card.answered-correct { border-left-color: #4caf50; }
+  .question-card.answered-wrong { border-left-color: #e53935; }
+  .q-number { font-size: 0.78rem; color: #888; font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+  .q-text { font-size: 1rem; font-weight: 600; margin-bottom: 14px; line-height: 1.5; }
+  .options label { display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px;
+    border-radius: 7px; cursor: pointer; margin-bottom: 7px; border: 1.5px solid #e0e0e0;
+    transition: background 0.15s; font-size: 0.95rem; }
+  .options label:hover { background: #f0f4ff; }
+  .options input[type=radio] { margin-top: 3px; flex-shrink: 0; }
+  .options label.correct { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; font-weight: 600; }
+  .options label.wrong { background: #ffebee; border-color: #e53935; color: #c62828; }
+  .options label.show-correct { background: #e8f5e9; border-color: #4caf50; }
+  .feedback { margin-top: 12px; padding: 10px 14px; border-radius: 7px; font-size: 0.9rem; line-height: 1.5; }
+  .feedback.correct { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #4caf50; }
+  .feedback.wrong { background: #ffebee; color: #c62828; border-left: 4px solid #e53935; }
+  .recap { background: white; border-radius: 12px; padding: 30px; margin-top: 30px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1); display: none; }
+  .recap h2 { font-size: 1.4rem; color: #1a3c6e; margin-bottom: 20px; }
+  .recap-stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+  .stat-box { flex: 1; min-width: 120px; padding: 16px; border-radius: 8px; text-align: center; }
+  .stat-box.green { background: #e8f5e9; color: #2e7d32; }
+  .stat-box.red { background: #ffebee; color: #c62828; }
+  .stat-box.blue { background: #e3f2fd; color: #1565c0; }
+  .stat-box.orange { background: #fff3e0; color: #e65100; }
+  .stat-box .num { font-size: 2rem; font-weight: bold; }
+  .stat-box .lbl { font-size: 0.8rem; margin-top: 4px; }
+  .review-list { margin-top: 10px; }
+  .review-item { padding: 12px 14px; border-radius: 7px; margin-bottom: 10px; font-size: 0.9rem; }
+  .review-item.wrong-item { background: #fff3e0; border-left: 4px solid #ff9800; }
+  .review-item.skipped-item { background: #f3e5f5; border-left: 4px solid #9c27b0; }
+  .review-item .ri-q { font-weight: 600; margin-bottom: 4px; }
+  .review-item .ri-ans { color: #555; }
+  .score-circle { text-align: center; margin: 20px 0; }
+  .score-circle .big { font-size: 3rem; font-weight: bold; color: #1a3c6e; }
+  .score-circle .sub { font-size: 1rem; color: #666; }
+  .grade-msg { text-align: center; font-size: 1.1rem; font-weight: 600; padding: 10px;
+    border-radius: 8px; margin-bottom: 20px; }
+  .grade-msg.excellent { background: #e8f5e9; color: #2e7d32; }
+  .grade-msg.good { background: #e3f2fd; color: #1565c0; }
+  .grade-msg.average { background: #fff3e0; color: #e65100; }
+  .grade-msg.poor { background: #ffebee; color: #c62828; }
+  .section-recap { margin-top: 18px; }
+  .section-recap h3 { font-size: 1rem; color: #1a3c6e; margin-bottom: 8px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px; }
+  @media(max-width:600px) {
+    header h1 { font-size: 1.2rem; }
+    .sticky-bar { flex-direction: column; gap: 8px; padding: 10px 16px; }
+    .container { padding: 0 8px 60px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>&#127979; Corporate Finance &amp; IT Management</h1>
+  <p>Planning &amp; Budgeting | IT Costs | Cloud Computing | Cost Management &mdash; 60 Questions</p>
+</header>
+<div class="sticky-bar">
+  <div class="score-info">
+    <span>&#9989; Correct: <b id="sc-correct">0</b></span>
+    <span>&#10060; Wrong: <b id="sc-wrong">0</b></span>
+    <span>&#128203; Answered: <b id="sc-answered">0</b>/60</span>
+  </div>
+  <button onclick="submitQuiz()">&#128196; Submit &amp; See Results</button>
+</div>
+<div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+
+<div class="container" id="quiz-container"></div>
+<div class="container"><div class="recap" id="recap"></div></div>
+
+<script>
+const questions = [
+  {
+    section: "IT Finance Basics",
+    q: "For a company with $1 billion in revenue, what is the typical IT budget range?",
+    options: ["$10M - $20M (1-2% of revenue)", "$40M - $80M (4-8% of revenue)", "$100M - $150M (10-15% of revenue)", "$5M - $10M (0.5-1% of revenue)"],
+    answer: 1,
+    explanation: "IT budget is typically between 4% and 8% of revenue. For a $1B company, that means $40M to $80M."
+  },
+  {
+    section: "IT Finance Basics",
+    q: "What percentage of a company's Capital Expenditures does IT spending typically represent?",
+    options: ["10%", "25%", "50%", "75%"],
+    answer: 2,
+    explanation: "IT spending typically represents about 50% of a company's total Capital Expenditures."
+  },
+  {
+    section: "IT Finance Basics",
+    q: "What percentage of an IT budget is typically allocated to 'new things' (projects)?",
+    options: ["About 80%", "About 50%", "About 20%", "About 5%"],
+    answer: 2,
+    explanation: "About 20% of the IT budget is for new projects. The other 80% is for running and maintaining existing production applications ('keeping the lights on')."
+  },
+  {
+    section: "IT Finance Basics",
+    q: "On average, the lifetime costs of an IT application are how many times the initial project investment?",
+    options: ["2 times", "3 times", "5 times", "10 times"],
+    answer: 2,
+    explanation: "The lifetime costs of an IT application are, on average, 5 times the initial project investment."
+  },
+  {
+    section: "IT Finance Basics",
+    q: "What does 'keeping the lights on' refer to in IT finance?",
+    options: ["Paying electricity bills for data centers", "Running and maintaining existing production applications", "Funding new strategic projects", "Cloud computing expenses"],
+    answer: 1,
+    explanation: "'Keeping the lights on' refers to the 80% of IT budget spent on running and maintaining existing production applications, as opposed to investing in new things."
+  },
+  {
+    section: "IT Financial Processes",
+    q: "Which of the following is NOT one of the 3 main IT financial processes?",
+    options: ["Planning and Budgeting", "Cost Management", "Chargebacks", "Revenue Forecasting"],
+    answer: 3,
+    explanation: "The 3 main IT financial processes are: Planning and Budgeting, Cost Management, and Chargebacks. Revenue Forecasting is not one of them."
+  },
+  {
+    section: "IT Financial Processes",
+    q: "What is the primary goal of the IT chargeback process?",
+    options: ["To reduce the IT department headcount", "To charge IT costs back to user departments making them responsible for their IT usage", "To increase IT department revenue", "To outsource IT services to external vendors"],
+    answer: 1,
+    explanation: "The IT chargeback process charges IT costs back to user departments instead of keeping them centrally, making departments responsible for their IT usage and providing visibility to top management."
+  },
+  {
+    section: "IT Financial Processes",
+    q: "Which of the following is a CON of the IT chargeback process?",
+    options: ["Reduced costs by cutting unnecessary demands", "Improved visibility to spendings", "Complex and controversial allocation rules", "Increased accountability"],
+    answer: 2,
+    explanation: "A major con of chargeback is the complex and controversial allocation rules, which can make the relationship between IT and other departments difficult due to fairness concerns."
+  },
+  {
+    section: "IT Financial Processes",
+    q: "Which of the following is a PRO of the IT chargeback process?",
+    options: ["Heavy management process to collect data", "Complex allocation rules", "Reduced costs by cutting off unnecessary demands from users", "Makes IT relationships with departments more difficult"],
+    answer: 2,
+    explanation: "A key pro of chargeback is reduced costs by cutting off unnecessary demands from users, since departments must now pay for what they request."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "What does Capex stand for?",
+    options: ["Capital Expenses", "Capital Expenditures", "Capitalized Expenses", "Cash Expenditures"],
+    answer: 1,
+    explanation: "Capex stands for Capital Expenditures. These are assets recorded on the Balance Sheet and amortized over the life of the asset."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "How is Capex treated in accounting?",
+    options: ["Immediately expensed on the P&L", "Recorded as an asset on the Balance Sheet and amortized over its life", "Deducted from revenue directly", "Recorded as a liability"],
+    answer: 1,
+    explanation: "Capex is recorded as an asset on the Balance Sheet. It is then amortized over the life of the asset, and the amortization is an expense line on the P&L with no cash impact."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "Hardware (HW) equipment is classified as:",
+    options: ["Always Opex", "Always Capex (except if of small value)", "Always Opex if used in production", "Either Capex or Opex depending on the project phase"],
+    answer: 1,
+    explanation: "HW equipment is always Capex, except if it is of small value. This is a key rule to remember."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "Software (SW) licence maintenance is classified as:",
+    options: ["Capex", "Opex", "Either Capex or Opex", "It depends on the license value"],
+    answer: 1,
+    explanation: "SW licence maintenance is Opex. Note the distinction: the SW licence itself is Capex, but the ongoing maintenance of that licence is Opex."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "A preliminary project phase / feasibility study is classified as:",
+    options: ["Capex, because it leads to a project", "Opex, because no asset may result from it", "Capex, because it is a large investment", "Opex, only if the project is cancelled"],
+    answer: 1,
+    explanation: "Preliminary project phases and feasibility studies are Opex because no asset may result from them at that stage."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "Application maintenance is classified as:",
+    options: ["Capex", "Always Opex", "Capex if the maintenance improves the application", "Opex only for small changes"],
+    answer: 1,
+    explanation: "Application maintenance is always Opex, as it is running day-to-day business, not creating a new asset."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "Travel & Expenses (T&E) are generally classified as:",
+    options: ["Always Capex", "Always Opex, except if part of a capitalizable activity", "Always Capex if related to a project", "Neither Capex nor Opex"],
+    answer: 1,
+    explanation: "T&E are always Opex, EXCEPT if they are part of a capitalizable activity. This is an important exception to remember."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "Which of the following is classified as Capex?",
+    options: ["Application maintenance", "SW licence maintenance", "SW licences (purchase)", "Outsourcing services"],
+    answer: 2,
+    explanation: "SW licences (the purchase itself) are Capex because they create an asset. Maintenance of those licences, application maintenance, and services are all Opex."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "Functional design of a software project is classified as:",
+    options: ["Capex", "Opex", "Both Capex and Opex equally", "Neither"],
+    answer: 1,
+    explanation: "Functional design is Opex, while technical design is Capex. This is a specific accounting rule to remember."
+  },
+  {
+    section: "Capex vs Opex",
+    q: "One-time data migration interface development costs are:",
+    options: ["Capex, because they are part of a project", "Opex, because no asset results from them", "Capex, because they require significant investment", "Opex, only if the migration fails"],
+    answer: 1,
+    explanation: "Development costs of one-time data migration interfaces are not capitalizable (Opex) because no lasting asset results from them."
+  },
+  {
+    section: "Cloud Computing",
+    q: "What does SaaS stand for?",
+    options: ["Storage as a Service", "Software as a Service", "System as a Service", "Security as a Service"],
+    answer: 1,
+    explanation: "SaaS stands for Software as a Service. It is a cloud model where you pay per user for an application hosted externally."
+  },
+  {
+    section: "Cloud Computing",
+    q: "What does IaaS stand for?",
+    options: ["Internet as a Service", "Infrastructure as a Service", "Integration as a Service", "Information as a Service"],
+    answer: 1,
+    explanation: "IaaS stands for Infrastructure as a Service. You pay by capacity for a server hosted in an external data center."
+  },
+  {
+    section: "Cloud Computing",
+    q: "What does PaaS stand for?",
+    options: ["Payment as a Service", "Platform as a Service", "Process as a Service", "Performance as a Service"],
+    answer: 1,
+    explanation: "PaaS stands for Platform as a Service. You pay by usage for a software development environment."
+  },
+  {
+    section: "Cloud Computing",
+    q: "Cloud computing costs are classified as:",
+    options: ["Capex only", "Opex only (no capital costs)", "Both Capex and Opex", "Capex for infrastructure, Opex for software"],
+    answer: 1,
+    explanation: "Cloud computing has no capital costs (no HW purchased, no asset created). All costs are Opex. This is a key financial characteristic of cloud computing."
+  },
+  {
+    section: "Cloud Computing",
+    q: "Why do CIOs typically prefer Capex over Opex?",
+    options: ["Capex is always cheaper", "Capex has a lower immediate impact on Opex, pushing today's costs to future costs", "Capex is easier to manage", "Capex provides better tax benefits always"],
+    answer: 1,
+    explanation: "CIOs usually prefer Capex because it has a lower immediate impact on Opex. It pushes today's costs to future costs through amortization."
+  },
+  {
+    section: "Cloud Computing",
+    q: "Which of the following is NOT a reason why cloud computing is successful?",
+    options: ["Less impact on cash", "No need to forecast future capacity", "Creates large capital assets on the balance sheet", "Can be scaled up and down"],
+    answer: 2,
+    explanation: "Cloud computing does NOT create capital assets - it is all Opex. The other options are genuine advantages of cloud computing."
+  },
+  {
+    section: "Budgeting Basics",
+    q: "A budget is best described as:",
+    options: ["A historical record of past spending", "A financial plan for the upcoming year broken down by month and cost items", "A strategic 5-year plan", "A tax filing document"],
+    answer: 1,
+    explanation: "A budget is a financial plan for the upcoming year, broken down by month and detailed by cost items (people, HW, SW, services, projects, etc.)."
+  },
+  {
+    section: "Budgeting Basics",
+    q: "In a standard budget financial template, what do the columns typically represent?",
+    options: ["Different departments", "Previous year actuals + Month 1-12 budget + Annual total", "Different cost categories", "Different projects"],
+    answer: 1,
+    explanation: "In a budget template: Column 1 = Previous Year spendings, Columns 2-13 = Month 1 to 12 Budget, Column 14 = Sum of all months."
+  },
+  {
+    section: "Budgeting Basics",
+    q: "Which of the following is a material item in an IT budget?",
+    options: ["Office coffee supplies", "Headcount (permanent, temporary, contractors)", "Company car insurance", "Building maintenance"],
+    answer: 1,
+    explanation: "Headcount (employees: permanent, temporary, contractors, consultants) is one of the most material items in an IT budget, along with IT equipment, SW expenses, and IT services."
+  },
+  {
+    section: "Budgeting Basics",
+    q: "What is the 'Zero-based budgeting' methodology?",
+    options: ["Starting from last year's budget and adjusting", "Starting from scratch and justifying all costs from zero", "Setting all budgets to zero initially then adding only essentials", "Using zero assumptions for growth"],
+    answer: 1,
+    explanation: "Zero-based budgeting starts from scratch, requiring justification of all costs. It is more disciplined but takes more time and effort than incremental/baseline budgeting."
+  },
+  {
+    section: "Budgeting Basics",
+    q: "What is the 'Baseline or Incremental' budgeting methodology?",
+    options: ["Starting from zero and building up", "Using previous year budget/actual as a starting point", "Only budgeting for new projects", "Budgeting based on industry benchmarks"],
+    answer: 1,
+    explanation: "Baseline/incremental budgeting uses the previous year's budget or actuals as a starting point. It does not encourage people to question previous assumptions."
+  },
+  {
+    section: "Budgeting Basics",
+    q: "Which budgeting approach is described as 'participative' and 'decentralized'?",
+    options: ["Top-down budgeting", "Bottom-up budgeting", "Zero-based budgeting", "Incremental budgeting"],
+    answer: 1,
+    explanation: "Bottom-up budgeting is participative and decentralized, involving all levels of management. It is more complex and takes longer but has better buy-in."
+  },
+  {
+    section: "Budgeting Basics",
+    q: "Which budgeting approach is described as 'authoritarian' and 'centralized'?",
+    options: ["Bottom-up budgeting", "Zero-based budgeting", "Top-down budgeting", "Incremental budgeting"],
+    answer: 2,
+    explanation: "Top-down budgeting is authoritarian and centralized, controlled by top management. It is simpler and faster but may lack buy-in from lower levels."
+  },
+  {
+    section: "Writing a Budget",
+    q: "What is the FIRST step when writing a budget?",
+    options: ["Fill in the figures immediately", "Make a list of all things your organization will spend money on (without thinking of actual money yet)", "Get management approval", "Compare to last year's actuals"],
+    answer: 1,
+    explanation: "The first step is to prepare the plan: make a list of all spending items (like a shopping list) without thinking about actual amounts yet. Consider one-off items, capital costs, running costs, and projects."
+  },
+  {
+    section: "Writing a Budget",
+    q: "Why is it important to document your assumptions when writing a budget?",
+    options: ["It is required by law", "It will prove useful for budget presentations and revisions", "It makes the budget look more professional", "It is only needed for large budgets"],
+    answer: 1,
+    explanation: "Documenting assumptions is critical because it will prove useful for budget presentations and revisions. It also ensures you can justify your numbers to management."
+  },
+  {
+    section: "Writing a Budget",
+    q: "When should you revise your budget after it is approved?",
+    options: ["Never - an approved budget is final", "Only at year end", "Regularly, as you move into execution and as your environment changes", "Only when overspending occurs"],
+    answer: 2,
+    explanation: "As you move into execution, you need to track, monitor and report actuals. Your environment may change, so you need to regularly revise your budget."
+  },
+  {
+    section: "Writing a Budget",
+    q: "Who should you involve when filling in budget figures?",
+    options: ["Only yourself as the budget owner", "Only the Finance controller", "Multiple people including Finance controller, peers, internal partners and others", "Only top management"],
+    answer: 2,
+    explanation: "The more people you involve (Finance controller, peers, internal partners, others), the more likely you are to produce a good budget. Others can also help carry out research."
+  },
+  {
+    section: "Planning Process",
+    q: "What is the correct order of the planning hierarchy from highest to lowest level?",
+    options: ["Budget > Operating Plan > Strategic Plan > Vision/Mission", "Vision/Mission > Strategic Plan > Operating Plan > Budget", "Operating Plan > Budget > Strategic Plan > Vision/Mission", "Budget > Strategic Plan > Vision/Mission > Operating Plan"],
+    answer: 1,
+    explanation: "The planning hierarchy flows from: Vision/Mission > Strategic Plan (long-term goals) > Operating Plan (short-term goals) > Financial Plan/Budget."
+  },
+  {
+    section: "Planning Process",
+    q: "An IT Plan typically covers what time horizon?",
+    options: ["Less than 1 year", "1 to 3 years", "5 to 10 years", "Exactly 1 year"],
+    answer: 1,
+    explanation: "An IT Plan typically covers 1 to 3 years, while a Budget covers 1 year and Strategic Planning covers a longer horizon."
+  },
+  {
+    section: "Planning Process",
+    q: "Which of the following is a benefit of planning?",
+    options: ["Increased bureaucracy", "Strategic alignment and improved decision making", "Reduced flexibility", "Higher costs"],
+    answer: 1,
+    explanation: "Benefits of planning include: strategic alignment, improved decision making, reduced risks, increased return on investment, and optimized resource allocation."
+  },
+  {
+    section: "Planning Process",
+    q: "Planning answers six basic questions. Which of the following is NOT one of them?",
+    options: ["What needs to be accomplished?", "When is the deadline?", "Who will be the competitor?", "How much time, energy, and resources are required?"],
+    answer: 2,
+    explanation: "The six questions of planning are: What, When, Where, Who (responsible), How, and How much (resources). 'Who will be the competitor?' is not one of them."
+  },
+  {
+    section: "Planning Process",
+    q: "In the budget process cycle, what comes AFTER 'Implement'?",
+    options: ["Plan", "Review", "Monitor", "Secure and Allocate Resources"],
+    answer: 2,
+    explanation: "The budget process cycle is: 1.Review > 2.Plan > 3.Secure and Allocate Resources > 4.Implement > 5.Monitor > 6.Evaluate."
+  },
+  {
+    section: "Planning Process",
+    q: "A company's IT budget starts with which forecast?",
+    options: ["IT headcount forecast", "Sales and Revenue forecast for the coming year", "Capital expenditure forecast", "Operating expense forecast"],
+    answer: 1,
+    explanation: "The budget process starts with Sales and Revenue forecast. Once determined, the company applies its financial model to get the rest of the P&L, including IT budget as part of G&A expenses."
+  },
+  {
+    section: "Budget Control & Approval",
+    q: "What is a main goal of budget control?",
+    options: ["To eliminate all variances", "To establish the degree of progress toward achievement of short-term plans", "To replace strategic planning", "To reduce headcount"],
+    answer: 1,
+    explanation: "A main goal of budget control is to establish the degree of progress toward the achievement of short-term plans, and to allow delegation without losing overall control."
+  },
+  {
+    section: "Budget Control & Approval",
+    q: "To win budget approval, you should separate budget items into which two categories?",
+    options: ["Capex and Opex", "'Need to have' (essential) and 'Nice to have' (non-essential)", "Short-term and long-term", "Fixed costs and variable costs"],
+    answer: 1,
+    explanation: "You should separate 'need to have' from 'nice to have' - clearly labeling each line item as essential or non-essential, and spelling out the risks of not having essential items."
+  },
+  {
+    section: "Budget Control & Approval",
+    q: "Which of the following helps win budget approval?",
+    options: ["Being overly optimistic in projections", "Using round numbers for simplicity", "Using industry benchmarks and demonstrating strategic alignment", "Submitting the budget at the last minute"],
+    answer: 2,
+    explanation: "Key strategies to win budget approval include: strategic alignment, using industry benchmarks, being credible with past performance, triple-checking figures, and getting line-of-business support."
+  },
+  {
+    section: "Budget Control & Approval",
+    q: "What does 'variance analysis' in budget control involve?",
+    options: ["Analyzing different budget formats", "Understanding why actual results differ from budget and taking corrective action", "Comparing budgets across departments", "Forecasting future revenues"],
+    answer: 1,
+    explanation: "Variance analysis involves understanding why actuals differ from budget, what immediate action should be taken, and what learnings can be applied to the next budget cycle."
+  },
+  {
+    section: "Budget Control & Approval",
+    q: "Budget control defines spending authorizations. What does this mean?",
+    options: ["Only the CEO can approve spending", "It defines who is authorized to approve what level of spending", "All spending must be pre-approved by Finance", "Spending is unlimited once budgeted"],
+    answer: 1,
+    explanation: "Budget control defines spending authorizations - who can approve what level of spending - as well as acceptance that a project can start and elements of individual performance."
+  },
+  {
+    section: "Budget Control & Approval",
+    q: "Key elements to check before a budget approval request include:",
+    options: ["Only the total cost", "Strategic alignment, value creation, resource optimization, and your track record", "Only headcount numbers", "Only Capex items"],
+    answer: 1,
+    explanation: "Before requesting budget approval, check: strategic alignment, value creation, resource optimization (time & money), your track record, and complementarities with other initiatives."
+  },
+  {
+    section: "Cost Management",
+    q: "According to the course, what percentage of IT projects run 10-20% over the original budget?",
+    options: ["About 10%", "About a third (33%)", "About half (50%)", "About 20%"],
+    answer: 1,
+    explanation: "According to the survey cited in the course, a third of IT projects carried out in the private sector run between 10 and 20 percent over the original budget."
+  },
+  {
+    section: "Cost Management",
+    q: "What is the main reason for IT project overspending according to the course?",
+    options: ["Lack of technical skills", "Poor forecasting, increases in project scope, and interdependency issues", "Too many team members", "Insufficient hardware"],
+    answer: 1,
+    explanation: "The main reasons for overspending include poor forecasting, increases in project scope, and issues of interdependencies and conflicts between multiple projects."
+  },
+  {
+    section: "Cost Management",
+    q: "What percentage of IT directors do NOT have clear visibility of their projects?",
+    options: ["10%", "25%", "39%", "55%"],
+    answer: 2,
+    explanation: "39% of IT directors do not have clear visibility of projects and so do not know when they are close to running over budget."
+  },
+  {
+    section: "Cost Management",
+    q: "When comparing actuals to budget, what should you do with favorable variances?",
+    options: ["Ignore them as they are positive", "Do not ignore them - always find an explanation", "Report them to shareholders immediately", "Apply them to offset unfavorable variances"],
+    answer: 1,
+    explanation: "A cardinal rule of cost management: Do NOT ignore favorable variances without finding an explanation. Understanding why you performed better than expected is just as important as understanding overruns."
+  },
+  {
+    section: "Cost Management",
+    q: "What is a 'sensitivity analysis' in cost management?",
+    options: ["Analysis of employee satisfaction", "A 'What if' analysis to see what effect different outcomes could have on performance", "Analysis of customer sensitivity to price changes", "A security audit of IT systems"],
+    answer: 1,
+    explanation: "Sensitivity analysis (or 'What if' analysis) is used to see what effect different outcomes could have on performance. It helps anticipate problems and plan for various scenarios."
+  },
+  {
+    section: "Cost Management",
+    q: "What is a key cardinal rule of cost management regarding timing?",
+    options: ["Always assume timing variances are permanent", "Do not confuse changes in timing with permanent changes to revenue or expense levels", "Timing variances should be ignored", "Timing variances always indicate poor performance"],
+    answer: 1,
+    explanation: "A cardinal rule: Do NOT confuse changes in timing with permanent changes to the levels of revenues or expenses. A timing difference is very different from a structural change."
+  },
+  {
+    section: "Cost Management",
+    q: "Which of the following is an element of cost management?",
+    options: ["Hiring new employees", "KPIs, scorecards, dashboards, actuals tracking, and reporting", "Setting the company strategy", "Negotiating supplier contracts"],
+    answer: 1,
+    explanation: "Elements of cost management include: KPIs, KBIs, scorecards, dashboards, actuals tracking, reporting, communication, stakeholder involvement, and budget reviews."
+  },
+  {
+    section: "KPIs & Dashboards",
+    q: "Which of the following is an example of an IT KPI related to customer service?",
+    options: ["IT cost as % of revenue", "% of IT projects delivered on time and on budget", "Number of support calls and % solved on first call", "Voluntary IT turnover rate"],
+    answer: 2,
+    explanation: "Customer service KPIs include: number of support calls, % of calls solved on 1st call, average waiting time, number of bugs reported, and average time to resolve incidents."
+  },
+  {
+    section: "KPIs & Dashboards",
+    q: "Which KPI measures the financial efficiency of IT investments?",
+    options: ["Number of innovation training hours per employee", "Project savings as % of investments (ROI)", "Diversity ratios", "Unplanned system downtime"],
+    answer: 1,
+    explanation: "Project savings as % of investments (ROI - Return on Investment) is a key financial KPI that measures whether IT investments are generating value."
+  },
+  {
+    section: "Finance Quiz",
+    q: "Which of the following is used to describe an asset held for more than 12 months?",
+    options: ["Non-current asset", "Fixed asset", "Current asset", "All of the above"],
+    answer: 0,
+    explanation: "A non-current asset is an asset held for more than 12 months. 'Fixed asset' is another term sometimes used, but 'non-current asset' is the most precise accounting term. Note: the quiz answer was A) Non-current asset."
+  },
+  {
+    section: "Finance Quiz",
+    q: "An increase in energy costs can explain a lower Gross Profit margin:",
+    options: ["Yes", "No"],
+    answer: 0,
+    explanation: "Yes. Energy costs are typically part of Cost of Goods Sold (COGS). An increase in energy costs raises COGS, which directly reduces the Gross Profit margin."
+  },
+  {
+    section: "Finance Quiz",
+    q: "If a company runs a large and expensive TV advertising campaign, this is going to increase its Cost of Goods Sold (COGS):",
+    options: ["Yes", "No"],
+    answer: 1,
+    explanation: "No. TV advertising is a Sales & Marketing expense, which appears below the Gross Profit line on the P&L. It does NOT affect COGS or Gross Profit margin."
+  },
+  {
+    section: "Finance Quiz",
+    q: "The main three sections of the Cash Flow Statement are:",
+    options: ["Cash from operating activities; cash from investing activities; cash from financing activities", "Cash from operating activities; cash from sales; cash from administrative activities", "Cash from assets; cash from liabilities; cash from equity", "Cash from customers; cash from shareholders; cash from miscellaneous sources"],
+    answer: 0,
+    explanation: "The three sections of the Cash Flow Statement are: (1) Cash from Operating Activities, (2) Cash from Investing Activities, and (3) Cash from Financing Activities."
+  },
+  {
+    section: "Finance Quiz",
+    q: "Getting a loan from the bank will:",
+    options: ["Increase profit", "Increase cash", "Decrease profit", "Decrease cash"],
+    answer: 1,
+    explanation: "Getting a bank loan increases cash (it is a financing activity). It does NOT directly affect profit. The interest payments on the loan will affect profit later, but the loan itself only impacts cash."
+  },
+  {
+    section: "Finance Quiz",
+    q: "Which stock would you rather invest in?",
+    options: ["Stock A with a Price to Earnings (P/E) ratio = 10", "Stock B with a Price to Earnings (P/E) ratio = 30"],
+    answer: 0,
+    explanation: "Stock A with P/E = 10 is cheaper relative to its earnings. A lower P/E means you pay less for each dollar of earnings, making it potentially a better value investment."
+  },
+  {
+    section: "Finance Quiz",
+    q: "Last quarter, Company X increased their Gross Profit by 10% and their Net Profit by 5%. This is:",
+    options: ["A positive sign indicating effective cost management", "A negative sign"],
+    answer: 1,
+    explanation: "This is a negative sign. Gross profit grew faster than net profit, meaning operating expenses below the gross profit line grew disproportionately. Costs are rising faster than the business is scaling."
+  },
+  {
+    section: "Finance Quiz",
+    q: "DSO (Days Sales Outstanding) for Company A increased from 38 days to 45 days last quarter. What does this mean?",
+    options: ["This is good as the company is going to make greater profit", "This does not impact company profit but will challenge cash position", "This will improve working capital"],
+    answer: 1,
+    explanation: "DSO increasing means customers are taking longer to pay. This does NOT impact profit (revenue is still recognized) but it DOES challenge the company cash position and working capital."
+  },
+  {
+    section: "Finance Quiz",
+    q: "Company A increased their Inventory Turnover from 10 to 12 last quarter. This means:",
+    options: ["This is going to increase the Current ratio", "This is going to increase the Quick ratio", "This is going to hurt working capital"],
+    answer: 2,
+    explanation: "Higher inventory turnover means inventory is being sold faster, which reduces inventory levels. Lower inventory hurts working capital (Current Assets decrease) and reduces the Current ratio."
+  },
+  {
+    section: "Finance Quiz",
+    q: "The Debt to Equity ratio is used to:",
+    options: ["Measure the liquidity of the company", "Measure the profitability of the company", "Check if the company has too much debt", "None of the above"],
+    answer: 2,
+    explanation: "The Debt to Equity ratio measures financial leverage - specifically whether the company has too much debt relative to its equity. It is a solvency/leverage ratio, not a liquidity or profitability ratio."
+  }
+];
+
+let userAnswers = new Array(questions.length).fill(null);
+let correctCount = 0;
+let wrongCount = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  let currentSection = '';
+  questions.forEach((q, i) => {
+    if (q.section !== currentSection) {
+      currentSection = q.section;
+      const st = document.createElement('div');
+      st.className = 'section-title';
+      st.textContent = currentSection;
+      container.appendChild(st);
+    }
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = 'card-' + i;
+    let optionsHtml = '';
+    q.options.forEach((opt, j) => {
+      optionsHtml += `<label id="lbl-${i}-${j}"><input type="radio" name="q${i}" value="${j}" onchange="handleAnswer(${i}, ${j})"> ${opt}</label>`;
+    });
+    card.innerHTML = `
+      <div class="q-number">Question ${i+1} of ${questions.length} &bull; ${q.section}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="opts-${i}">${optionsHtml}</div>
+      <div class="feedback" id="fb-${i}" style="display:none"></div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function handleAnswer(qIdx, selectedIdx) {
+  const q = questions[qIdx];
+  const wasAnswered = userAnswers[qIdx] !== null;
+  const wasCorrect = wasAnswered && userAnswers[qIdx] === q.answer;
+  userAnswers[qIdx] = selectedIdx;
+  const isCorrect = selectedIdx === q.answer;
+  if (!wasAnswered) {
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+  } else {
+    if (wasCorrect && !isCorrect) { correctCount--; wrongCount++; }
+    else if (!wasCorrect && isCorrect) { wrongCount--; correctCount++; }
+  }
+  const opts = document.getElementById('opts-' + qIdx);
+  const labels = opts.querySelectorAll('label');
+  labels.forEach((lbl, j) => {
+    lbl.classList.remove('correct', 'wrong', 'show-correct');
+    if (j === q.answer) lbl.classList.add('show-correct');
+    if (j === selectedIdx && !isCorrect) lbl.classList.add('wrong');
+    if (j === selectedIdx && isCorrect) lbl.classList.add('correct');
+  });
+  const fb = document.getElementById('fb-' + qIdx);
+  fb.style.display = 'block';
+  fb.className = 'feedback ' + (isCorrect ? 'correct' : 'wrong');
+  fb.innerHTML = (isCorrect ? '<b>&#9989; Correct!</b> ' : '<b>&#10060; Incorrect.</b> ') + q.explanation;
+  const card = document.getElementById('card-' + qIdx);
+  card.classList.remove('answered-correct', 'answered-wrong');
+  card.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+  updateStats();
+}
+
+function updateStats() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  document.getElementById('sc-correct').textContent = correctCount;
+  document.getElementById('sc-wrong').textContent = wrongCount;
+  document.getElementById('sc-answered').textContent = answered;
+  document.getElementById('progress-bar').style.width = (answered / questions.length * 100) + '%';
+}
+
+function submitQuiz() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  const skipped = questions.length - answered;
+  const pct = Math.round(correctCount / questions.length * 100);
+  let gradeClass, gradeMsg;
+  if (pct >= 85) { gradeClass = 'excellent'; gradeMsg = '&#127942; Excellent! Outstanding performance!'; }
+  else if (pct >= 70) { gradeClass = 'good'; gradeMsg = '&#128077; Good job! Keep it up!'; }
+  else if (pct >= 50) { gradeClass = 'average'; gradeMsg = '&#128218; Average. Review the topics below.'; }
+  else { gradeClass = 'poor'; gradeMsg = '&#128165; Needs improvement. Study the material carefully.'; }
+
+  const sectionStats = {};
+  questions.forEach((q, i) => {
+    if (!sectionStats[q.section]) sectionStats[q.section] = {total:0, correct:0};
+    sectionStats[q.section].total++;
+    if (userAnswers[i] === q.answer) sectionStats[q.section].correct++;
+  });
+
+  let sectionHtml = '<div class="section-recap"><h3>&#128202; Performance by Section</h3>';
+  Object.entries(sectionStats).forEach(([sec, stat]) => {
+    const sp = Math.round(stat.correct/stat.total*100);
+    const color = sp >= 70 ? '#4caf50' : sp >= 50 ? '#ff9800' : '#e53935';
+    sectionHtml += `<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f0f0f0;">
+      <span style="font-size:0.9rem">${sec}</span>
+      <span style="font-weight:bold;color:${color}">${stat.correct}/${stat.total} (${sp}%)</span>
+    </div>`;
+  });
+  sectionHtml += '</div>';
+
+  let reviewHtml = '';
+  const wrongOrSkipped = questions.filter((q, i) => userAnswers[i] !== q.answer);
+  if (wrongOrSkipped.length > 0) {
+    reviewHtml = '<div class="section-recap" style="margin-top:20px"><h3>&#128270; Questions to Review</h3>';
+    wrongOrSkipped.forEach((q, _) => {
+      const i = questions.indexOf(q);
+      const isSkipped = userAnswers[i] === null;
+      const cls = isSkipped ? 'skipped-item' : 'wrong-item';
+      const tag = isSkipped ? '&#9940; Skipped' : '&#10060; Wrong';
+      reviewHtml += `<div class="review-item ${cls}">
+        <div class="ri-q">${tag} &mdash; Q${i+1}: ${q.q}</div>
+        <div class="ri-ans">&#9989; Correct answer: <b>${q.options[q.answer]}</b></div>
+        <div class="ri-ans" style="margin-top:4px;font-size:0.85rem;color:#666">${q.explanation}</div>
+      </div>`;
+    });
+    reviewHtml += '</div>';
+  }
+
+  const recap = document.getElementById('recap');
+  recap.style.display = 'block';
+  recap.innerHTML = `
+    <h2>&#127919; Quiz Results</h2>
+    <div class="grade-msg ${gradeClass}">${gradeMsg}</div>
+    <div class="score-circle">
+      <div class="big">${pct}%</div>
+      <div class="sub">${correctCount} correct out of ${questions.length} questions</div>
+    </div>
+    <div class="recap-stats">
+      <div class="stat-box green"><div class="num">${correctCount}</div><div class="lbl">&#9989; Correct</div></div>
+      <div class="stat-box red"><div class="num">${wrongCount}</div><div class="lbl">&#10060; Wrong</div></div>
+      <div class="stat-box orange"><div class="num">${skipped}</div><div class="lbl">&#9940; Skipped</div></div>
+      <div class="stat-box blue"><div class="num">${answered}</div><div class="lbl">&#128203; Answered</div></div>
+    </div>
+    ${sectionHtml}
+    ${reviewHtml}
+    <div style="text-align:center;margin-top:24px">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="background:#1a3c6e;color:white;border:none;padding:12px 28px;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:bold">&#8679; Back to Top</button>
+    </div>
+  `;
+  recap.scrollIntoView({behavior: 'smooth'});
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

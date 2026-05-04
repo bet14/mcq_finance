@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance for IT Managers - MCQ Quiz</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; color: #2d3748; }
+header { background: linear-gradient(135deg, #1a365d, #2b6cb0); color: white; padding: 24px 32px; text-align: center; }
+header h1 { font-size: 1.8rem; margin-bottom: 6px; }
+header p { font-size: 0.95rem; opacity: 0.85; }
+.container { max-width: 900px; margin: 30px auto; padding: 0 20px 80px; }
+.progress-bar-wrap { background: #e2e8f0; border-radius: 10px; height: 10px; margin-bottom: 6px; }
+.progress-bar { height: 10px; border-radius: 10px; background: linear-gradient(90deg, #38a169, #68d391); transition: width 0.4s; }
+.progress-label { font-size: 0.82rem; color: #718096; margin-bottom: 20px; text-align: right; }
+.question-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 5px solid #cbd5e0; transition: border-color 0.3s; }
+.question-card.correct { border-left-color: #38a169; }
+.question-card.incorrect { border-left-color: #e53e3e; }
+.q-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; flex-wrap: wrap; gap: 6px; }
+.q-number { font-size: 0.78rem; font-weight: 700; color: #718096; text-transform: uppercase; letter-spacing: 0.05em; }
+.q-status { font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.q-status.correct { background: #c6f6d5; color: #276749; }
+.q-status.incorrect { background: #fed7d7; color: #9b2c2c; }
+.q-text { font-size: 1rem; font-weight: 600; line-height: 1.5; margin-bottom: 16px; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option-btn { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer; text-align: left; font-size: 0.92rem; line-height: 1.4; transition: all 0.2s; width: 100%; }
+.option-btn:hover:not(:disabled) { border-color: #4299e1; background: #ebf8ff; }
+.option-btn:disabled { cursor: default; }
+.option-btn.correct-ans { border-color: #38a169 !important; background: #f0fff4 !important; }
+.option-btn.wrong-ans { border-color: #e53e3e !important; background: #fff5f5 !important; }
+.option-letter { font-weight: 700; color: #4a5568; min-width: 22px; flex-shrink: 0; }
+.feedback { margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 0.88rem; line-height: 1.5; display: none; }
+.feedback.show { display: block; }
+.feedback.correct { background: #f0fff4; border: 1px solid #9ae6b4; color: #276749; }
+.feedback.incorrect { background: #fff5f5; border: 1px solid #fc8181; color: #9b2c2c; }
+.controls { display: flex; gap: 14px; justify-content: center; margin: 30px 0; flex-wrap: wrap; }
+.btn { padding: 12px 28px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-primary { background: #2b6cb0; color: white; }
+.btn-primary:hover { background: #2c5282; }
+.btn-success { background: #38a169; color: white; }
+.btn-success:hover { background: #276749; }
+.btn-warning { background: #d69e2e; color: white; }
+.btn-warning:hover { background: #b7791f; }
+.recap { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); display: none; margin-top: 20px; }
+.recap.show { display: block; }
+.recap h2 { font-size: 1.5rem; color: #1a365d; margin-bottom: 20px; text-align: center; }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.score-card { text-align: center; padding: 16px; border-radius: 10px; }
+.score-card.s-total { background: #ebf8ff; }
+.score-card.s-correct { background: #f0fff4; }
+.score-card.s-incorrect { background: #fff5f5; }
+.score-card.s-skipped { background: #fffff0; }
+.score-card .num { font-size: 2rem; font-weight: 800; }
+.score-card .lbl { font-size: 0.8rem; color: #718096; margin-top: 4px; }
+.score-card.s-total .num { color: #2b6cb0; }
+.score-card.s-correct .num { color: #38a169; }
+.score-card.s-incorrect .num { color: #e53e3e; }
+.score-card.s-skipped .num { color: #d69e2e; }
+.grade-bar-wrap { margin: 16px 0 24px; }
+.grade-bar-wrap label { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; display: block; }
+.grade-bar-bg { background: #e2e8f0; border-radius: 10px; height: 22px; overflow: hidden; }
+.grade-bar-fill { height: 22px; border-radius: 10px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 0.8rem; font-weight: 700; color: white; min-width: 40px; }
+.improve-section { margin-top: 24px; }
+.improve-section h3 { font-size: 1.1rem; color: #e53e3e; margin-bottom: 12px; }
+.improve-item { padding: 10px 14px; background: #fff5f5; border-left: 4px solid #fc8181; border-radius: 6px; margin-bottom: 8px; font-size: 0.88rem; line-height: 1.4; }
+.well-done-section { margin-top: 20px; }
+.well-done-section h3 { font-size: 1.1rem; color: #38a169; margin-bottom: 12px; }
+.well-done-item { padding: 8px 14px; background: #f0fff4; border-left: 4px solid #68d391; border-radius: 6px; margin-bottom: 6px; font-size: 0.88rem; }
+.topic-breakdown { margin-top: 24px; }
+.topic-breakdown h3 { font-size: 1.1rem; color: #2b6cb0; margin-bottom: 14px; }
+.topic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 0.88rem; }
+.topic-name { min-width: 220px; }
+.topic-bar-bg { flex: 1; background: #e2e8f0; border-radius: 6px; height: 12px; }
+.topic-bar-fill { height: 12px; border-radius: 6px; }
+.topic-pct { min-width: 45px; text-align: right; font-weight: 600; }
+.sticky-submit { position: fixed; bottom: 20px; right: 20px; z-index: 100; }
+.sticky-submit .btn { box-shadow: 0 4px 14px rgba(0,0,0,0.25); font-size: 1rem; padding: 14px 32px; }
+.grade-msg { text-align: center; font-size: 1.2rem; font-weight: 700; padding: 16px; border-radius: 10px; margin-bottom: 20px; }
+.grade-msg.excellent { background: #c6f6d5; color: #276749; }
+.grade-msg.good { background: #bee3f8; color: #2c5282; }
+.grade-msg.average { background: #fefcbf; color: #744210; }
+.grade-msg.poor { background: #fed7d7; color: #9b2c2c; }
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  .question-card { padding: 16px; }
+  .score-grid { grid-template-columns: repeat(2, 1fr); }
+  .topic-name { min-width: 140px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>&#127891; Finance for IT Managers &mdash; MCQ Quiz</h1>
+  <p>Corporate Finance Framework &bull; Financial Statements &bull; KPIs &bull; Cash Flow &bull; Depreciation</p>
+</header>
+<div class="container">
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+  <div class="progress-label" id="progressLabel">0 / 62 answered</div>
+  <div id="quizArea"></div>
+  <div class="controls">
+    <button class="btn btn-warning" onclick="submitQuiz()">&#128203; Submit &amp; See Results</button>
+    <button class="btn btn-primary" onclick="resetQuiz()">&#128260; Reset Quiz</button>
+  </div>
+  <div class="recap" id="recap"></div>
+</div>
+<div class="sticky-submit">
+  <button class="btn btn-success" onclick="submitQuiz()">&#9989; Submit Now</button>
+</div>
+
+<script>
+const questions = [
+  {
+    topic: 'Financial Statements Basics',
+    q: 'The formal financial statements are prepared by using a trial balance.',
+    options: ['True', 'False'],
+    answer: 0,
+    explanation: 'Correct. The trial balance (General Ledger) is the data source used to prepare all formal financial statements.'
+  },
+  {
+    topic: 'Financial Statements Basics',
+    q: 'The financial statement that summarizes all the changes in owner equity that occurred during a period is called the Capital Statement.',
+    options: ['True', 'False'],
+    answer: 0,
+    explanation: 'Correct. The Capital Statement (also called Statement of Changes in Equity) summarizes all changes in owner equity over a period.'
+  },
+  {
+    topic: 'Financial Statements Basics',
+    q: 'All Revenue, Expense and Draw account balances are reset to zero at the end of a business accounting year.',
+    options: ['True', 'False'],
+    answer: 0,
+    explanation: 'Correct. These are temporary accounts that are closed (reset to zero) at year-end so they start fresh for the new period.'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'An Income Statement is also often referred to as a Profit and Loss (P&L) statement.',
+    options: ['True', 'False'],
+    answer: 0,
+    explanation: 'Correct. The Income Statement is commonly called the P&L statement as it shows revenues minus costs to determine profit or loss.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'All Balance Sheets have the same basic categories of income and expenses.',
+    options: ['True', 'False'],
+    answer: 1,
+    explanation: 'False. Balance Sheets contain Assets, Liabilities and Equity — NOT income and expenses. Income and expenses belong to the Income Statement (P&L).'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'The financial statement that summarizes revenues and expenses for a specific period of time such as a year is:',
+    options: ['Balance Sheet', 'Capital Statement', 'Income Statement', 'Cash Flow Statement'],
+    answer: 2,
+    explanation: 'The Income Statement (P&L) summarizes revenues and expenses over a specific period of time to show profit or loss.'
+  },
+  {
+    topic: 'Financial Statements Basics',
+    q: 'Additional information provided about a business financial condition and methods used in preparing Financial Statements are called:',
+    options: ['Management Summary', 'Owner Supplemental Information', 'Notes to the Financial Statements', 'Creditor Notes'],
+    answer: 2,
+    explanation: 'Notes to the Financial Statements provide supplemental details about accounting methods, assumptions, and financial condition.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'The financial statement that shows a business assets, liabilities and equity at a specific point in time is:',
+    options: ['Income Statement', 'Capital Statement', 'Statement of Cash Flow', 'Balance Sheet'],
+    answer: 3,
+    explanation: 'The Balance Sheet is a snapshot of the company financial position (Assets = Liabilities + Equity) at a specific date.'
+  },
+  {
+    topic: 'Financial Statements Basics',
+    q: 'A calendar year is a year that begins in June and ends in May.',
+    options: ['True', 'False'],
+    answer: 1,
+    explanation: 'False. A calendar year runs from January 1 to December 31. A year beginning in June and ending in May would be a fiscal year.'
+  },
+  {
+    topic: 'Cash Flow',
+    q: 'The Statement of Changes in Financial Position reports the sources and uses of cash or working capital for a specific period of time.',
+    options: ['True', 'False'],
+    answer: 0,
+    explanation: 'Correct. The Cash Flow Statement shows where cash came from (sources) and how it was used (uses) during a period.'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'Businesses that sell products have a specific section in their Income Statement called Cost of Goods Sold (COGS).',
+    options: ['True', 'False'],
+    answer: 0,
+    explanation: 'Correct. Product-based businesses include a COGS section in their Income Statement to capture direct production and procurement costs.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'Liabilities are the properties used in the operation or investment activities of a business.',
+    options: ['True', 'False'],
+    answer: 1,
+    explanation: 'False. Liabilities are obligations or debts owed by the company. Properties used in operations are Assets, not Liabilities.'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'Net Income results when expenses exceed revenues for the period.',
+    options: ['True', 'False'],
+    answer: 1,
+    explanation: 'False. When expenses exceed revenues, the result is a Net Loss. Net Income occurs when revenues exceed expenses.'
+  },
+  {
+    topic: 'Financial Statements Basics',
+    q: 'Financial Statements primarily provide data on:',
+    options: [
+      'Projections for the upcoming fiscal year',
+      'Where money comes from, what money is spent on and how much money is available for use',
+      'Comparative company data to companies in similar industries',
+      'All of the above'
+    ],
+    answer: 1,
+    explanation: 'Financial Statements report on where money comes from, what it is spent on, and how much is available. They are historical reports, not forward-looking projections.'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'The primary function of the Income Statement is to:',
+    options: [
+      'Show the company value as of a given point in time',
+      'Determine if the company will have enough cash to operate',
+      'Determine taxes owed or not owed',
+      'Compare the company assets against liabilities',
+      'Measure the company financial performance over a period of time'
+    ],
+    answer: 4,
+    explanation: 'The Income Statement measures financial performance (revenues vs. costs = profit/loss) over a defined period of time.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'The primary function of the Balance Sheet is to:',
+    options: [
+      'Measure the company performance over a period of time',
+      'Make sure that assets and liabilities balance',
+      'Determine taxes owed or not owed',
+      'Show the company value as of a given point in time',
+      'Determine if the company will have enough cash to operate'
+    ],
+    answer: 3,
+    explanation: 'The Balance Sheet shows the company financial value (Assets = Liabilities + Equity) at a specific point in time — it is a snapshot, not a period report.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'Which of the following lists are ALL Assets found in the Balance Sheet?',
+    options: [
+      'Cash, accounts receivable, marketable securities, inventory, prepaid expenses and common stock',
+      'Cash, accounts receivable, marketable securities, inventory and prepaid expenses',
+      'Cash, accounts receivable, inventory and Operating Margin',
+      'Cash, accounts receivable, inventory, prepaid expenses and revenue',
+      'Cash, accounts receivable, inventory, marketable securities and revenue'
+    ],
+    answer: 1,
+    explanation: 'Cash, accounts receivable, marketable securities, inventory and prepaid expenses are all assets. Common stock is equity; revenue belongs to the P&L — neither are assets.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'The Balance Sheet equation is:',
+    options: [
+      'Assets divided by Equity = Liabilities',
+      'Assets plus Liabilities = Equity',
+      'Assets = Liabilities plus Equity',
+      'Equity = Profit minus Taxes'
+    ],
+    answer: 2,
+    explanation: 'The fundamental accounting equation is: Assets = Liabilities + Equity. This equation must always balance.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'Which one of the following lists represents the Current Liabilities of a company?',
+    options: [
+      'Accounts Payable, Notes Payable, Accrued Expenses AND Income Taxes Payable',
+      'Accounts Payable, Notes Payable, Accrued Expenses AND Prepaid Expenses',
+      'Accounts Payable, Notes Payable, Accrued Expenses BUT NOT Income Taxes Payable',
+      'Accounts Payable, Notes Payable, Income Taxes Payable BUT NOT Accrued Expenses',
+      'Accounts Payable, Notes Payable AND Prepaid Expenses'
+    ],
+    answer: 0,
+    explanation: 'Current Liabilities include Accounts Payable, Notes Payable, Accrued Expenses AND Income Taxes Payable. Prepaid Expenses are a current asset, not a liability.'
+  },
+  {
+    topic: 'Equity and Stock',
+    q: 'Which statement is correct about Preferred Stock?',
+    options: [
+      'It is reserved only for preferred customers or investors',
+      'It is always worth more than common stock',
+      'It always costs more than common stock',
+      'It has priority over common stock in the event of the dissolution of the company',
+      'It cannot be owned by full time employees of the company'
+    ],
+    answer: 3,
+    explanation: 'Preferred Stock has priority over common stock in the event of company dissolution (liquidation) — preferred shareholders are paid before common shareholders.'
+  },
+  {
+    topic: 'Corporate Finance',
+    q: 'Which one of the below is the MAJOR responsibility of a businessperson?',
+    options: [
+      'Making as little taxable income as possible to minimize taxes',
+      'Making as much money as possible for employees to share in salary and bonuses',
+      'Making sure the company is legally compliant with all reporting requirements',
+      'Making as much money as possible to distribute in dividends to stockholders',
+      'Making the value of the company increase by generating increasing revenues and profits'
+    ],
+    answer: 4,
+    explanation: 'The primary responsibility of a businessperson is to increase company value through growing revenues and profits — this benefits all stakeholders.'
+  },
+  {
+    topic: 'Financial Statements Basics',
+    q: 'Which is the most relevant statement to an employee regarding the understanding and use of financial statements?',
+    options: [
+      'They are only really needed by a company CFO or Accounting Staff',
+      'They have little to do with day-to-day operations of most departments',
+      'They can help any employee understand their impact on the financial health of the company',
+      'They are only really used to determine taxes owed',
+      'They are only needed by senior executives and board members'
+    ],
+    answer: 2,
+    explanation: 'Financial statements help any employee understand their impact on the company financial health, making them relevant to everyone in the organization.'
+  },
+  {
+    topic: 'Corporate Finance',
+    q: 'Who typically heads the Finance department in a company?',
+    options: [
+      'CEO (Chief Executive Officer)',
+      'COO (Chief Operating Officer)',
+      'CFO (Chief Financial Officer)',
+      'CTO (Chief Technology Officer)'
+    ],
+    answer: 2,
+    explanation: 'The Finance department is headed by the CFO (Chief Financial Officer), who oversees both financial resource management and financial reporting.'
+  },
+  {
+    topic: 'Corporate Finance',
+    q: 'The Finance department has two key areas of responsibility. Which answer correctly identifies both?',
+    options: [
+      'Product development and customer relations',
+      'Managing company financial resources AND recording/reporting financial transactions',
+      'Human resources management and IT infrastructure',
+      'Sales management and supply chain management'
+    ],
+    answer: 1,
+    explanation: 'Finance has two key responsibilities: (1) Managing company financial resources (treasury, budgeting, maximizing shareholder value) and (2) Recording and reporting all financial transactions (accounting, compliance).'
+  },
+  {
+    topic: 'Corporate Finance',
+    q: 'What does GAAP stand for?',
+    options: [
+      'Generally Accepted Accounting Procedures',
+      'General Accounting and Audit Principles',
+      'Generally Accepted Accounting Principles',
+      'Global Accounting and Audit Practices'
+    ],
+    answer: 2,
+    explanation: 'GAAP stands for Generally Accepted Accounting Principles — the standard framework of guidelines for financial accounting and reporting.'
+  },
+  {
+    topic: 'Chart of Accounts',
+    q: 'A Chart of Accounts is best described as:',
+    options: [
+      'A list of all customers and their outstanding balances',
+      'A set of buckets (account names/numbers) where transactions of similar nature are recorded',
+      'A summary of annual revenues and expenses',
+      'A document listing all employees and their salaries'
+    ],
+    answer: 1,
+    explanation: 'A Chart of Accounts is a set of categorized buckets (accounts with names and numbers) used to classify and record financial transactions of similar nature. Examples: Revenue, Cash, Short Term Debts.'
+  },
+  {
+    topic: 'Chart of Accounts',
+    q: 'The General Ledger (also called Trial Balance or Journal) serves as:',
+    options: [
+      'A marketing plan for the company',
+      'A list of all company employees and their roles',
+      'The data source for all financial statements',
+      'A record of only cash transactions'
+    ],
+    answer: 2,
+    explanation: 'The General Ledger records ALL financial transactions (Date, Account, Value) and serves as the primary data source for preparing all financial statements.'
+  },
+  {
+    topic: 'Accrual Accounting',
+    q: 'Under accrual accounting, when is a sale to a customer recorded?',
+    options: [
+      'When the customer places the order',
+      'When cash is received from the customer',
+      'When products are shipped to the customer (invoice issued)',
+      'When the customer confirms receipt of goods'
+    ],
+    answer: 2,
+    explanation: 'Under accrual accounting, a sale is recorded when products are shipped/invoiced. The amount goes to Accounts Receivable first; cash is received 30-45 days later.'
+  },
+  {
+    topic: 'Accrual Accounting',
+    q: 'Under accrual accounting, when a company receives goods from a supplier, the amount is initially recorded in:',
+    options: [
+      'Cash Account (immediately reduces cash)',
+      'Revenue Account',
+      'Accounts Payable Account',
+      'Inventory Account only, with no liability recorded'
+    ],
+    answer: 2,
+    explanation: 'When goods are received from a supplier, the amount goes to Accounts Payable (a liability). Cash is only reduced when the supplier is actually paid per the agreed payment terms.'
+  },
+  {
+    topic: 'Accrual Accounting',
+    q: 'What is the key difference between accrual accounting and cash accounting?',
+    options: [
+      'Accrual accounting only records large transactions above a threshold',
+      'Cash accounting records transactions when they happen; accrual records when cash changes hands',
+      'Accrual accounting records transactions when they happen even if payment is done later; cash accounting only records when cash changes hands',
+      'There is no meaningful difference between the two methods'
+    ],
+    answer: 2,
+    explanation: 'Accrual accounting records transactions when they occur (e.g., when goods are shipped or received), regardless of when cash is exchanged. Cash accounting only records when cash actually moves.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'Working Capital is defined as:',
+    options: [
+      'Total Assets minus Total Liabilities',
+      'Current Assets minus Current Liabilities',
+      'Cash plus Accounts Receivable only',
+      'Total Revenue minus Total Expenses'
+    ],
+    answer: 1,
+    explanation: 'Working Capital = Current Assets - Current Liabilities. It measures a company short-term liquidity and ability to meet obligations within 12 months.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'In the context of the Balance Sheet, the term "Current" means:',
+    options: [
+      'The most recent financial year data',
+      'Items related to the current management team',
+      'Assets convertible to cash or liabilities due within 12 months',
+      'The current market value of assets'
+    ],
+    answer: 2,
+    explanation: '"Current" in accounting means within 12 months. Current Assets can be converted to cash within a year; Current Liabilities are obligations due within a year.'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'What does EBITDA stand for?',
+    options: [
+      'Earnings Before Income Tax and Depreciation Allowance',
+      'Earnings Before Interest, Taxes, Depreciation and Amortization',
+      'Estimated Budget Including Tax, Depreciation and Assets',
+      'Earnings Based on Interest, Taxes, Debt and Assets'
+    ],
+    answer: 1,
+    explanation: 'EBITDA = Earnings Before Interest, Taxes, Depreciation and Amortization. It is a widely used measure of core operating profitability.'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'Gross Profit is calculated as:',
+    options: [
+      'Revenue minus all Operating Expenses',
+      'Revenue minus Cost of Goods Sold (COGS)',
+      'Revenue minus all taxes and interest',
+      'Net Income plus Depreciation and Amortization'
+    ],
+    answer: 1,
+    explanation: 'Gross Profit = Revenue - Cost of Goods Sold (COGS). It is the first measurement of profitability, before deducting operating expenses like R&D, Sales and G&A.'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'Which of the following is typically included in Operating Expenses on an Income Statement?',
+    options: [
+      'Cost of raw materials and direct labor only',
+      'R&D, Sales and Marketing, and G&A (General and Administration)',
+      'Accounts Receivable and Inventory',
+      'Long-term debt repayments and capital expenditures'
+    ],
+    answer: 1,
+    explanation: 'Operating Expenses include R&D/Engineering, Sales and Marketing (including commissions), and G&A (General and Administration, which includes IT costs).'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'G&A (General and Administration) in the Income Statement is best described as:',
+    options: [
+      'Costs directly related to manufacturing and producing products',
+      'A catch-all category for overhead and administrative costs including IT',
+      'Only executive salaries and board compensation',
+      'Marketing, advertising and sales promotion costs'
+    ],
+    answer: 1,
+    explanation: 'G&A is a catch-all category for overhead and administrative costs that do not fit into R&D or Sales and Marketing. IT costs are typically classified under G&A.'
+  },
+  {
+    topic: 'Cash Flow',
+    q: 'The Cash Flow Statement is best described as:',
+    options: [
+      'A replacement for the Income Statement showing the same information differently',
+      'Complementary to the Income Statement/P&L — showing actual cash movements',
+      'Only required for large publicly traded corporations',
+      'The same as the Balance Sheet but presented differently'
+    ],
+    answer: 1,
+    explanation: 'The Cash Flow Statement is complementary to the Income Statement. While the P&L shows profit/loss, the Cash Flow Statement shows actual cash inflows and outflows.'
+  },
+  {
+    topic: 'Cash Flow',
+    q: 'Which of the following is a transaction that increases profit but does NOT produce cash until later?',
+    options: [
+      'Repaying a bank loan',
+      'Purchasing new machinery',
+      'Sales invoiced but not yet collected (Accounts Receivable)',
+      'Paying employee salaries'
+    ],
+    answer: 2,
+    explanation: 'Sales recorded as Accounts Receivable increase profit immediately under accrual accounting, but cash is only received when the customer pays — typically 30-45 days later.'
+  },
+  {
+    topic: 'Cash Flow',
+    q: 'In the Wonder Widget story from the course, the company became insolvent despite being profitable because:',
+    options: [
+      'They had too many employees and high overhead costs',
+      'Their product was not selling well in the market',
+      'Fast growth created a large cash appetite — cash timing did not match profit recognition',
+      'They paid too much in taxes and regulatory fees'
+    ],
+    answer: 2,
+    explanation: 'Wonder Widget was profitable but ran out of cash because fast growth requires cash upfront (materials, labor, setup) while customer payments arrive later. Cash timing is everything.'
+  },
+  {
+    topic: 'Cash Flow',
+    q: 'Which of the following puts cash in the bank but does NOT produce profit on the Income Statement?',
+    options: [
+      'Selling products to customers on credit',
+      'Getting a bank loan',
+      'Reducing operating expenses',
+      'Collecting outstanding accounts receivable'
+    ],
+    answer: 1,
+    explanation: 'Getting a loan puts cash in the bank but creates a liability — it does not produce profit. It must be repaid and does not appear as revenue on the Income Statement.'
+  },
+  {
+    topic: 'Cash Flow',
+    q: 'If Accounts Receivable grow faster than sales, what is the impact on the company?',
+    options: [
+      'It is a positive sign indicating strong business growth',
+      'It is a cash drain — the company has revenue but has not collected the cash yet',
+      'It directly increases the company profit margin',
+      'It has no significant impact on cash position'
+    ],
+    answer: 1,
+    explanation: 'If Accounts Receivable grow faster than sales, customers are taking longer to pay. This is a cash drain — the company has recognized revenue but not yet received the cash.'
+  },
+  {
+    topic: 'Cash Flow',
+    q: 'Inventory is considered a large consumer of cash because:',
+    options: [
+      'Inventory always loses value over time',
+      'Cash invested in inventory can take a long time to convert back to cash, and risks obsolescence',
+      'Inventory requires expensive storage facilities',
+      'Inventory is taxed at a higher rate than other assets'
+    ],
+    answer: 1,
+    explanation: 'Cash invested in inventory takes time to convert back to cash (production -> sales -> collection). If inventory grows faster than sales, the company may waste cash and face obsolescence risk.'
+  },
+  {
+    topic: 'Depreciation',
+    q: 'Depreciation is best described as:',
+    options: [
+      'The increase in market value of an asset over time',
+      'An expense charged against earnings to write off the cost of a capital asset over its useful life',
+      'A one-time charge recorded when an asset is sold or disposed of',
+      'The reduction in market value of inventory due to price changes'
+    ],
+    answer: 1,
+    explanation: 'Depreciation is an expense that spreads the cost of a capital asset over its useful life, considering factors like age, wear and tear, residual value, and obsolescence.'
+  },
+  {
+    topic: 'Depreciation',
+    q: 'Amortization differs from Depreciation in that it applies to:',
+    options: [
+      'Physical machinery, equipment and vehicles',
+      'Real estate and land properties',
+      'Intangible assets such as software licenses and R&D expenditure',
+      'Cash, bank accounts and short-term investments'
+    ],
+    answer: 2,
+    explanation: 'Amortization spreads the cost of intangible assets (like software licenses, R&D expenditure, patents) over their useful life. Depreciation applies to tangible/physical assets.'
+  },
+  {
+    topic: 'Depreciation',
+    q: 'Which of the following are methods of depreciating assets mentioned in the course?',
+    options: [
+      'Straight-line and Accelerated depreciation',
+      'FIFO and LIFO depreciation methods',
+      'Linear and Exponential depreciation',
+      'Fixed-rate and Variable-rate depreciation'
+    ],
+    answer: 0,
+    explanation: 'The course mentions Straight-line depreciation (equal amounts each year) and Accelerated depreciation (higher amounts in early years, lower in later years) as the two main methods.'
+  },
+  {
+    topic: 'Depreciation',
+    q: 'Depreciation is recorded as:',
+    options: [
+      'A credit on the Balance Sheet only',
+      'An asset on the Balance Sheet',
+      'An expense on the Income Statement',
+      'A liability on the Balance Sheet'
+    ],
+    answer: 2,
+    explanation: 'Depreciation is recorded as an expense on the Income Statement, which reduces reported profit. It is a non-cash expense that reflects the consumption of asset value over time.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'The P/E ratio (Price to Earnings ratio) is calculated as:',
+    options: [
+      'Net Profit divided by Total Revenue',
+      'Stock Price divided by Earnings per Share',
+      'Total Assets divided by Total Liabilities',
+      'Market Capitalization divided by Book Value'
+    ],
+    answer: 1,
+    explanation: 'P/E Ratio = Stock Price / Earnings per Share. The guideline value is under 20, indicating how much investors are willing to pay per dollar of earnings.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'The Current Ratio is calculated as:',
+    options: [
+      'Net Income divided by Total Revenue',
+      'Total Assets divided by Total Liabilities',
+      'Current Assets divided by Current Liabilities',
+      'Cash divided by Current Liabilities'
+    ],
+    answer: 2,
+    explanation: 'Current Ratio = Current Assets / Current Liabilities. It assesses a company liquidity. The guideline is 2, meaning current assets should be twice current liabilities.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'The Quick Ratio differs from the Current Ratio in that it:',
+    options: [
+      'Uses annual data instead of quarterly data',
+      'Excludes Inventory from Current Assets before dividing by Current Liabilities',
+      'Includes long-term assets in the calculation',
+      'Uses market value instead of book value for assets'
+    ],
+    answer: 1,
+    explanation: 'Quick Ratio = (Current Assets - Inventory) / Current Liabilities. Inventory is excluded because it may not be quickly convertible to cash. The guideline is 1.3.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'DSO (Days Sales Outstanding) is calculated as:',
+    options: [
+      'Annual Revenue divided by 365',
+      'Accounts Receivable divided by Average Revenue per Day',
+      'Total Sales divided by Number of Customers',
+      'Inventory divided by Daily Cost of Goods Sold'
+    ],
+    answer: 1,
+    explanation: 'DSO = Accounts Receivable / Average Revenue per Day. It measures how long it takes to collect payment after a sale. Ideal is 30 days; in practice typically around 45 days.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'Inventory Turnover is calculated as:',
+    options: [
+      'Annual Revenue divided by Average Inventory',
+      'Annual Cost of Goods Sold divided by Average Inventory',
+      'Total Inventory divided by Number of Product Lines',
+      'Annual Purchases divided by Ending Inventory'
+    ],
+    answer: 1,
+    explanation: 'Inventory Turnover = Annual COGS / Average Inventory. It measures how quickly inventory is sold and replaced. The guideline is greater than 7 times per year.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'Gross Profit Margin is calculated as:',
+    options: [
+      'Net Profit divided by Gross Sales',
+      'EBITDA divided by Total Revenue',
+      'Gross Profit divided by Gross Sales',
+      'Operating Income divided by Total Assets'
+    ],
+    answer: 2,
+    explanation: 'Gross Profit Margin = Gross Profit / Gross Sales. It is a good indicator of the business model and can range from 20% to 80% depending on the industry.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'A Net Profit Margin of 3% would be considered:',
+    options: [
+      'Excellent for a software company',
+      'Very bad for a software company but potentially acceptable for a distribution business',
+      'The universal industry standard for all sectors',
+      'Only relevant for manufacturing companies'
+    ],
+    answer: 1,
+    explanation: '3% Net Profit Margin is very bad for software, pharmaceutical or manufacturing businesses (which have higher margins) but can be acceptable for distribution businesses with high volume and low margins.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'The Debt to Equity ratio measures:',
+    options: [
+      'How profitable the company is relative to its revenue',
+      'How liquid the company is in the short term',
+      'The financial leverage of the company (how much debt relative to equity)',
+      'How efficiently the company uses its assets to generate revenue'
+    ],
+    answer: 2,
+    explanation: 'Debt to Equity = Total Debt / Total Equity. It measures financial leverage. The guideline is less than 1, meaning the company should not have more debt than equity.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'Return on Equity (ROE) is calculated as:',
+    options: [
+      'Net Income divided by Total Assets',
+      'Net Income (annualized) divided by Stockholders Equity',
+      'Gross Profit divided by Total Equity',
+      'Operating Income divided by Total Revenue'
+    ],
+    answer: 1,
+    explanation: 'ROE = Net Income (annualized) / Stockholders Equity. It measures the rate of return on shareholders investment. The guideline is 15-20%.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'When analyzing KPIs, which approach provides the most valuable insights?',
+    options: [
+      'Looking at a single point-in-time value in isolation',
+      'Comparing only to companies in completely different industries',
+      'Comparing vs. budget, tracking trends over time, and benchmarking against the industry',
+      'Only looking at absolute dollar values, not percentages or ratios'
+    ],
+    answer: 2,
+    explanation: 'KPIs should be compared vs. budget, tracked over time for trends, and benchmarked against the industry. A single value in isolation has very limited meaning.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'If a company Gross Margin percentage is declining, which of the following could be a reason?',
+    options: [
+      'The company recently hired more administrative employees',
+      'Price reductions, excessive discounts, rising production costs, or competitive pressure',
+      'The company opened new regional offices',
+      'The company increased its R&D budget for future products'
+    ],
+    answer: 1,
+    explanation: 'Declining Gross Margin could be due to: price reductions, too much discounting, rising costs, product mix changes, or competitive pressure. Each cause requires a different corrective action.'
+  },
+  {
+    topic: 'Corporate Finance',
+    q: 'M&A in the context of Finance stands for:',
+    options: [
+      'Management and Administration',
+      'Marketing and Advertising',
+      'Mergers and Acquisitions',
+      'Monitoring and Auditing'
+    ],
+    answer: 2,
+    explanation: 'M&A stands for Mergers and Acquisitions — the process of combining companies (merger) or one company purchasing another (acquisition). It is an optional Finance department function.'
+  },
+  {
+    topic: 'Corporate Finance',
+    q: 'Why is IT particularly significant from a Finance perspective?',
+    options: [
+      'IT generates the most revenue in most companies',
+      'IT is usually a large cost center with significant capital expenditures (CapEx)',
+      'IT has the most employees in most companies',
+      'IT is exempt from normal budget constraints and financial oversight'
+    ],
+    answer: 1,
+    explanation: 'IT is significant from a Finance perspective because it typically involves large dollar amounts with significant capital expenditures, making financial management and justification critical.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'Accounts Payable can serve as a source of financing because:',
+    options: [
+      'It generates interest income for the company',
+      'By taking full credit terms from suppliers, the company can use that cash for other purposes in the interim',
+      'It reduces the company tax liability directly',
+      'It increases the company reported revenue'
+    ],
+    answer: 1,
+    explanation: 'Accounts Payable acts as a source of short-term financing. By using the full credit terms offered by suppliers (e.g., 30-60 days), the company retains cash longer for other uses.'
+  },
+  {
+    topic: 'Balance Sheet',
+    q: 'High inventory levels are considered a risk because:',
+    options: [
+      'They always indicate a positive sign of strong business growth',
+      'They consume cash and carry the risk of obsolescence if not sold quickly',
+      'They are irrelevant to the company cash flow position',
+      'They only concern retail businesses, not manufacturers'
+    ],
+    answer: 1,
+    explanation: 'High inventory is a high-risk area: it consumes cash (cash invested in inventory takes time to convert back to cash) and risks obsolescence if products become outdated before being sold.'
+  },
+  {
+    topic: 'Financial Statements Basics',
+    q: 'The relationship between Balance Sheet at T1, Balance Sheet at T2, and the Income Statement for the period is:',
+    options: [
+      'They are completely independent documents with no connection',
+      'The Income Statement for period T1-T2 explains the changes in equity between the two Balance Sheets',
+      'The Balance Sheet at T2 completely replaces the Income Statement',
+      'All three statements are prepared at the same point in time'
+    ],
+    answer: 1,
+    explanation: 'The Income Statement for period T1-T2 bridges the two Balance Sheets. The profit or loss generated during the period explains the change in equity between Balance Sheet T1 and T2.'
+  },
+  {
+    topic: 'Cash Flow',
+    q: 'The Cash Flow Curve for a fast-growing startup company typically shows:',
+    options: [
+      'Immediate positive cash flow from the first day of operations',
+      'A large initial cash requirement (negative cash) before eventually turning positive',
+      'Constant stable cash levels throughout the entire growth period',
+      'Cash flow that exactly mirrors profit at all times'
+    ],
+    answer: 1,
+    explanation: 'Fast growth means big appetite for cash. Companies need to set up operations, buy materials, and pay workers before collecting from customers — creating an initial cash deficit that must be financed.'
+  },
+  {
+    topic: 'Cash Flow',
+    q: 'Which of the following is a viable option for a company facing a cash shortage despite being profitable?',
+    options: [
+      'Stop selling products to reduce cash consumption',
+      'Raise prices, get receivable financing, or raise more capital',
+      'Reduce the quality of products to lower production costs',
+      'Delay financial reporting to buy more time'
+    ],
+    answer: 1,
+    explanation: 'Options to address cash shortage include: raising prices (increases cash per sale), getting receivable financing/factoring (converts AR to cash faster), or raising more capital through equity or debt.'
+  },
+  {
+    topic: 'Income Statement',
+    q: 'Revenue recognition refers to:',
+    options: [
+      'The process of physically collecting cash payments from customers',
+      'The accounting rules governing when sales should be recorded in the financial statements',
+      'The annual calculation and reconciliation of total revenue',
+      'The comparison of revenue performance across different accounting periods'
+    ],
+    answer: 1,
+    explanation: 'Revenue recognition governs WHEN sales are recorded. Recording sales too early, too late, or recording sales that have not actually happened are all violations of accounting principles and GAAP.'
+  },
+  {
+    topic: 'Corporate Finance',
+    q: 'The Finance department role as an internal "Finance consultant to other departments" means:',
+    options: [
+      'Finance controls and approves all decisions made in every department',
+      'Finance provides financial guidance and analysis to help other departments make sound financial decisions',
+      'Finance replaces the management team of other departments',
+      'Finance only reports financial results to the board of directors'
+    ],
+    answer: 1,
+    explanation: 'Finance acts as an internal consultant, providing financial guidance and analysis to help other departments (including IT) understand their financial impact and make financially sound decisions.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'Sales per Employee is an example of which type of KPI?',
+    options: [
+      'A liquidity ratio',
+      'A financial leverage ratio',
+      'A productivity measure',
+      'A profitability ratio'
+    ],
+    answer: 2,
+    explanation: 'Sales per Employee is a productivity measure. Other productivity measures include backlog of orders, order processing time, and sales per square foot.'
+  },
+  {
+    topic: 'KPIs',
+    q: 'Backlog of orders is defined as:',
+    options: [
+      'Orders that have been cancelled by customers',
+      'Orders received minus orders shipped and invoiced',
+      'Total orders placed during the entire fiscal year',
+      'Orders pending management approval before processing'
+    ],
+    answer: 1,
+    explanation: 'Backlog = Orders received - Orders shipped and invoiced. It indicates future revenue potential and is an indicator of customer demand relative to the company operational capacity.'
+  }
+];
+
+const userAnswers = new Array(questions.length).fill(-1);
+
+function buildQuiz() {
+  const area = document.getElementById('quizArea');
+  let html = '';
+  questions.forEach(function(q, i) {
+    html += '<div class="question-card" id="card-' + i + '">';
+    html += '<div class="q-header">';
+    html += '<span class="q-number">Q' + (i+1) + ' / ' + questions.length + ' &bull; ' + q.topic + '</span>';
+    html += '<span class="q-status" id="status-' + i + '" style="display:none"></span>';
+    html += '</div>';
+    html += '<div class="q-text">' + q.q + '</div>';
+    html += '<div class="options" id="opts-' + i + '">';
+    q.options.forEach(function(opt, j) {
+      const letter = String.fromCharCode(65 + j);
+      html += '<button class="option-btn" id="opt-' + i + '-' + j + '" onclick="selectAnswer(' + i + ',' + j + ')">';
+      html += '<span class="option-letter">' + letter + ')</span><span>' + opt + '</span>';
+      html += '</button>';
+    });
+    html += '</div>';
+    html += '<div class="feedback" id="feedback-' + i + '"></div>';
+    html += '</div>';
+  });
+  area.innerHTML = html;
+  updateProgress();
+}
+
+function selectAnswer(qi, oi) {
+  if (userAnswers[qi] !== -1) return;
+  userAnswers[qi] = oi;
+  const q = questions[qi];
+  const isCorrect = (oi === q.answer);
+  const card = document.getElementById('card-' + qi);
+  const fb = document.getElementById('feedback-' + qi);
+  const st = document.getElementById('status-' + qi);
+  q.options.forEach(function(_, j) {
+    const btn = document.getElementById('opt-' + qi + '-' + j);
+    btn.disabled = true;
+    if (j === q.answer) btn.classList.add('correct-ans');
+    if (j === oi && !isCorrect) btn.classList.add('wrong-ans');
+  });
+  card.classList.add(isCorrect ? 'correct' : 'incorrect');
+  st.textContent = isCorrect ? '✓ Correct' : '✗ Incorrect';
+  st.className = 'q-status ' + (isCorrect ? 'correct' : 'incorrect');
+  st.style.display = 'inline-block';
+  fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+  fb.innerHTML = (isCorrect ? '<strong>&#10003; Correct!</strong> ' : '<strong>&#10007; Incorrect.</strong> ') + q.explanation;
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = userAnswers.filter(function(a) { return a !== -1; }).length;
+  const pct = Math.round((answered / questions.length) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = answered + ' / ' + questions.length + ' answered';
+}
+
+function submitQuiz() {
+  let correct = 0, incorrect = 0, skipped = 0;
+  const topicStats = {};
+  questions.forEach(function(q, i) {
+    if (!topicStats[q.topic]) topicStats[q.topic] = {correct: 0, total: 0};
+    topicStats[q.topic].total++;
+    if (userAnswers[i] === -1) {
+      skipped++;
+    } else if (userAnswers[i] === q.answer) {
+      correct++;
+      topicStats[q.topic].correct++;
+    } else {
+      incorrect++;
+    }
+  });
+  const total = questions.length;
+  const pct = Math.round((correct / total) * 100);
+  let gradeClass, gradeMsg;
+  if (pct >= 85) { gradeClass = 'excellent'; gradeMsg = '&#127881; Excellent! Outstanding performance!'; }
+  else if (pct >= 70) { gradeClass = 'good'; gradeMsg = '&#128077; Good job! Solid understanding of Finance concepts.'; }
+  else if (pct >= 50) { gradeClass = 'average'; gradeMsg = '&#128161; Keep going! Review the topics you missed.'; }
+  else { gradeClass = 'poor'; gradeMsg = '&#128218; More study needed. Focus on the weak areas below.'; }
+  let barColor = pct >= 85 ? '#38a169' : pct >= 70 ? '#4299e1' : pct >= 50 ? '#d69e2e' : '#e53e3e';
+  let recapHTML = '<h2>&#128203; Quiz Results</h2>';
+  recapHTML += '<div class="grade-msg ' + gradeClass + '">' + gradeMsg + '</div>';
+  recapHTML += '<div class="score-grid">';
+  recapHTML += '<div class="score-card s-total"><div class="num">' + total + '</div><div class="lbl">Total Questions</div></div>';
+  recapHTML += '<div class="score-card s-correct"><div class="num">' + correct + '</div><div class="lbl">Correct</div></div>';
+  recapHTML += '<div class="score-card s-incorrect"><div class="num">' + incorrect + '</div><div class="lbl">Incorrect</div></div>';
+  recapHTML += '<div class="score-card s-skipped"><div class="num">' + skipped + '</div><div class="lbl">Skipped</div></div>';
+  recapHTML += '</div>';
+  recapHTML += '<div class="grade-bar-wrap"><label>Score: ' + pct + '%</label>';
+  recapHTML += '<div class="grade-bar-bg"><div class="grade-bar-fill" style="width:' + pct + '%;background:' + barColor + '">' + pct + '%</div></div></div>';
+  recapHTML += '<div class="topic-breakdown"><h3>&#128200; Performance by Topic</h3>';
+  Object.keys(topicStats).forEach(function(topic) {
+    const s = topicStats[topic];
+    const tp = Math.round((s.correct / s.total) * 100);
+    const tcolor = tp >= 80 ? '#38a169' : tp >= 60 ? '#d69e2e' : '#e53e3e';
+    recapHTML += '<div class="topic-row">';
+    recapHTML += '<span class="topic-name">' + topic + '</span>';
+    recapHTML += '<div class="topic-bar-bg"><div class="topic-bar-fill" style="width:' + tp + '%;background:' + tcolor + '"></div></div>';
+    recapHTML += '<span class="topic-pct" style="color:' + tcolor + '">' + tp + '%</span>';
+    recapHTML += '</div>';
+  });
+  recapHTML += '</div>';
+  const weakTopics = Object.keys(topicStats).filter(function(t) { return (topicStats[t].correct / topicStats[t].total) < 0.6; });
+  const strongTopics = Object.keys(topicStats).filter(function(t) { return (topicStats[t].correct / topicStats[t].total) >= 0.8; });
+  if (weakTopics.length > 0) {
+    recapHTML += '<div class="improve-section"><h3>&#9888; Topics to Improve</h3>';
+    weakTopics.forEach(function(t) {
+      const s = topicStats[t];
+      recapHTML += '<div class="improve-item"><strong>' + t + '</strong>: ' + s.correct + '/' + s.total + ' correct — Review this topic carefully.</div>';
+    });
+    recapHTML += '</div>';
+  }
+  if (strongTopics.length > 0) {
+    recapHTML += '<div class="well-done-section"><h3>&#10003; Strong Areas</h3>';
+    strongTopics.forEach(function(t) {
+      const s = topicStats[t];
+      recapHTML += '<div class="well-done-item"><strong>' + t + '</strong>: ' + s.correct + '/' + s.total + ' correct &#127881;</div>';
+    });
+    recapHTML += '</div>';
+  }
+  const missedQs = questions.filter(function(q, i) { return userAnswers[i] !== -1 && userAnswers[i] !== q.answer; });
+  if (missedQs.length > 0) {
+    recapHTML += '<div class="improve-section"><h3>&#128270; Questions to Review (' + missedQs.length + ' missed)</h3>';
+    questions.forEach(function(q, i) {
+      if (userAnswers[i] !== -1 && userAnswers[i] !== q.answer) {
+        recapHTML += '<div class="improve-item"><strong>Q' + (i+1) + ':</strong> ' + q.q + '<br>';
+        recapHTML += '<span style="color:#9b2c2c">Your answer: ' + q.options[userAnswers[i]] + '</span><br>';
+        recapHTML += '<span style="color:#276749">Correct answer: ' + q.options[q.answer] + '</span></div>';
+      }
+    });
+    recapHTML += '</div>';
+  }
+  const recap = document.getElementById('recap');
+  recap.innerHTML = recapHTML;
+  recap.className = 'recap show';
+  recap.scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+
+function resetQuiz() {
+  userAnswers.fill(-1);
+  buildQuiz();
+  document.getElementById('recap').className = 'recap';
+  document.getElementById('recap').innerHTML = '';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

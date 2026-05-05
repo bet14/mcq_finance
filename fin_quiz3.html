@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capital Budgeting MCQ Quiz</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f0f4f8;color:#2d3748}
+header{background:linear-gradient(135deg,#1a365d,#2b6cb0);color:white;padding:24px 32px;text-align:center}
+header h1{font-size:1.8rem;margin-bottom:6px}
+header p{font-size:.95rem;opacity:.85}
+.pb-wrap{background:#e2e8f0;height:8px}
+.pb{height:8px;background:linear-gradient(90deg,#48bb78,#38a169);transition:width .4s}
+.stats-bar{display:flex;justify-content:center;gap:24px;padding:12px 24px;background:#fff;border-bottom:1px solid #e2e8f0;font-size:.88rem;flex-wrap:wrap}
+.stat{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%}
+.d-ans{background:#4299e1}.d-ok{background:#48bb78}.d-no{background:#fc8181}
+.container{max-width:860px;margin:24px auto;padding:0 16px}
+.card{background:white;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.08);border-left:5px solid #4299e1}
+.card.ok{border-left-color:#48bb78}.card.no{border-left-color:#fc8181}
+.qhead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:8px}
+.qnum{background:#ebf8ff;color:#2b6cb0;font-weight:700;font-size:.8rem;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.qcat{background:#faf5ff;color:#6b46c1;font-size:.75rem;padding:3px 10px;border-radius:20px;text-align:right}
+.qtext{font-size:1rem;font-weight:600;line-height:1.6;margin-bottom:16px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.93rem;line-height:1.5}
+.opt:hover:not(.dis){border-color:#90cdf4;background:#ebf8ff}
+.opt.ok{border-color:#48bb78!important;background:#f0fff4!important}
+.opt.no{border-color:#fc8181!important;background:#fff5f5!important}
+.opt.dis{cursor:default}
+.lbl{font-weight:700;color:#4299e1;min-width:22px}
+.lbl.ok{color:#38a169}.lbl.no{color:#e53e3e}
+.fb{margin-top:14px;padding:12px 16px;border-radius:8px;font-size:.88rem;line-height:1.6;display:none}
+.fb.show{display:block}
+.fb.ok{background:#f0fff4;border:1px solid #9ae6b4;color:#276749}
+.fb.no{background:#fff5f5;border:1px solid #feb2b2;color:#c53030}
+.sub-wrap{text-align:center;padding:24px 0 40px}
+.btn-sub{background:linear-gradient(135deg,#2b6cb0,#1a365d);color:white;border:none;padding:14px 48px;font-size:1.05rem;font-weight:700;border-radius:30px;cursor:pointer;box-shadow:0 4px 14px rgba(43,108,176,.35);transition:transform .2s}
+.btn-sub:hover{transform:translateY(-2px)}
+#recap{display:none;max-width:860px;margin:0 auto 40px;padding:0 16px}
+.rh{background:linear-gradient(135deg,#1a365d,#2b6cb0);color:white;border-radius:12px 12px 0 0;padding:28px 32px;text-align:center}
+.rh h2{font-size:1.6rem;margin-bottom:8px}
+.score{font-size:3rem;font-weight:900}
+.rsub{font-size:1rem;opacity:.85}
+.rstats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;background:white;padding:24px;border:1px solid #e2e8f0}
+.rst{text-align:center;padding:16px;border-radius:10px}
+.rst.ok{background:#f0fff4}.rst.no{background:#fff5f5}.rst.sk{background:#fffaf0}
+.rn{font-size:2rem;font-weight:800}
+.rst.ok .rn{color:#38a169}.rst.no .rn{color:#e53e3e}.rst.sk .rn{color:#d69e2e}
+.rl{font-size:.85rem;color:#718096;margin-top:4px}
+.rsec{background:white;border:1px solid #e2e8f0;padding:24px}
+.rsec h3{font-size:1.1rem;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e2e8f0}
+.ri{padding:12px;border-radius:8px;margin-bottom:10px;font-size:.88rem;line-height:1.6}
+.ri.ok{background:#f0fff4;border-left:4px solid #48bb78}
+.ri.no{background:#fff5f5;border-left:4px solid #fc8181}
+.ri.sk{background:#fffaf0;border-left:4px solid #f6ad55}
+.riq{font-weight:600;margin-bottom:4px}
+.ria{color:#4a5568}.rica{color:#276749;font-weight:600}
+.imp{background:#fffaf0;border:2px solid #f6ad55;border-radius:10px;padding:20px;margin-top:16px}
+.imp h4{color:#c05621;font-size:1rem;margin-bottom:12px}
+.itag{display:inline-block;background:#feebc8;color:#c05621;padding:4px 12px;border-radius:20px;font-size:.82rem;margin:4px}
+.btn-retry{background:linear-gradient(135deg,#38a169,#276749);color:white;border:none;padding:12px 36px;font-size:1rem;font-weight:700;border-radius:30px;cursor:pointer;margin:20px auto 0;display:block}
+.rf{background:#f7fafc;border:1px solid #e2e8f0;border-radius:0 0 12px 12px;padding:16px;text-align:center}
+@media(max-width:600px){.rstats{grid-template-columns:1fr}.stats-bar{gap:12px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>&#x1F4CA; Capital Budgeting &mdash; MCQ Quiz</h1>
+  <p>Corporate Finance &middot; International Masters &middot; Spring 2025 &middot; 63 Questions</p>
+</header>
+<div class="pb-wrap"><div class="pb" id="pb" style="width:0%"></div></div>
+<div class="stats-bar">
+  <div class="stat"><div class="dot d-ans"></div><span id="sAns">0 answered</span></div>
+  <div class="stat"><div class="dot d-ok"></div><span id="sOk">0 correct</span></div>
+  <div class="stat"><div class="dot d-no"></div><span id="sNo">0 wrong</span></div>
+</div>
+<div class="container" id="qc"></div>
+<div class="sub-wrap"><button class="btn-sub" onclick="submitQuiz()">&#x1F4CB; Submit &amp; See Results</button></div>
+<div id="recap"></div>
+<script>
+const Q=[
+{cat:"Capital Budgeting",q:"What is the primary goal of capital budgeting?",opts:["To manage day-to-day operating expenses","To estimate the financial viability of a capital investment over its life","To prepare monthly financial statements","To calculate employee salaries"],ans:1,exp:"Capital budgeting aims to estimate the financial viability of a capital investment over the entire life of the investment, helping organizations decide whether to proceed with major expenditures."},
+{cat:"Capital Budgeting",q:"Which of the following is NOT a typical application of capital budgeting?",opts:["Construction of a new plant","Investment in an outside venture","Paying monthly utility bills","Evaluating IT projects"],ans:2,exp:"Capital budgeting applies to major investments like new plants, outside ventures, and projects. Paying monthly utility bills is an operating expense, not a capital investment."},
+{cat:"Capital Budgeting",q:"In the context of IT, capital budgeting is used to:",opts:["Manage help desk tickets","Quantify the value of a given IT project and decide Go/NoGo","Schedule employee vacations","Track software licenses"],ans:1,exp:"In IT, capital budgeting is used to quantify project value, decide on Go/NoGo decisions, and prioritize projects based on financial metrics."},
+{cat:"Capital Budgeting",q:"Which financial metrics are applied during the capital budgeting process?",opts:["Gross margin and EBITDA","Payback period, ROI, NPV, and IRR","Price-to-earnings ratio and dividend yield","Current ratio and quick ratio"],ans:1,exp:"The capital budgeting process applies financial metrics including Payback Period, ROI, NPV, and IRR."},
+{cat:"Capital Budgeting",q:"Capital budgeting requires an evaluation of:",opts:["Only investment costs","Only investment returns","Both investment costs and investment returns","Employee performance metrics"],ans:2,exp:"Capital budgeting is based on an evaluation of both investment costs AND investment returns to determine financial viability."},
+{cat:"Capital Budgeting",q:"Which best describes the capital budgeting process steps?",opts:["Apply financial metrics first, then determine costs","Determine project costs only","Determine costs, determine benefits, then apply financial metrics","Determine benefits only, then decide"],ans:2,exp:"The process is: (1) Determine project costs, (2) Determine project benefits/returns, (3) Apply financial metrics like Payback, ROI, NPV, IRR."},
+{cat:"Time Value of Money",q:"The principle that a dollar today is worth more than a dollar tomorrow is called:",opts:["Inflation accounting","Time value of money","Opportunity cost","Discounted cash flow"],ans:1,exp:"The time value of money principle states that money available now is worth more than the same amount in the future because it can be invested to earn returns."},
+{cat:"Time Value of Money",q:"The formula for Future Value using compound interest is:",opts:["FV = PV / (1+i)^n","FV = PV x (1+i)^n","FV = PV + i x n","FV = PV x i^n"],ans:1,exp:"The compound interest formula is FV = PV x (1+i)^n, where i is the interest/discount rate and n is the number of periods."},
+{cat:"Time Value of Money",q:"In the formula FV = PV(1+i)^n, what does 'i' represent?",opts:["Inflation index","Interest rate, discount rate, hurdle rate, or cost of capital","Investment amount","Income tax rate"],ans:1,exp:"'i' represents the interest rate, also called the discount rate, hurdle rate, or cost of capital depending on context."},
+{cat:"Time Value of Money",q:"The Present Value formula is:",opts:["PV = FV x (1+i)^n","PV = FV / (1+i)^n","PV = FV - i x n","PV = FV + (1+i)^n"],ans:1,exp:"PV = FV / (1+i)^n discounts the future value back to its equivalent value today."},
+{cat:"Time Value of Money",q:"If you invest $1,000 today at 10% annual interest, what is the future value after 2 years?",opts:["$1,100","$1,200","$1,210","$1,020"],ans:2,exp:"FV = 1000 x (1.10)^2 = 1000 x 1.21 = $1,210. Compound interest earns interest on interest."},
+{cat:"Time Value of Money",q:"What is the present value of $1,210 received in 2 years at a 10% discount rate?",opts:["$1,100","$1,000","$1,050","$990"],ans:1,exp:"PV = 1210 / (1.10)^2 = 1210 / 1.21 = $1,000. This is the inverse of the future value calculation."},
+{cat:"Time Value of Money",q:"What does 'n' represent in FV = PV(1+i)^n?",opts:["The net profit","The number of periods","The nominal rate","The net investment"],ans:1,exp:"'n' represents the number of periods (years, months, etc.) over which the investment grows."},
+{cat:"Opportunity Cost",q:"Opportunity cost is best defined as:",opts:["The direct cost of a project","The forgone benefit from an option not chosen","The total expenses of a business","The tax paid on investment returns"],ans:1,exp:"Opportunity cost is the forgone benefit that would have been derived from an option not chosen - what you give up when making a decision."},
+{cat:"Opportunity Cost",q:"Why are opportunity costs often overlooked?",opts:["They are too large to calculate","They are unseen by definition","They are always negative","They are included in accounting records"],ans:1,exp:"Because opportunity costs are unseen by definition - they represent benefits from paths not taken - they can be easily overlooked."},
+{cat:"Opportunity Cost",q:"To properly evaluate opportunity costs, you should:",opts:["Only consider the chosen option","Consider costs and benefits of every available option and weigh them","Focus only on financial returns","Ignore qualitative factors"],ans:1,exp:"The costs and benefits of every option available must be considered and weighed against the others to make the best decision."},
+{cat:"Opportunity Cost",q:"Considering opportunity costs can guide organizations to:",opts:["More conservative decision making","More profitable decision making","Slower decision making","More bureaucratic processes"],ans:1,exp:"Considering the value of opportunity costs can guide individuals and organizations to more profitable decision making."},
+{cat:"Discounted Cash Flow",q:"Discounted Cash Flow (DCF) is used to:",opts:["Calculate current operating expenses","Estimate the value of an investment based on expected future cash flows","Measure employee productivity","Track inventory levels"],ans:1,exp:"DCF is a valuation method used to estimate the value of an investment based on its expected future cash flows, converting them to their present value."},
+{cat:"Discounted Cash Flow",q:"DCF analysis is the basis for which two financial metrics?",opts:["ROI and Payback Period","NPV and IRR","Gross Margin and EBITDA","Current Ratio and Debt Ratio"],ans:1,exp:"DCF is the foundation for both NPV (Net Present Value) and IRR (Internal Rate of Return)."},
+{cat:"Discounted Cash Flow",q:"What does DCF convert all future cash flows to?",opts:["Their maximum value","Their current (present) value","Their average value","Their nominal value"],ans:1,exp:"DCF converts all future cash flows to their current (present) value, enabling comparison of cash flows at different points in time."},
+{cat:"Discounted Cash Flow",q:"In the DCF formula, what does 'r' represent?",opts:["Revenue","Discount rate","Risk factor","Return on assets"],ans:1,exp:"In DCF = CF1/(1+r) + CF2/(1+r)^2 + ..., 'r' is the discount rate used to bring future cash flows to present value."},
+{cat:"ROI",q:"The formula for ROI is:",opts:["ROI = Project cost / Financial value x 100","ROI = [(Financial value - Project cost) / Project cost] x 100","ROI = Financial value x Project cost x 100","ROI = (Financial value + Project cost) / 2 x 100"],ans:1,exp:"ROI = [(Financial value - Project cost) / Project cost] x 100. It measures the percentage return relative to the cost of the investment."},
+{cat:"ROI",q:"If total project costs are $300,000 and expected gains are $360,000, what is the ROI?",opts:["10%","15%","20%","25%"],ans:2,exp:"ROI = [(360,000 - 300,000) / 300,000] x 100 = [60,000 / 300,000] x 100 = 20%."},
+{cat:"ROI",q:"Which of the following is NOT a reason why ROI is important?",opts:["It quantifies project value in dollar terms","It can build stakeholder support","It guarantees project success","It can lead to project prioritization"],ans:2,exp:"ROI quantifies value, builds stakeholder support, and helps prioritize projects. It does NOT guarantee project success."},
+{cat:"ROI",q:"ROI turns the subjective into the objective by:",opts:["Eliminating all project risks","Showing business leaders currency figures of a project worth","Replacing the need for project management","Automating financial reporting"],ans:1,exp:"ROI shows business leaders dollar/currency figures of a project worth, turning subjective assessments into objective numbers."},
+{cat:"ROI",q:"What best practice is recommended when calculating project ROI?",opts:["Overestimate benefits and underestimate costs","Be conservative: underestimate benefits and overestimate costs","Use only qualitative data","Ignore project risks"],ans:1,exp:"Best practice is to be conservative - underestimate benefits and overestimate costs - to be on the safe side."},
+{cat:"ROI",q:"Financial value (project benefits) in ROI calculation refers to:",opts:["The initial investment amount","The project payback or returns generated","The discount rate applied","The payback period in years"],ans:1,exp:"Financial value is the project payback - the returns or benefits generated by the project over its life."},
+{cat:"Payback Period",q:"Payback period measures:",opts:["The total profit of a project","How long it takes to recover the costs of a project","The net present value of future cash flows","The internal rate of return"],ans:1,exp:"Payback period measures how much time it takes to recover the costs of a project - how long until project benefits outweigh project costs."},
+{cat:"Payback Period",q:"The formula for payback period when cash inflows are even is:",opts:["Payback = Annual cash inflows / Project cost","Payback = Project cost / Annual cash inflows","Payback = Project cost x Annual cash inflows","Payback = (Project cost - Annual cash inflows) x 100"],ans:1,exp:"When cash inflows are even (equal each period), Payback Period = Project cost / Annual cash inflows."},
+{cat:"Payback Period",q:"If a project costs $100,000 and returns $20,000 annually, what is the payback period?",opts:["3 years","4 years","5 years","6 years"],ans:2,exp:"Payback Period = $100,000 / $20,000 = 5 years."},
+{cat:"Payback Period",q:"When cash inflows are uneven, how do you calculate the payback period?",opts:["Divide total costs by average annual inflows","Accumulate benefits year after year until the total exceeds the costs","Use the NPV formula","Multiply annual inflows by the discount rate"],ans:1,exp:"For uneven cash flows, accumulate the benefits year after year until the cumulative total becomes higher than the total project costs."},
+{cat:"Payback Period",q:"Which is a key limitation of the payback period method?",opts:["It is too complex to calculate","It ignores the time value of money and benefits after the payback period","It requires a discount rate","It cannot be used for IT projects"],ans:1,exp:"The two main problems: (1) it ignores benefits that occur after the payback period, and (2) it ignores the time value of money."},
+{cat:"Payback Period",q:"A company has a standard payback period of 2 years. A project has a payback of 3 years. What should happen?",opts:["Accept the project because it generates returns","Reject the project because it exceeds the standard period","Accept if NPV is positive","Defer the decision"],ans:1,exp:"Projects that take longer to return the original investment than the company standard will not be acceptable. 3 years exceeds the 2-year standard."},
+{cat:"Payback Period",q:"Why might a company choose a less-profitable investment with faster payback?",opts:["Because it has a higher NPV","Because the company is strapped for cash and avoids debt","Because it has a higher IRR","Because it has lower risk"],ans:1,exp:"Some companies choose less-profitable investments with faster payback if they are strapped for cash and do not want to use debt to finance operations."},
+{cat:"NPV",q:"NPV stands for:",opts:["Net Profit Value","Net Present Value","Nominal Price Variation","Net Portfolio Value"],ans:1,exp:"NPV stands for Net Present Value - the sum of the present values of all incoming and outgoing cash flows over a period of time."},
+{cat:"NPV",q:"If the NPV of a project is positive, it means:",opts:["The project will definitely succeed","The project is profitable and worth considering","The project costs exceed benefits","The discount rate is too high"],ans:1,exp:"A positive NPV means the project is profitable and worth considering. A negative NPV means the project is unprofitable and should not be pursued."},
+{cat:"NPV",q:"What is the key advantage of NPV over ROI and payback period?",opts:["It is simpler to calculate","It takes into account the time value of money","It does not require a discount rate","It ignores future cash flows"],ans:1,exp:"Unlike ROI and payback period, NPV takes into account the time value of money, making it a more sophisticated and accurate measure."},
+{cat:"NPV",q:"NPV is calculated as:",opts:["The sum of all future cash flows without discounting","The sum of the present values of all incoming and outgoing cash flows over time","Total revenue minus total costs","Future value divided by the discount rate"],ans:1,exp:"NPV is the sum of the PV (Present Values) of all incoming and outgoing cash flows over a period of time, discounted at the appropriate rate."},
+{cat:"NPV",q:"In the NPV example: initial investment $243,000, cash inflow $50,000/month for 12 months, annual rate 12%. What is the monthly discount rate?",opts:["12%","6%","1%","2%"],ans:2,exp:"Monthly discount rate = Annual rate / 12 = 12% / 12 = 1% per month."},
+{cat:"NPV",q:"In the NPV example (initial investment $243,000, $50,000/month for 12 months at 1%/month), the NPV is approximately:",opts:["$243,000","$319,754","$600,000","$76,754"],ans:1,exp:"The NPV is approximately $319,754, calculated by summing the present values of all 12 monthly cash flows of $50,000 discounted at 1% per month, minus the $243,000 initial investment."},
+{cat:"NPV",q:"For meaningful comparison between projects using NPV, they should be assessed with:",opts:["Different discount rates and time horizons","The same time horizon and discount rate","The highest possible discount rate","No discount rate"],ans:1,exp:"To make comparison meaningful between projects for prioritization, projects should be assessed with the same time horizon and discount rate."},
+{cat:"NPV",q:"Who typically provides the discount rate used for evaluating projects?",opts:["The project manager","Finance department or project office","External auditors","Government regulators"],ans:1,exp:"The discount rate will be given by Finance or the project office - it is not something the project team has to determine themselves."},
+{cat:"NPV",q:"The discount rate in NPV analysis represents:",opts:["Only the bank interest rate","The rate of return required by the investor, including costs, risks, and lost opportunities","The inflation rate","The project manager target profit margin"],ans:1,exp:"The discount rate is the rate of return required by the investor, which includes costs, risks, and lost opportunities (opportunity cost)."},
+{cat:"IRR",q:"IRR stands for:",opts:["Immediate Return Rate","Internal Rate of Return","Investment Risk Ratio","Incremental Revenue Rate"],ans:1,exp:"IRR stands for Internal Rate of Return - the discount rate that results in NPV = 0 for a given project."},
+{cat:"IRR",q:"IRR is defined as:",opts:["The discount rate that maximizes NPV","The discount rate that results in NPV = 0","The average return over the project life","The minimum acceptable rate of return"],ans:1,exp:"IRR is the discount rate that results in NPV = 0. It represents the break-even rate of return for the investment."},
+{cat:"IRR",q:"If IRR > Discount rate, you should:",opts:["Reject the project (NPV is negative)","Accept the project (NPV is positive)","Request more data before deciding","Reduce the project scope"],ans:1,exp:"If IRR > Discount rate, the project should be accepted because this implies NPV is positive. If IRR < Discount rate, reject the project."},
+{cat:"IRR",q:"If IRR < Discount rate, you should:",opts:["Accept the project","Reject the project","Increase the discount rate","Reduce project costs"],ans:1,exp:"If IRR < Discount rate, the project should be rejected because this implies NPV is negative - the project does not generate sufficient returns."},
+{cat:"IRR",q:"How is IRR typically calculated?",opts:["Using a simple algebraic formula","Through trial and error or with a calculator/spreadsheet","By dividing NPV by the initial investment","By multiplying the discount rate by the project duration"],ans:1,exp:"IRR is calculated through trial and error or with a calculator/spreadsheet, as there is no simple closed-form algebraic solution for most cases."},
+{cat:"IRR",q:"The higher the IRR:",opts:["The less valuable the project","The more valuable the project","The longer the payback period","The lower the NPV"],ans:1,exp:"The higher the IRR, the more valuable the project. A higher IRR means the project generates returns well above the cost of capital."},
+{cat:"IRR",q:"IRR is described as a variation on which method?",opts:["ROI","Payback Period","NPV","Profitability Index"],ans:2,exp:"IRR is a variation on NPV methodology. It is the discount rate that makes the NPV equal to zero."},
+{cat:"Profitability Index",q:"The Profitability Index (PI) formula is:",opts:["PI = Initial investment / PV of future cash flows","PI = PV of future cash flows / Initial investment","PI = NPV / IRR","PI = ROI / Payback period"],ans:1,exp:"Profitability Index = PV of future cash flows / Initial investment. It normalizes NPV so that larger projects are not at an advantage."},
+{cat:"Profitability Index",q:"For a project to be attractive using the Profitability Index, PI should be:",opts:["Less than 0","Equal to 0","Higher than 1","Equal to 1"],ans:2,exp:"The Profitability Index should be higher than 1 for the project to be attractive. A PI > 1 means the present value of returns exceeds the initial investment."},
+{cat:"Profitability Index",q:"What is the main advantage of the Profitability Index over NPV?",opts:["It is easier to calculate","It normalizes NPV so bigger projects are not at an advantage","It does not require a discount rate","It measures payback period"],ans:1,exp:"The Profitability Index normalizes NPV so that bigger projects (with naturally larger absolute NPV values) are not automatically favored over smaller, more efficient projects."},
+{cat:"Profitability Index",q:"The Profitability Index is also described as:",opts:["A variation on ROI","A variation on NPV methodology","A variation on payback period","A variation on IRR"],ans:1,exp:"The Profitability Index is also a variation on NPV methodology that normalizes the result relative to the initial investment."},
+{cat:"Project Value Case",q:"A value case (business case) is best described as:",opts:["A simple one-page project summary","A comprehensive analysis of cost, feasibility, risks, benefits, and economic return","A technical specification document","A marketing plan for the project"],ans:1,exp:"A value case is the fundamental analysis of the cost of a project, system cost, feasibility, risks, benefits, and economic return - combining quantitative and qualitative data."},
+{cat:"Project Value Case",q:"Which of the following is NOT one of the four important benefits of a value case?",opts:["Organizational agreement","Economic justification","Guaranteed project approval","Documented proof"],ans:2,exp:"The four benefits of a value case are: Organizational agreement, Economic justification, Documented proof, and Confidence. Guaranteed approval is not one of them."},
+{cat:"Project Value Case",q:"The value case replaces intuition and hope with:",opts:["Optimism and enthusiasm","Confident business decisions made on sound analysis","Management mandates","Simple financial estimates"],ans:1,exp:"The value case replaces intuition, hope, and optimism with confident business decisions made on sound analysis."},
+{cat:"Project Value Case",q:"Which is a common reason why value cases are often not completed?",opts:["They are too expensive to produce","Enthusiastic mandates from management or lack of skills/bandwidth","They are not required by law","They take too long to present"],ans:1,exp:"Value cases are often skipped because of enthusiastic mandates from management or because teams lack the skills or bandwidth to complete one."},
+{cat:"Project Value Case",q:"Which statement about a less-than-perfect value case is true?",opts:["It should not be submitted","A less-than-perfect value case is better than no value case at all","It must be redone completely","It invalidates the project"],ans:1,exp:"A less-than-perfect value case is better than no value case at all - it still provides structure and justification for decision-making."},
+{cat:"Project Value Case",q:"Project assessment criteria include both financial and general criteria. Which is an example of a general criterion?",opts:["NPV","IRR","Strategic alignment","Payback period"],ans:2,exp:"General criteria include strategic alignment, risk level, size of initial investment, and criticality level. NPV, IRR, and Payback Period are financial criteria."},
+{cat:"Project Value Case",q:"Which of the following is an example of a non-financial benefit category?",opts:["Cost reduction","Revenue generation","Labor cost savings","Process automation savings"],ans:1,exp:"Non-financial benefit categories include revenue generation, compliance, customer satisfaction, employee development, process standardization, data security, user experience, and brand image."},
+{cat:"Portfolio Management",q:"What does PPM stand for in the context of investment planning?",opts:["Project Performance Measurement","Project Portfolio Management","Planned Project Methodology","Portfolio Profit Maximization"],ans:1,exp:"PPM stands for Project Portfolio Management - a framework for managing and prioritizing multiple projects aligned with company strategic priorities."},
+{cat:"Portfolio Management",q:"In portfolio-based investment planning, the framework for prioritization involves:",opts:["Selecting only the cheapest projects","Defining categories and target percentages aligned with company strategic priorities","Approving all projects submitted","Prioritizing projects by team size"],ans:1,exp:"The PPM framework involves defining categories and target percentages in line with company strategic priorities, then monitoring actual projects vs. the target portfolio."},
+{cat:"Portfolio Management",q:"Demand management in IT refers to:",opts:["Managing customer complaints","Managing IT from internal service provider to strategic differentiator, including planned and unplanned demand","Tracking hardware inventory","Scheduling maintenance windows"],ans:1,exp:"Demand management covers IT transformation from internal service provider to strategic differentiator, managing both planned demand and unplanned demand (change requests, bug fixes, etc.)."},
+{cat:"Portfolio Management",q:"Which of the following is part of the demand management process?",opts:["Paying vendor invoices","Capturing demand, building business case, seeking executive approval, performing detailed budgeting","Hiring new employees","Setting up IT infrastructure"],ans:1,exp:"The demand management process includes: capture demand and identify opportunities, build business case, seek executive approval, perform detailed budgeting and planning."},
+{cat:"Comparison of Methods",q:"Which method is considered the most sophisticated because it accounts for the time value of money?",opts:["ROI","Payback Period","NPV","Simple profit calculation"],ans:2,exp:"NPV is considered more sophisticated and accurate than ROI and payback period because it takes into account the time value of money through discounting."},
+{cat:"Comparison of Methods",q:"Which method is simplest but ignores the time value of money AND post-payback benefits?",opts:["NPV","IRR","Payback Period","Profitability Index"],ans:2,exp:"Payback Period is the simplest method but has two key limitations: it ignores the time value of money and ignores any benefits that occur after the payback period."},
+{cat:"Comparison of Methods",q:"A project has ROI = 20%, Payback = 5 years, NPV = positive, IRR > discount rate. What is the overall assessment?",opts:["Reject - payback is too long","Accept - all indicators suggest the project is financially viable","Reject - ROI is too low","Cannot determine without more data"],ans:1,exp:"When ROI is positive (20%), NPV is positive, and IRR exceeds the discount rate, all indicators suggest the project is financially viable and should be accepted."},
+{cat:"Comparison of Methods",q:"Which two methods are variations of NPV methodology?",opts:["ROI and Payback Period","IRR and Profitability Index","ROI and IRR","Payback Period and Profitability Index"],ans:1,exp:"Both IRR (Internal Rate of Return) and Profitability Index are described as variations on NPV methodology."}
+];
+
+const state={ans:new Array(Q.length).fill(null)};
+
+function labels(){return['A','B','C','D'];}
+
+function updateStats(){
+  const answered=state.ans.filter(x=>x!==null).length;
+  const correct=state.ans.filter((x,i)=>x===Q[i].ans).length;
+  const wrong=state.ans.filter((x,i)=>x!==null&&x!==Q[i].ans).length;
+  document.getElementById('sAns').textContent=answered+' answered';
+  document.getElementById('sOk').textContent=correct+' correct';
+  document.getElementById('sNo').textContent=wrong+' wrong';
+  document.getElementById('pb').style.width=(answered/Q.length*100)+'%';
+}
+
+function choose(qi,oi){
+  if(state.ans[qi]!==null)return;
+  state.ans[qi]=oi;
+  const card=document.getElementById('card-'+qi);
+  const opts=card.querySelectorAll('.opt');
+  const fb=document.getElementById('fb-'+qi);
+  const correct=Q[qi].ans;
+  opts.forEach((o,idx)=>{
+    o.classList.add('dis');
+    if(idx===correct){o.classList.add('ok');o.querySelector('.lbl').classList.add('ok');}
+    if(idx===oi&&oi!==correct){o.classList.add('no');o.querySelector('.lbl').classList.add('no');}
+  });
+  fb.classList.add('show');
+  if(oi===correct){
+    fb.classList.add('ok');
+    fb.innerHTML='<strong>&#x2705; Correct!</strong> '+Q[qi].exp;
+    card.classList.add('ok');
+  } else {
+    fb.classList.add('no');
+    fb.innerHTML='<strong>&#x274C; Incorrect.</strong> The correct answer is <strong>'+labels()[correct]+'. '+Q[qi].opts[correct]+'</strong>. '+Q[qi].exp;
+    card.classList.add('no');
+  }
+  updateStats();
+}
+
+function buildQuiz(){
+  const c=document.getElementById('qc');
+  c.innerHTML='';
+  Q.forEach((q,qi)=>{
+    const card=document.createElement('div');
+    card.className='card';card.id='card-'+qi;
+    let optsHtml=q.opts.map((o,oi)=>`<div class="opt" onclick="choose(${qi},${oi})"><span class="lbl">${labels()[oi]}</span><span>${o}</span></div>`).join('');
+    card.innerHTML=`<div class="qhead"><span class="qnum">Q${qi+1} / ${Q.length}</span><span class="qcat">${q.cat}</span></div><div class="qtext">${q.q}</div><div class="opts">${optsHtml}</div><div class="fb" id="fb-${qi}"></div>`;
+    c.appendChild(card);
+  });
+  updateStats();
+}
+
+function submitQuiz(){
+  const total=Q.length;
+  const correct=state.ans.filter((x,i)=>x===Q[i].ans).length;
+  const wrong=state.ans.filter((x,i)=>x!==null&&x!==Q[i].ans).length;
+  const skipped=state.ans.filter(x=>x===null).length;
+  const pct=Math.round(correct/total*100);
+  let grade='',gcolor='';
+  if(pct>=80){grade='Excellent!';gcolor='#38a169';}
+  else if(pct>=60){grade='Good job!';gcolor='#d69e2e';}
+  else{grade='Keep practicing!';gcolor='#e53e3e';}
+
+  // Build wrong/skip categories
+  const weakCats={};
+  Q.forEach((q,i)=>{
+    if(state.ans[i]===null||state.ans[i]!==q.ans){
+      weakCats[q.cat]=(weakCats[q.cat]||0)+1;
+    }
+  });
+
+  let detailHtml='';
+  Q.forEach((q,i)=>{
+    const a=state.ans[i];
+    let cls='sk',icon='&#x23ED;',ansText='Not answered';
+    if(a!==null&&a===q.ans){cls='ok';icon='&#x2705;';ansText='Your answer: '+labels()[a]+'. '+q.opts[a];}
+    else if(a!==null){cls='no';icon='&#x274C;';ansText='Your answer: '+labels()[a]+'. '+q.opts[a];}
+    const correctText='Correct: '+labels()[q.ans]+'. '+q.opts[q.ans];
+    detailHtml+=`<div class="ri ${cls}"><div class="riq">${icon} Q${i+1}. ${q.q}</div><div class="ria">${ansText}</div>${cls!=='ok'?`<div class="rica">${correctText}</div>`:''}${cls!=='ok'?`<div style="font-size:.82rem;color:#718096;margin-top:4px">${q.exp}</div>`:''}</div>`;
+  });
+
+  let weakHtml=Object.keys(weakCats).map(c=>`<span class="itag">&#x26A0; ${c} (${weakCats[c]} missed)</span>`).join('');
+
+  const recap=document.getElementById('recap');
+  recap.style.display='block';
+  recap.innerHTML=`
+    <div class="rh">
+      <h2>&#x1F3C6; Quiz Results</h2>
+      <div class="score" style="color:${gcolor}">${pct}%</div>
+      <div class="rsub">${grade} &mdash; ${correct} correct out of ${total} questions</div>
+    </div>
+    <div class="rstats">
+      <div class="rst ok"><div class="rn">${correct}</div><div class="rl">&#x2705; Correct</div></div>
+      <div class="rst no"><div class="rn">${wrong}</div><div class="rl">&#x274C; Wrong</div></div>
+      <div class="rst sk"><div class="rn">${skipped}</div><div class="rl">&#x23ED; Skipped</div></div>
+    </div>
+    <div class="rsec">
+      <h3>&#x1F4DD; Detailed Review</h3>
+      ${detailHtml}
+      ${weakHtml?`<div class="imp"><h4>&#x1F4AA; Topics to Focus On:</h4>${weakHtml}</div>`:''}
+      <button class="btn-retry" onclick="retryQuiz()">&#x1F504; Retry Quiz</button>
+    </div>
+    <div class="rf"><small>Capital Budgeting &mdash; Corporate Finance &middot; International Masters &middot; Spring 2025</small></div>
+  `;
+  recap.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz(){
+  state.ans=new Array(Q.length).fill(null);
+  document.getElementById('recap').style.display='none';
+  buildQuiz();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

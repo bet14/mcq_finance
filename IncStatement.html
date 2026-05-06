@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Income Statement MCQ Quiz</title>
+  <style>
+    :root{
+      --bg:#0f172a;
+      --card:#111827;
+      --panel:#1f2937;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#38bdf8;
+      --good:#10b981;
+      --bad:#ef4444;
+      --warn:#f59e0b;
+      --border:#334155;
+      --btn:#2563eb;
+      --btn2:#0f766e;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, Arial, Helvetica, sans-serif;
+      background:linear-gradient(180deg, #0b1120 0%, #111827 100%);
+      color:var(--text);
+    }
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px 16px 120px;
+    }
+    .hero{
+      background:linear-gradient(135deg, rgba(56,189,248,.15), rgba(37,99,235,.1));
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:22px;
+      margin-bottom:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+    }
+    .hero h1{
+      margin:0 0 8px;
+      font-size:28px;
+    }
+    .hero p{
+      margin:6px 0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .topbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      margin:16px 0;
+      position:sticky;
+      top:0;
+      z-index:20;
+      padding:12px 0;
+      background:linear-gradient(180deg, rgba(15,23,42,.98), rgba(15,23,42,.92));
+      backdrop-filter: blur(8px);
+    }
+    .stats{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .chip{
+      background:#0b1220;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:14px;
+      color:var(--text);
+    }
+    .chip strong{color:#fff}
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    button{
+      border:none;
+      cursor:pointer;
+      color:white;
+      font-weight:700;
+      border-radius:12px;
+      padding:12px 16px;
+      transition:.2s ease;
+      box-shadow:0 8px 20px rgba(0,0,0,.18);
+    }
+    button:hover{transform:translateY(-1px); opacity:.95}
+    button:active{transform:translateY(0)}
+    .submit-btn{background:var(--btn);}
+    .reset-btn{background:#475569;}
+    .back-btn{background:var(--btn2);}
+    .quiz{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    .question-card{
+      background:rgba(17,24,39,.94);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+    }
+    .qhead{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+      margin-bottom:12px;
+    }
+    .qnum{
+      min-width:72px;
+      text-align:center;
+      background:#0b1220;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:8px 10px;
+      color:var(--accent);
+      font-weight:800;
+    }
+    .qtext{
+      flex:1;
+      line-height:1.55;
+      font-size:16px;
+    }
+    .options{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+    .option{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      cursor:pointer;
+      transition:.15s ease;
+    }
+    .option:hover{border-color:#4b5563}
+    .option input{margin-top:3px}
+    .option .label{
+      line-height:1.5;
+      width:100%;
+    }
+    .feedback{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#0b1220;
+      display:none;
+    }
+    .feedback.good{display:block; border-color:rgba(16,185,129,.4); background:rgba(16,185,129,.08)}
+    .feedback.bad{display:block; border-color:rgba(239,68,68,.4); background:rgba(239,68,68,.08)}
+    .feedback .title{
+      font-weight:800;
+      margin-bottom:6px;
+    }
+    .feedback .explain{
+      color:var(--text);
+      line-height:1.55;
+    }
+    .feedback .correct-answer{
+      margin-top:8px;
+      color:#dbeafe;
+      font-size:14px;
+    }
+    .recap{
+      margin-top:22px;
+      background:rgba(17,24,39,.96);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+    }
+    .recap h2{
+      margin:0 0 10px;
+      font-size:22px;
+    }
+    .recap-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:12px;
+      margin:14px 0 16px;
+    }
+    .box{
+      background:#0b1220;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+    }
+    .box .k{color:var(--muted); font-size:13px; margin-bottom:6px}
+    .box .v{font-size:22px; font-weight:900}
+    .summary-list{
+      display:grid;
+      gap:10px;
+    }
+    .summary-item{
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#0b1220;
+      line-height:1.6;
+    }
+    .summary-item.good{border-color:rgba(16,185,129,.35)}
+    .summary-item.bad{border-color:rgba(239,68,68,.35)}
+    .summary-item .mini{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+    .fixed-bar{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:50;
+      background:rgba(15,23,42,.96);
+      border-top:1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .fixed-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:12px 16px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .hint{
+      color:var(--muted);
+      font-size:14px;
+    }
+    .progress{
+      height:10px;
+      background:#0b1220;
+      border:1px solid var(--border);
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:10px;
+    }
+    .progress > div{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, var(--accent), #22c55e);
+      transition:width .25s ease;
+    }
+    @media (max-width: 900px){
+      .recap-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    }
+    @media (max-width: 640px){
+      .qhead{flex-direction:column}
+      .qnum{min-width:auto; width:max-content}
+      .recap-grid{grid-template-columns:1fr}
+      button{width:100%}
+      .fixed-inner{flex-direction:column; align-items:stretch}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Income Statement Components — MCQ Quiz</h1>
+      <p>
+        60+ multiple choice questions in English about the structure and key concepts of the income statement.
+      </p>
+      <p>
+        Feedback appears immediately after each selection with <strong>correct / incorrect</strong> status and explanation.
+        You can submit anytime, even if you have not answered all questions.
+      </p>
+    </section>
+
+    <div class="topbar">
+      <div class="stats">
+        <div class="chip">Answered: <strong id="answeredCount">0</strong>/<strong id="totalCount">0</strong></div>
+        <div class="chip">Correct: <strong id="correctCount">0</strong></div>
+        <div class="chip">Score: <strong id="scorePct">0%</strong></div>
+      </div>
+      <div class="actions">
+        <button class="back-btn" onclick="goHome()">Back to index.html</button>
+        <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+        <button class="reset-btn" onclick="resetQuiz()">Reset</button>
+      </div>
+    </div>
+
+    <div class="quiz" id="quiz"></div>
+
+    <section class="recap" id="recap" style="display:none;">
+      <h2>Recap</h2>
+      <div class="recap-grid">
+        <div class="box"><div class="k">Total Questions</div><div class="v" id="recapTotal">0</div></div>
+        <div class="box"><div class="k">Answered</div><div class="v" id="recapAnswered">0</div></div>
+        <div class="box"><div class="k">Correct</div><div class="v" id="recapCorrect">0</div></div>
+        <div class="box"><div class="k">Accuracy</div><div class="v" id="recapAccuracy">0%</div></div>
+      </div>
+      <div class="summary-list" id="summaryList"></div>
+    </section>
+  </div>
+
+  <div class="fixed-bar">
+    <div class="fixed-inner">
+      <div class="hint">Submit and Back buttons stay visible while scrolling.</div>
+      <div class="actions">
+        <button class="back-btn" onclick="goHome()">Back to index.html</button>
+        <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {q:"What is the top line of an income statement?", options:["Net income","Sales","Gross profit","Operating income"], answer:1, exp:"The top line is revenue, often called sales."},
+      {q:"Cost of sales is also commonly called:", options:["Operating expenses","Gross profit","Cost of goods sold","Income tax"], answer:2, exp:"Cost of sales is another name for cost of goods sold (COGS)."},
+      {q:"Gross profit is calculated as:", options:["Sales − Operating expenses","Sales − Cost of sales","Net income − Taxes","Operating income − Other expenses"], answer:1, exp:"Gross profit equals sales minus cost of sales."},
+      {q:"Which item comes directly after gross profit?", options:["Net income","Operating expenses","Sales","Income taxes"], answer:1, exp:"Operating expenses are typically deducted after gross profit."},
+      {q:"Which of the following is an operating expense?", options:["Engineering","Sales tax","Interest income","Retained earnings"], answer:0, exp:"Engineering is usually part of operating expenses."},
+      {q:"Sales and Marketing belongs to:", options:["Cost of sales","Operating expenses","Other income and expenses","Income taxes"], answer:1, exp:"Sales and marketing is an operating expense."},
+      {q:"General and Administrative is a type of:", options:["Operating expense","Gross profit","Revenue","Non-cash asset"], answer:0, exp:"G&A is part of operating expenses."},
+      {q:"Operating income is calculated as:", options:["Gross profit + Operating expenses","Gross profit − Operating expenses","Net income − Taxes","Sales − Taxes"], answer:1, exp:"Operating income equals gross profit minus operating expenses."},
+      {q:"Which section appears after operating income?", options:["Sales","Other income and expenses","Gross profit","Cost of sales"], answer:1, exp:"Other income and expenses usually follow operating income."},
+      {q:"Other income and expenses may include:", options:["Salaries only","Interest and non-operating items","Sales commissions only","Revenue from products only"], answer:1, exp:"This section can include interest and non-operating items."},
+      {q:"Income before taxes is also called:", options:["Operating profit only","Pre-tax income","Gross margin","Equity income"], answer:1, exp:"Income before taxes is also called pre-tax income."},
+      {q:"Income taxes are subtracted to arrive at:", options:["Gross profit","Operating income","Net income","Sales"], answer:2, exp:"After taxes are deducted, the result is net income."},
+      {q:"Net income is the:", options:["Final profit after all expenses and taxes","Revenue before expenses","Amount paid to suppliers","Total liabilities"], answer:0, exp:"Net income is the final profit after all costs and taxes."},
+      {q:"Which of the following is NOT usually an operating expense?", options:["Engineering","Sales and Marketing","General and Administrative","Cost of sales"], answer:3, exp:"Cost of sales is generally shown separately from operating expenses."},
+      {q:"Cost of sales is deducted from:", options:["Operating income","Sales","Net income","Income taxes"], answer:1, exp:"Cost of sales is subtracted directly from sales."},
+      {q:"Gross profit shows the profit after deducting:", options:["Taxes","Operating expenses","Cost of sales","Interest expense only"], answer:2, exp:"Gross profit is sales minus cost of sales."},
+      {q:"Operating income shows the profit after deducting:", options:["Cost of sales only","Operating expenses from gross profit","Taxes from gross profit","Dividends from sales"], answer:1, exp:"Operating income subtracts operating expenses from gross profit."},
+      {q:"Which line is usually the first expense category after revenue?", options:["Income taxes","Cost of sales","Net income","Other income"], answer:1, exp:"Cost of sales is typically the first expense below revenue."},
+      {q:"Which one is a non-operating item?", options:["Engineering","Sales and Marketing","Other income and expenses","General and Administrative"], answer:2, exp:"Other income and expenses are usually non-operating items."},
+      {q:"Earnings per share is usually shown at the:", options:["Top of the statement","Middle of the statement","Bottom of the statement","In the revenue section only"], answer:2, exp:"EPS is usually presented near the bottom."},
+      {q:"Fully diluted earnings per share means:", options:["EPS before taxes","EPS after all shares and dilution are considered","Gross profit per share","Revenue per share"], answer:1, exp:"Fully diluted EPS reflects dilution from all potential shares."},
+      {q:"Which of the following is the correct order?", options:["Net income → Taxes → Operating income → Gross profit","Sales → Cost of sales → Gross profit → Operating expenses","Sales → Gross profit → Cost of sales → Operating expenses","Operating income → Sales → Gross profit → Net income"], answer:1, exp:"The usual order is sales, cost of sales, gross profit, then operating expenses."},
+      {q:"If sales are $650,000 and cost of sales is $475,000, gross profit is:", options:["$125,000","$175,000","$200,000","$475,000"], answer:1, exp:"Gross profit = 650,000 − 475,000 = 175,000."},
+      {q:"If gross profit is $175,000 and operating expenses are $138,000, operating income is:", options:["$37,000","$13,800","$32,000","$19,200"], answer:0, exp:"Operating income = 175,000 − 138,000 = 37,000."},
+      {q:"If operating income is $37,000 and other expenses are $(5,000), income before taxes is:", options:["$42,000","$32,000","$12,800","$19,200"], answer:0, exp:"A negative other expense of 5,000 increases pre-tax income to 42,000."},
+      {q:"If income before taxes is $32,000 and taxes are $12,800, net income is:", options:["$44,800","$19,200","$20,000","$12,800"], answer:1, exp:"Net income = 32,000 − 12,800 = 19,200."},
+      {q:"Which item is part of operating expenses in the example?", options:["Engineering","Income taxes","Cost of sales","Net income"], answer:0, exp:"Engineering is an operating expense in the example."},
+      {q:"Which of the following is NOT part of the income statement structure?", options:["Revenue","Expenses","Equity contribution","Net income"], answer:2, exp:"Equity contribution belongs to the balance sheet / equity section, not the income statement."},
+      {q:"The purpose of the income statement is to show:", options:["A company’s cash balance","A company’s financial position at a point in time","A company’s profitability over a period","A company’s liabilities only"], answer:2, exp:"The income statement shows performance and profitability over a period."},
+      {q:"Which statement is correct?", options:["Gross profit comes after net income","Operating income comes before gross profit","Net income is the final line of the income statement","Sales are calculated from taxes"], answer:2, exp:"Net income is typically the final line of the income statement."},
+
+      {q:"What does revenue represent on the income statement?", options:["Money owed to suppliers","Sales generated from business activities","Assets owned at year-end","Taxes paid"], answer:1, exp:"Revenue is the amount earned from selling goods or services."},
+      {q:"Gross margin is usually calculated as:", options:["Gross profit / Sales","Net income / Equity","Operating income / Sales","Sales / Assets"], answer:0, exp:"Gross margin equals gross profit divided by sales."},
+      {q:"A higher gross margin generally suggests:", options:["The company keeps more profit after direct costs","The company has no debt","The company has no taxes","The company has negative sales"], answer:0, exp:"Higher gross margin means better control of direct production or service costs."},
+      {q:"Operating expenses are usually costs related to:", options:["Running the business","Building shareholder equity","Paying dividends only","Purchasing stocks"], answer:0, exp:"Operating expenses support the day-to-day running of the business."},
+      {q:"Which of these is most likely below operating income?", options:["Revenue","Cost of sales","Other income and expenses","Gross profit"], answer:2, exp:"Other income and expenses usually come after operating income."},
+      {q:"If other income is positive, it:", options:["Reduces pre-tax income","Increases pre-tax income","Has no effect on income","Always means a loss"], answer:1, exp:"Positive other income increases income before taxes."},
+      {q:"Which line is most directly affected by changes in sales volume?", options:["Revenue","Tax rate only","Equity contribution","Depreciation schedule only"], answer:0, exp:"Revenue changes directly when sales volume changes."},
+      {q:"Cost of goods sold mainly reflects:", options:["Direct cost of producing goods or services","Marketing campaigns","Shareholder dividends","Bank deposits"], answer:0, exp:"COGS is the direct cost linked to production or delivery."},
+      {q:"A company with very low operating expenses relative to gross profit usually has:", options:["Lower operating leverage","Higher operating margin","No revenue","Higher taxes only"], answer:1, exp:"Lower operating expenses often lead to a higher operating margin."},
+      {q:"Which best describes EBITDA?", options:["Earnings before interest, taxes, depreciation, and amortization","Earnings after taxes and dividends","Equity balance after debt","Expense before direct costs"], answer:0, exp:"EBITDA removes interest, tax, depreciation, and amortization from earnings."},
+      {q:"Depreciation and amortization are generally:", options:["Non-cash expenses","Revenue items","Equity items","Dividend items"], answer:0, exp:"Depreciation and amortization reduce profit but do not directly use cash."},
+      {q:"Which is the most likely reason gross profit goes down?", options:["Cost of sales increases or sales price decreases","Equity increases","Cash balance increases","Number of shares outstanding falls"], answer:0, exp:"Gross profit declines when direct costs rise or selling prices fall."},
+      {q:"If gross profit stays the same but operating expenses rise, operating income:", options:["Rises","Falls","Stays unchanged","Becomes revenue"], answer:1, exp:"Higher operating expenses reduce operating income."},
+      {q:"Net profit margin is:", options:["Net income / Sales","Gross profit / Equity","Operating income / Assets","Sales / Net income"], answer:0, exp:"Net profit margin equals net income divided by sales."},
+      {q:"A company can have positive gross profit but negative net income because of:", options:["High operating and other expenses","No revenue","No assets","No accounting"], answer:0, exp:"Even with positive gross profit, other expenses can drive net income negative."},
+      {q:"Interest expense is typically classified as:", options:["Operating expense","Non-operating expense","Revenue","Gross profit"], answer:1, exp:"Interest expense is usually below operating income."},
+      {q:"Income tax expense is usually calculated based on:", options:["Net income after tax","Income before taxes","Gross profit only","Revenue only"], answer:1, exp:"Taxes are usually based on pre-tax income."},
+      {q:"Which item is often used to evaluate core business performance?", options:["Operating income","Share capital","Cash on hand","Treasury stock"], answer:0, exp:"Operating income reflects the core operations of the business."},
+      {q:"Which line best captures the company’s final result for the period?", options:["Revenue","Gross profit","Operating income","Net income"], answer:3, exp:"Net income is the bottom-line result after all expenses and taxes."},
+      {q:"What does a negative net income indicate?", options:["The company made a loss for the period","The company has no revenue","The company must be insolvent","The company has positive earnings"], answer:0, exp:"Negative net income means the company recorded a loss during the period."},
+
+      {q:"Where would you most likely find sales commissions?", options:["Cost of sales","Operating expenses","Income taxes","Net income"], answer:1, exp:"Sales commissions are usually included in operating expenses."},
+      {q:"Where would you most likely find factory labor tied directly to production?", options:["Cost of sales","Other income","Income taxes","Equity"], answer:0, exp:"Direct production labor is usually part of cost of sales."},
+      {q:"What does 'top line growth' refer to?", options:["Growth in revenue","Growth in taxes","Growth in debt","Growth in equity"], answer:0, exp:"Top line means revenue growth."},
+      {q:"What does 'bottom line growth' refer to?", options:["Growth in gross profit","Growth in net income","Growth in assets","Growth in sales tax"], answer:1, exp:"Bottom line means net income growth."},
+      {q:"Why is comparing income statements over time useful?", options:["To track trends in profitability and cost structure","To avoid calculating taxes","To eliminate accounting","To replace the balance sheet"], answer:0, exp:"Trend analysis helps identify changes in performance and expense behavior."},
+      {q:"Why is comparing companies in the same industry important?", options:["Because income statement items can vary by business model","Because all companies use identical margins","Because taxes are always the same","Because revenue is meaningless"], answer:0, exp:"Industry context matters because margins and expense structures differ widely."},
+      {q:"Which ratio is directly derived from the income statement?", options:["Gross margin","Current ratio","Debt to equity","Quick ratio"], answer:0, exp:"Gross margin uses gross profit and sales from the income statement."},
+      {q:"Which of these is more closely tied to liquidity than profitability?", options:["Current ratio","Gross margin","Net margin","Operating income"], answer:0, exp:"Current ratio measures liquidity, not profitability."},
+      {q:"When analyzing margins, what should you check first if margin declines?", options:["Whether prices, discounts, costs, or product mix changed","Only the share price","Only the dividend","Only the number of employees"], answer:0, exp:"Margin decline can result from price pressure, discounts, higher costs, or mix changes."},
+      {q:"A large difference between gross profit and operating income usually means:", options:["Operating expenses are significant","Sales are zero","Taxes are negative","The company has no direct costs"], answer:0, exp:"A big gap indicates substantial operating expenses."},
+      {q:"Which of the following is closest to a measure of operating efficiency?", options:["Operating margin","Share price","Debt issuance","Book value only"], answer:0, exp:"Operating margin reflects how efficiently core operations convert sales into profit."},
+      {q:"If sales rise but net income does not, one possible reason is:", options:["Costs or expenses rose faster than sales","The company stopped reporting","Equity contribution increased","Cash became negative"], answer:0, exp:"Rising expenses can offset revenue growth."},
+      {q:"Which statement about gross profit is true?", options:["It includes taxes","It excludes cost of sales","It is sales minus direct costs","It equals net income"], answer:2, exp:"Gross profit is sales minus direct costs (COGS)." },
+      {q:"Which statement about operating income is true?", options:["It excludes operating expenses","It reflects profit from core operations","It is always larger than gross profit","It includes dividends"], answer:1, exp:"Operating income shows profit from core operations after operating expenses."},
+      {q:"What can other income and expenses contain?", options:["Interest income/expense and gains or losses","Only salaries","Only inventory","Only cash deposits"], answer:0, exp:"This section often includes interest and other non-operating items."},
+      {q:"Why are net income figures sometimes compared with diluted EPS?", options:["Because diluted EPS adjusts for all potential shares","Because revenue is ignored","Because taxes are excluded","Because gross profit is the same"], answer:0, exp:"Diluted EPS accounts for the effect of potentially dilutive shares."},
+      {q:"Which of these is not typically on the income statement?", options:["Assets","Revenue","Expenses","Net income"], answer:0, exp:"Assets are shown on the balance sheet, not the income statement."},
+      {q:"What is the main purpose of the income statement?", options:["To measure profitability over a period","To list all company assets","To show liabilities only","To show shareholder votes"], answer:0, exp:"The income statement summarizes profitability over a given period."},
+      {q:"Which line is most influenced by pricing strategy and discounts?", options:["Revenue and gross margin","Equity contribution","Cash flow from financing","Retained earnings"], answer:0, exp:"Pricing and discounting affect sales and gross margin."},
+      {q:"Which line is most likely affected by overhead costs?", options:["Operating expenses","Revenue","Gross profit only","Share capital"], answer:0, exp:"Overhead costs are usually included in operating expenses."},
+      {q:"What happens when cost of sales increases faster than sales?", options:["Gross margin declines","Gross margin rises","Net income automatically rises","Operating income equals revenue"], answer:0, exp:"Higher cost of sales reduces gross margin."},
+      {q:"What happens when operating expenses decrease while sales remain constant?", options:["Operating income increases","Gross profit becomes zero","Revenue decreases","Taxes disappear"], answer:0, exp:"Lower operating expenses improve operating income."},
+      {q:"Which of the following best describes the sequence of the income statement?", options:["Revenue → COGS → Gross Profit → Operating Expenses → Operating Income → Other Items → Taxes → Net Income","Revenue → Net Income → Taxes → COGS","Assets → Liabilities → Equity → Revenue","Revenue → Cash Flow → Balance Sheet"], answer:0, exp:"This is the standard flow of the income statement."},
+      {q:"If a company has strong sales but poor net income, what should you investigate?", options:["Margins, operating expenses, interest, and taxes","Only cash and bank balance","Only share price","Only employee count"], answer:0, exp:"Weak bottom-line results can come from cost, financing, or tax issues."},
+      {q:"Which statement is correct about revenues and costs?", options:["Revenue is money earned; cost of sales is directly tied to delivering that revenue","Revenue is always after taxes","Cost of sales is part of equity","Revenue appears after net income"], answer:0, exp:"Revenue and direct costs are the starting point of the income statement."},
+      {q:"What does a higher operating margin typically suggest?", options:["Better control over operating expenses","More shares outstanding","Higher inventory levels only","Higher debt only"], answer:0, exp:"Higher operating margin usually means stronger operating efficiency."},
+      {q:"Which line is most useful to compare across companies in the same industry?", options:["Gross margin","Household income","Inventory count","Number of branch offices"], answer:0, exp:"Gross margin is a common cross-company comparison metric within the same industry."},
+      {q:"Why can net profit margin vary a lot by industry?", options:["Different business models, cost structures, and pricing power","Because accounting is random","Because revenue never changes","Because taxes are identical"], answer:0, exp:"Different industries have different economics and margin profiles."},
+      {q:"Which of these is typically below the operating income line?", options:["Other income and expenses","Revenue","Cost of sales","Gross profit"], answer:0, exp:"Other income and expenses come after operating income."},
+      {q:"What is a simple reason to track income statement trends monthly or quarterly?", options:["To identify changes early and react quickly","To avoid making sales","To eliminate expenses","To replace budgeting"], answer:0, exp:"Regular tracking helps detect issues and opportunities early."},
+      {q:"If the company’s gross margin improves, what is one likely explanation?", options:["Better pricing, lower direct costs, or better product mix","Higher interest expense","Lower equity","More income tax"], answer:0, exp:"Gross margin improves when sales value rises relative to direct costs."},
+      {q:"What is the relationship between sales and net income?", options:["Sales are the starting point; net income is the end result after expenses and taxes","Sales are calculated from net income","Net income appears before sales","They are unrelated"], answer:0, exp:"The income statement starts with sales and ends with net income."},
+      {q:"Which of the following would most likely increase gross profit?", options:["Increasing sales while keeping cost of sales flat","Increasing taxes","Increasing equity","Increasing depreciation"], answer:0, exp:"If sales rise and direct costs do not, gross profit increases."},
+      {q:"Which of these is a non-operating gain/loss item?", options:["Foreign exchange gain/loss or investment gain/loss","Sales and marketing","Production wages","Warehouse rent"], answer:0, exp:"Non-operating items often include FX or investment gains/losses."},
+      {q:"What is the key benefit of a standardized income statement format?", options:["It makes comparison across periods and companies easier","It removes the need for audits","It eliminates all costs","It guarantees profit"], answer:0, exp:"Standardization helps users compare results consistently."},
+      {q:"Which line would usually be most relevant when assessing core business profitability?", options:["Operating income","Share capital","Treasury shares","Accumulated other comprehensive income"], answer:0, exp:"Operating income is a key measure of core profitability."},
+      {q:"When a company reports net income, what does it generally mean?", options:["The company earned a profit after all expenses and taxes","The company has positive cash only","The company has no debt","The company has no operating costs"], answer:0, exp:"Net income is the profit remaining after all relevant deductions."},
+      {q:"Which of these is the correct relationship?", options:["Net income is after operating income and taxes","Operating income is after net income","Gross profit is after net income","Revenue is after taxes"], answer:0, exp:"Net income comes after operating income, other items, and taxes."},
+      {q:"What is the strongest reason to study income statement components individually?", options:["To understand where profitability is created or lost","To ignore cash flow","To avoid using ratios","To focus only on the stock price"], answer:0, exp:"Breaking down components shows where performance improves or deteriorates."},
+      {q:"Which of the following is the final result after subtracting all expenses, interest, and taxes?", options:["Gross profit","Operating income","Net income","Revenue"], answer:2, exp:"Net income is the final result after all deductions."},
+      {q:"If sales increase but gross profit does not, what is a likely explanation?", options:["Cost of sales also increased","Operating expenses fell","Taxes were reduced","Equity increased"], answer:0, exp:"If gross profit does not rise, direct costs likely increased with sales."},
+      {q:"If operating income is strong but net income is weak, what could explain the gap?", options:["High interest expense or taxes","Higher gross margin only","More sales","Less revenue"], answer:0, exp:"Non-operating items and taxes can reduce net income materially."},
+      {q:"Why do analysts often look at margins rather than only absolute profit?", options:["Margins help compare performance across different company sizes","Margins are always bigger than revenue","Margins remove the need for accounting","Margins only matter for banks"], answer:0, exp:"Margins normalize performance by sales and allow better comparisons."},
+      {q:"What does the term 'income statement components' refer to?", options:["The individual sections such as revenue, cost of sales, expenses, and net income","Only assets and liabilities","Only cash inflows","Only shareholder equity"], answer:0, exp:"Components are the line items and sections that build the statement."},
+      {q:"A good final check when reading an income statement is to ask:", options:["How each line item affects gross profit, operating income, and net income","Only what the stock price is","Only how much cash is in the bank","Only whether the company issued shares"], answer:0, exp:"Understanding the effect of each line item is key to analysis."},
+      {q:"Which line is most likely to contain administrative salaries and office rent?", options:["General and Administrative","Cost of sales","Revenue","Income taxes"], answer:0, exp:"These overhead items belong to G&A."},
+      {q:"Which line is most likely to contain packaging and shipping tied directly to each unit sold?", options:["Cost of sales","Other income and expenses","Net income","Equity"], answer:0, exp:"Direct fulfillment or production costs are generally in COGS."},
+      {q:"What does it mean if operating income is zero?", options:["Core operations broke even before non-operating items and taxes","The company made a loss in all cases","The company has no revenue","The company has no expenses at all"], answer:0, exp:"Operating income of zero means no operating profit before other items and taxes."},
+      {q:"Which metric is most likely to be shown in percentage terms?", options:["Gross margin","Sales","Cost of sales","Net income"], answer:0, exp:"Margins are commonly presented as percentages of sales."},
+      {q:"What is the best description of the income statement?", options:["A report of profitability over a period of time","A report of assets at a single point in time","A report of liabilities only","A report of share price movement"], answer:0, exp:"The income statement measures performance over a period."},
+      {q:"If a company has strong gross profit but weak operating income, what should you inspect next?", options:["Operating expenses","Inventory only","Share capital only","Dividend policy only"], answer:0, exp:"High operating expenses may be consuming gross profit."},
+      {q:"Why can two companies with the same revenue have very different net income?", options:["Different cost structures, operating expenses, interest, and taxes","Revenue is not real","All companies use identical accounting","Net income is random"], answer:0, exp:"Different business economics and financing structures drive different outcomes."},
+      {q:"Which line is most likely to be impacted by a company’s pricing power?", options:["Revenue and gross margin","Shareholders’ equity","Debt principal only","Retained earnings only"], answer:0, exp:"Pricing power affects sales levels and gross margin."},
+      {q:"What is the best interpretation of a growing gross profit over time?", options:["The company is improving its direct profitability","The company has no taxes","The company has no debt","The company is losing money"], answer:0, exp:"Growing gross profit suggests improved direct profitability."},
+      {q:"What is the best interpretation of a growing net income over time?", options:["Overall profitability is improving","Sales are always falling","The balance sheet is shrinking","Taxes are zero"], answer:0, exp:"Growing net income indicates improving bottom-line profit."},
+      {q:"Which of these is most likely a core formula to remember?", options:["Sales − Cost of sales = Gross profit","Assets − Liabilities = Revenue","Net income + Taxes = Sales","Operating income = Equity − Debt"], answer:0, exp:"This is one of the foundational income statement formulas."},
+      {q:"Which of the following is a useful question when reviewing expenses?", options:["Are costs increasing faster than revenue?","What is the weather today?","How many shares are outstanding only?","What is the company logo?"], answer:0, exp:"A key analysis question is whether costs are growing faster than sales."}
+    ];
+
+    const quizEl = document.getElementById("quiz");
+    const answeredCountEl = document.getElementById("answeredCount");
+    const correctCountEl = document.getElementById("correctCount");
+    const scorePctEl = document.getElementById("scorePct");
+    const recapEl = document.getElementById("recap");
+    const recapTotalEl = document.getElementById("recapTotal");
+    const recapAnsweredEl = document.getElementById("recapAnswered");
+    const recapCorrectEl = document.getElementById("recapCorrect");
+    const recapAccuracyEl = document.getElementById("recapAccuracy");
+    const summaryListEl = document.getElementById("summaryList");
+
+    const userAnswers = new Array(quizData.length).fill(null);
+    const revealed = new Array(quizData.length).fill(false);
+
+    document.getElementById("totalCount").textContent = quizData.length;
+
+    function renderQuiz(){
+      quizEl.innerHTML = "";
+      quizData.forEach((item, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `
+          <div class="qhead">
+            <div class="qnum">Q${idx+1}</div>
+            <div class="qtext">${item.q}</div>
+          </div>
+          <div class="options">
+            ${item.options.map((opt, oi) => `
+              <label class="option">
+                <input type="radio" name="q${idx}" value="${oi}" />
+                <div class="label"><strong>${String.fromCharCode(65+oi)}.</strong> ${opt}</div>
+              </label>
+            `).join("")}
+          </div>
+          <div class="feedback" id="fb${idx}"></div>
+        `;
+        quizEl.appendChild(card);
+
+        card.querySelectorAll(`input[name="q${idx}"]`).forEach(r => {
+          r.addEventListener("change", (e) => {
+            const val = Number(e.target.value);
+            userAnswers[idx] = val;
+            revealFeedback(idx, val);
+            updateStats();
+          });
+        });
+      });
+      updateStats();
+    }
+
+    function revealFeedback(idx, selected){
+      revealed[idx] = true;
+      const fb = document.getElementById(`fb${idx}`);
+      const correct = quizData[idx].answer;
+      const isCorrect = selected === correct;
+      fb.className = `feedback ${isCorrect ? "good" : "bad"}`;
+      fb.innerHTML = `
+        <div class="title">${isCorrect ? "Correct ✓" : "Incorrect ✗"}</div>
+        <div class="explain">${quizData[idx].exp}</div>
+        <div class="correct-answer">Correct answer: <strong>${String.fromCharCode(65+correct)}. ${quizData[idx].options[correct]}</strong></div>
+      `;
+    }
+
+    function updateStats(){
+      const answered = userAnswers.filter(v => v !== null).length;
+      let correct = 0;
+      userAnswers.forEach((ans, i) => {
+        if (ans !== null && ans === quizData[i].answer) correct++;
+      });
+      answeredCountEl.textContent = answered;
+      correctCountEl.textContent = correct;
+      scorePctEl.textContent = `${Math.round((correct / quizData.length) * 100)}%`;
+    }
+
+    function submitQuiz(){
+      let answered = 0, correct = 0;
+      summaryListEl.innerHTML = "";
+      quizData.forEach((item, i) => {
+        const ans = userAnswers[i];
+        const isAnswered = ans !== null;
+        const isCorrect = ans === item.answer;
+        if (isAnswered) answered++;
+        if (isCorrect) correct++;
+
+        const div = document.createElement("div");
+        div.className = `summary-item ${isAnswered ? (isCorrect ? "good" : "bad") : ""}`;
+        div.innerHTML = `
+          <strong>Q${i+1}.</strong> ${item.q}<br/>
+          <span style="color:${isAnswered ? (isCorrect ? '#34d399' : '#f87171') : '#fbbf24'}; font-weight:700;">
+            ${isAnswered ? (isCorrect ? "Correct" : "Incorrect") : "Not answered"}
+          </span>
+          ${isAnswered ? `<div class="mini">Your answer: ${String.fromCharCode(65+ans)}. ${item.options[ans]}</div>` : ""}
+          <div class="mini">Correct answer: ${String.fromCharCode(65+item.answer)}. ${item.options[item.answer]}</div>
+          <div class="mini">${item.exp}</div>
+        `;
+        summaryListEl.appendChild(div);
+      });
+
+      const accuracy = Math.round((correct / quizData.length) * 100);
+      recapEl.style.display = "block";
+      recapTotalEl.textContent = quizData.length;
+      recapAnsweredEl.textContent = answered;
+      recapCorrectEl.textContent = correct;
+      recapAccuracyEl.textContent = `${accuracy}%`;
+
+      recapEl.scrollIntoView({behavior:"smooth", block:"start"});
+      updateStats();
+    }
+
+    function resetQuiz(){
+      userAnswers.fill(null);
+      revealed.fill(false);
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      document.querySelectorAll('.feedback').forEach(fb => {
+        fb.className = "feedback";
+        fb.style.display = "none";
+        fb.innerHTML = "";
+      });
+      recapEl.style.display = "none";
+      summaryListEl.innerHTML = "";
+      updateStats();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function goHome(){
+      window.location.href = "index.html";
+    }
+
+    renderQuiz();
+  </script>
+</body>
+</html>

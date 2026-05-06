@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Balance Sheet MCQ</title>
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --primary:#2563eb;
+      --primary-dark:#1d4ed8;
+      --success:#16a34a;
+      --danger:#dc2626;
+      --border:#dbe3ef;
+      --soft:#eef4ff;
+      --shadow:0 10px 30px rgba(15, 23, 42, .08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f6f8fc 0%, #eef3fb 100%);
+      color:var(--text);
+    }
+    .app{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 120px;
+    }
+    .header{
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
+      color:#fff;
+      border-radius: 18px;
+      padding: 22px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .header h1{
+      margin:0 0 8px;
+      font-size: 28px;
+    }
+    .header p{
+      margin:0;
+      opacity:.92;
+      line-height:1.5;
+    }
+    .topbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:space-between;
+      align-items:center;
+      margin: 18px 0 16px;
+    }
+    .pill{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 14px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, .05);
+      font-weight:700;
+    }
+    .btn-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    button{
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      border-radius: 12px;
+      padding: 12px 18px;
+      transition: transform .15s ease, background .15s ease, opacity .15s ease;
+    }
+    button:hover{transform: translateY(-1px)}
+    button:active{transform: translateY(0)}
+    .btn-primary{
+      background: var(--primary);
+      color:#fff;
+    }
+    .btn-primary:hover{background:var(--primary-dark)}
+    .btn-secondary{
+      background:#fff;
+      border:1px solid var(--border);
+      color:var(--text);
+    }
+    .btn-secondary:hover{background:#f8fafc}
+    .content{
+      display:grid;
+      grid-template-columns: 1.6fr .9fr;
+      gap: 18px;
+    }
+    .panel{
+      background:rgba(255,255,255,.95);
+      border:1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .quiz-panel{
+      padding: 18px;
+    }
+    .recap-panel{
+      padding: 18px;
+      position: sticky;
+      top: 18px;
+      height: fit-content;
+    }
+    .section-title{
+      margin:0 0 12px;
+      font-size: 20px;
+    }
+    .section-sub{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.5;
+      font-size: 14px;
+    }
+    .question{
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+    .question.correct{
+      border-color: rgba(22,163,74,.35);
+      background: #f0fdf4;
+    }
+    .question.wrong{
+      border-color: rgba(220,38,38,.35);
+      background: #fef2f2;
+    }
+    .q-title{
+      margin:0 0 10px;
+      font-weight:700;
+      line-height:1.45;
+    }
+    .options{
+      display:grid;
+      gap:8px;
+    }
+    .option{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      border:1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fff;
+    }
+    .option input{
+      margin-top: 3px;
+      transform: scale(1.05);
+    }
+    .option label{
+      cursor:pointer;
+      flex:1;
+      line-height:1.45;
+    }
+    .feedback{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      display:block;
+      line-height:1.5;
+    }
+    .feedback.hidden{
+      display:none;
+    }
+    .feedback.correct{
+      background: #ecfdf5;
+      border:1px solid rgba(22,163,74,.25);
+      color:#14532d;
+    }
+    .feedback.wrong{
+      background: #fef2f2;
+      border:1px solid rgba(220,38,38,.25);
+      color:#7f1d1d;
+    }
+    .feedback.neutral{
+      background: #f8fbff;
+      border:1px solid var(--border);
+      color: var(--muted);
+    }
+    .feedback .answer{
+      font-weight:700;
+      margin-top:6px;
+    }
+    .recap-box{
+      background: #f8fbff;
+      border:1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .score{
+      font-size: 30px;
+      font-weight: 800;
+      margin: 6px 0 8px;
+      color: var(--primary);
+    }
+    .summary-list{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text);
+    }
+    .summary-list li{
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+    .need-work{
+      border-left: 4px solid var(--danger);
+      padding-left: 12px;
+      margin-top: 10px;
+    }
+    .good{
+      border-left: 4px solid var(--success);
+      padding-left: 12px;
+      margin-top: 10px;
+    }
+    .floating-bar{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 999;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -8px 30px rgba(15, 23, 42, .08);
+    }
+    .floating-inner{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .small-note{
+      color:var(--muted);
+      font-size: 13px;
+    }
+    .mini{
+      font-size: 13px;
+      padding: 10px 14px;
+      border-radius: 10px;
+    }
+    @media (max-width: 900px){
+      .content{grid-template-columns: 1fr}
+      .recap-panel{position: static}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h1>Balance Sheet Components MCQ</h1>
+      <p>Click any option to get instant feedback. You can still submit anytime, even if not all questions are answered.</p>
+    </div>
+
+    <div class="topbar">
+      <div class="pill" id="progressPill">Answered: 0 / 30</div>
+      <div class="pill" id="statusPill">Status: In progress</div>
+    </div>
+
+    <div class="content">
+      <div class="panel quiz-panel">
+        <h2 class="section-title">Questions</h2>
+        <p class="section-sub">Immediate feedback appears right after you click an answer. Correct answers turn green, wrong answers turn red, and explanations are shown instantly.</p>
+        <form id="quizForm"></form>
+      </div>
+
+      <div class="panel recap-panel">
+        <h2 class="section-title">Recap</h2>
+        <p class="section-sub">Detailed result summary and areas to improve.</p>
+
+        <div class="recap-box">
+          <div>Total Questions: <strong>30</strong></div>
+          <div class="score" id="scoreText">0 / 30</div>
+          <div id="percentText">0%</div>
+        </div>
+
+        <div class="recap-box">
+          <strong>Detailed recap</strong>
+          <ul class="summary-list" id="recapList">
+            <li>No answers yet.</li>
+          </ul>
+        </div>
+
+        <div class="recap-box">
+          <strong>Need more practice</strong>
+          <div class="need-work" id="needWorkText">Answer questions to see weak areas.</div>
+        </div>
+
+        <div class="recap-box">
+          <strong>Strong areas</strong>
+          <div class="good" id="strongText">Answer questions to see strengths.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-bar">
+    <div class="floating-inner">
+      <div class="small-note">Back and Submit buttons stay fixed at the bottom while scrolling.</div>
+      <div class="btn-row">
+        <button class="btn-secondary mini" type="button" onclick="goHome()">Back to index.html</button>
+        <button class="btn-primary mini" type="button" onclick="submitQuiz()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      { q:"1. Which of the following is a current asset?", options:["Land","Cash and Equivalents","Long-term debt","Capital stock"], answer:1, exp:"Cash and equivalents are current assets because they are expected to be used or converted into cash within one year." },
+      { q:"2. Accounts Receivable is classified as:", options:["Current asset","Fixed asset","Current liability","Equity"], answer:0, exp:"Accounts receivable is money owed by customers and is expected to be collected soon, so it is a current asset." },
+      { q:"3. Allowance for Bad Debts is deducted from:", options:["Inventory","Accounts Payable","Accounts Receivable","Retained Earnings"], answer:2, exp:"Allowance for bad debts is a contra-asset account that reduces accounts receivable to net realizable value." },
+      { q:"4. Which item is part of inventory?", options:["Raw Materials","Lease Contracts","Accrued Payroll","Long-term debt"], answer:0, exp:"Raw materials are part of inventory in manufacturing and merchandising businesses." },
+      { q:"5. Which of the following is not a current asset?", options:["Prepaid Expenses","Cash and Equivalents","Long-term Investments","Inventory"], answer:2, exp:"Long-term investments are usually reported separately from current assets because they are not expected to be used within one year." },
+      { q:"6. Prepaid Expenses are classified as:", options:["Current assets","Current liabilities","Fixed assets","Equity"], answer:0, exp:"Prepaid expenses are payments made in advance for future benefits, so they are current assets." },
+      { q:"7. Land and Buildings are examples of:", options:["Current liabilities","Fixed assets","Other assets","Current assets"], answer:1, exp:"Land and buildings are long-term tangible resources used in operations, so they are fixed assets." },
+      { q:"8. Accumulated Depreciation is associated with:", options:["Fixed assets","Current liabilities","Accounts payable","Retained earnings"], answer:0, exp:"Accumulated depreciation is a contra-asset related to fixed assets such as equipment and buildings." },
+      { q:"9. Which is included in other assets?", options:["Cash","Deposits held by others","Accounts receivable","Notes payable"], answer:1, exp:"Deposits held by others are often reported in other assets, not current assets or liabilities." },
+      { q:"10. Long-Term Investments belong to:", options:["Current assets","Other assets","Current liabilities","Stockholders’ equity"], answer:1, exp:"Long-term investments are usually classified as other assets because they are not current operating assets." },
+      { q:"11. Accounts Payable is a:", options:["Current asset","Fixed asset","Current liability","Other asset"], answer:2, exp:"Accounts payable represents amounts owed to suppliers and is due within a short period, so it is a current liability." },
+      { q:"12. Accrued Payroll is classified as:", options:["Current liability","Current asset","Equity","Fixed asset"], answer:0, exp:"Accrued payroll is wages owed but not yet paid, so it is a current liability." },
+      { q:"13. Income Taxes Payable is part of:", options:["Other assets","Current liabilities","Fixed assets","Capital stock"], answer:1, exp:"Income taxes payable is an obligation due soon and is classified as a current liability." },
+      { q:"14. Notes Payable to Banks, Short-Term is:", options:["Current liability","Long-term liability","Current asset","Equity"], answer:0, exp:"Short-term notes payable are due within one year, so they are current liabilities." },
+      { q:"15. Current Portion of Long-Term Debt is classified as:", options:["Current liability","Fixed asset","Other asset","Capital stock"], answer:0, exp:"The part of long-term debt due within one year is shown as a current liability." },
+      { q:"16. Lease (Purchase) Contracts are part of:", options:["Current liabilities","Long-term liabilities","Current assets","Retained earnings"], answer:1, exp:"Lease purchase obligations are typically long-term liabilities because they extend beyond one year." },
+      { q:"17. Long-Term Debt (other than leases) is:", options:["A current asset","A fixed asset","A long-term liability","A current liability"], answer:2, exp:"Long-term debt is money owed beyond one year, so it is a long-term liability." },
+      { q:"18. Loans from Stockholders are classified as:", options:["Current liabilities","Long-term liabilities","Current assets","Other assets"], answer:1, exp:"Loans from stockholders are usually reported as long-term liabilities unless due soon." },
+      { q:"19. Capital Stock belongs to:", options:["Current liabilities","Stockholders’ equity","Current assets","Long-term liabilities"], answer:1, exp:"Capital stock represents owners’ investment in the company, so it is part of stockholders’ equity." },
+      { q:"20. Contributed Capital is a component of:", options:["Current assets","Stockholders’ equity","Current liabilities","Fixed assets"], answer:1, exp:"Contributed capital is money invested by owners and is reported within equity." },
+      { q:"21. Retained Earnings are classified under:", options:["Stockholders’ equity","Current liabilities","Other assets","Current assets"], answer:0, exp:"Retained earnings are cumulative profits kept in the business, so they belong to stockholders’ equity." },
+      { q:"22. Which of the following is a liability?", options:["Inventory","Accounts Receivable","Accounts Payable","Prepaid Expenses"], answer:2, exp:"Accounts payable is a liability because it is an amount the company owes to suppliers." },
+      { q:"23. Which of the following is a non-current asset?", options:["Cash","Prepaid Expenses","Machinery and Equipment","Income Taxes Payable"], answer:2, exp:"Machinery and equipment are long-term resources used in operations, so they are non-current assets." },
+      { q:"24. Total Current Assets include:", options:["Only cash","Cash, receivables, inventory, and prepaid expenses","Only fixed assets","Only liabilities"], answer:1, exp:"Current assets commonly include cash, receivables, inventory, and prepaid expenses." },
+      { q:"25. Total Fixed Assets are calculated after deducting:", options:["Accounts payable","Current liabilities","Accumulated depreciation","Retained earnings"], answer:2, exp:"Fixed assets are usually shown net of accumulated depreciation to arrive at net book value." },
+      { q:"26. Which of the following is part of current liabilities?", options:["Capital stock","Notes payable to banks, short-term","Long-term debt","Long-term investments"], answer:1, exp:"Short-term notes payable are due within one year, so they are current liabilities." },
+      { q:"27. Which section is not found on a balance sheet?", options:["Assets","Liabilities","Stockholders’ Equity","Revenue and Expenses"], answer:3, exp:"Revenue and expenses appear on the income statement, not on the balance sheet." },
+      { q:"28. Total Assets must equal:", options:["Total Revenue","Total Liabilities + Stockholders’ Equity","Net Income","Current Assets only"], answer:1, exp:"This is the accounting equation: Assets = Liabilities + Stockholders’ Equity." },
+      { q:"29. Which is the correct order on a balance sheet?", options:["Equity → Liabilities → Assets","Assets → Liabilities → Equity","Liabilities → Assets → Equity","Revenue → Expenses → Equity"], answer:1, exp:"A balance sheet is typically presented in this order: assets, then liabilities, then equity." },
+      { q:"30. The balance sheet shows a company’s financial position at:", options:["The end of a specific date","A whole year of sales only","The beginning of a project only","The total cash flow only"], answer:0, exp:"A balance sheet is a snapshot of financial position at a specific date, not over a period of time." }
+    ];
+
+    const form = document.getElementById('quizForm');
+    const recapList = document.getElementById('recapList');
+    const scoreText = document.getElementById('scoreText');
+    const percentText = document.getElementById('percentText');
+    const progressPill = document.getElementById('progressPill');
+    const statusPill = document.getElementById('statusPill');
+    const needWorkText = document.getElementById('needWorkText');
+    const strongText = document.getElementById('strongText');
+
+    const state = Array(questions.length).fill(null);
+    const feedbackState = Array(questions.length).fill(false);
+
+    function renderQuiz(){
+      form.innerHTML = '';
+      questions.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.id = `q-${i}`;
+        div.innerHTML = `
+          <div class="q-title">${item.q}</div>
+          <div class="options">
+            ${item.options.map((opt, idx) => `
+              <div class="option">
+                <input type="radio" name="q${i}" id="q${i}-${idx}" value="${idx}">
+                <label for="q${i}-${idx}">${String.fromCharCode(65 + idx)}. ${opt}</label>
+              </div>
+            `).join('')}
+          </div>
+          <div class="feedback hidden neutral" id="fb-${i}">Choose an answer to see instant feedback.</div>
+        `;
+        form.appendChild(div);
+      });
+
+      questions.forEach((_, i) => {
+        document.querySelectorAll(`input[name="q${i}"]`).forEach(radio => {
+          radio.addEventListener('change', () => handleAnswer(i));
+        });
+      });
+    }
+
+    function handleAnswer(i){
+      const selected = document.querySelector(`input[name="q${i}"]:checked`);
+      if (!selected) return;
+
+      const chosen = Number(selected.value);
+      state[i] = chosen;
+      const qBox = document.getElementById(`q-${i}`);
+      const fb = document.getElementById(`fb-${i}`);
+
+      fb.classList.remove('hidden', 'neutral', 'correct', 'wrong');
+
+      if (chosen === questions[i].answer) {
+        qBox.classList.remove('wrong');
+        qBox.classList.add('correct');
+        fb.classList.add('correct');
+        fb.innerHTML = `<strong>Correct.</strong> ${questions[i].exp}<div class="answer">Answer: ${String.fromCharCode(65 + questions[i].answer)}. ${questions[i].options[questions[i].answer]}</div>`;
+      } else {
+        qBox.classList.remove('correct');
+        qBox.classList.add('wrong');
+        fb.classList.add('wrong');
+        fb.innerHTML = `<strong>Wrong.</strong> ${questions[i].exp}<div class="answer">Your answer: ${String.fromCharCode(65 + chosen)}. ${questions[i].options[chosen]}<br>Correct answer: ${String.fromCharCode(65 + questions[i].answer)}. ${questions[i].options[questions[i].answer]}</div>`;
+      }
+
+      updateProgress();
+      updateRecap(false);
+    }
+
+    function updateProgress(){
+      const answered = state.filter(v => v !== null).length;
+      progressPill.textContent = `Answered: ${answered} / 30`;
+    }
+
+    function updateRecap(finalSubmit){
+      let score = 0;
+      const recapItems = [];
+      const weakTopics = [];
+      const strongTopics = [];
+
+      questions.forEach((item, i) => {
+        if (state[i] === item.answer) {
+          score++;
+          strongTopics.push(`Q${i+1}`);
+        } else if (state[i] !== null) {
+          weakTopics.push(`Q${i+1}`);
+        }
+        if (state[i] !== null || finalSubmit) {
+          recapItems.push(`<li>Q${i+1}: ${state[i] === item.answer ? 'Correct' : (state[i] === null ? 'Unanswered' : 'Wrong')}</li>`);
+        }
+      });
+
+      scoreText.textContent = `${score} / 30`;
+      percentText.textContent = `${Math.round(score / questions.length * 100)}%`;
+      recapList.innerHTML = recapItems.length ? recapItems.join('') : '<li>No answers yet.</li>';
+
+      if (weakTopics.length === 0) {
+        needWorkText.textContent = finalSubmit ? 'Excellent — you got everything correct or left questions unanswered.' : 'No weak areas yet.';
+      } else {
+        needWorkText.innerHTML = `
+          <ul class="summary-list">
+            ${weakTopics.map(x => `<li>${x}</li>`).join('')}
+          </ul>
+          <div>These are the questions you should review again.</div>
+        `;
+      }
+
+      if (strongTopics.length === 0) {
+        strongText.textContent = 'No strengths recorded yet.';
+      } else {
+        strongText.innerHTML = `
+          <ul class="summary-list">
+            ${strongTopics.map(x => `<li>${x}</li>`).join('')}
+          </ul>
+          <div>These are your correct answers so far.</div>
+        `;
+      }
+
+      if (finalSubmit) {
+        statusPill.textContent = 'Status: Submitted';
+      } else {
+        statusPill.textContent = 'Status: In progress';
+      }
+    }
+
+    function submitQuiz(){
+      for (let i = 0; i < questions.length; i++) {
+        const qBox = document.getElementById(`q-${i}`);
+        const fb = document.getElementById(`fb-${i}`);
+        if (state[i] === null) {
+          qBox.classList.add('wrong');
+          fb.classList.remove('hidden', 'neutral', 'correct');
+          fb.classList.add('wrong');
+          fb.innerHTML = `<strong>Unanswered.</strong> This question has not been selected yet.<div class="answer">Correct answer: ${String.fromCharCode(65 + questions[i].answer)}. ${questions[i].options[questions[i].answer]}</div>`;
+        }
+      }
+      updateRecap(true);
+    }
+
+    function goHome(){
+      window.location.href = 'index.html';
+    }
+
+    renderQuiz();
+    updateProgress();
+    updateRecap(false);
+  </script>
+</body>
+</html>

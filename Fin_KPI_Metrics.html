@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance KPI & Metrics MCQ</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto 100px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--bg-color);
+            margin-bottom: 30px;
+        }
+
+        .question-block {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            font-size: 1em;
+        }
+
+        .option-btn:hover:not(.disabled) {
+            background-color: #f0f7ff;
+            border-color: var(--accent-color);
+        }
+
+        .option-btn.correct {
+            background-color: #d4edda;
+            border-color: var(--success-color);
+            color: #155724;
+        }
+
+        .option-btn.wrong {
+            background-color: #f8d7da;
+            border-color: var(--error-color);
+            color: #721c24;
+        }
+
+        .option-btn.disabled {
+            cursor: default;
+            opacity: 0.8;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-msg {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 5px solid var(--success-color);
+        }
+
+        .feedback.wrong-msg {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 5px solid #ffeeba;
+        }
+
+        /* Sticky Controls */
+        .sticky-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .btn-home {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-home:hover {
+            background-color: #1a252f;
+        }
+
+        .btn-submit {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #2980b9;
+        }
+
+        /* Recap Section */
+        #recap {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #fff;
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+        }
+
+        .score-display {
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .recap-details {
+            margin-top: 20px;
+        }
+
+        .improvement-area {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fef9e7;
+            border-radius: 5px;
+            border-left: 5px solid #f1c40f;
+        }
+
+        @media (max-width: 600px) {
+            .sticky-controls {
+                flex-direction: row;
+                padding: 10px;
+            }
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Finance KPI & Metrics Quiz</h1>
+        <p>Test your knowledge on essential financial ratios and performance indicators.</p>
+    </header>
+
+    <div id="quiz-container">
+        <!-- Questions will be injected here -->
+    </div>
+
+    <div id="recap">
+        <div class="score-display" id="final-score"></div>
+        <div class="recap-details" id="recap-content"></div>
+        <div class="improvement-area" id="improvement-content"></div>
+    </div>
+</div>
+
+<div class="sticky-controls">
+    <button class="btn btn-home" onclick="window.location.href='index.html'">Back to Index</button>
+    <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+</div>
+
+<script>
+    const questions = [
+        {
+                "question": "What does PE ratio stand for?",
+                "options": [
+                        "A. Profit/Earnings ratio",
+                        "B. Price to Earnings ratio",
+                        "C. Purchase Efficiency ratio",
+                        "D. Price to Equity ratio"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Price to Earnings ratio. PE ratio is a key valuation metric."
+        },
+        {
+                "question": "How is PE ratio calculated?",
+                "options": [
+                        "A. Stock price / Earnings per share",
+                        "B. Earnings per share / Stock price",
+                        "C. Net income / Total assets",
+                        "D. Gross profit / Sales"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Stock price / Earnings per share. PE ratio is a key valuation metric."
+        },
+        {
+                "question": "A common guideline for PE ratio is:",
+                "options": [
+                        "A. Under 5",
+                        "B. Under 10",
+                        "C. Under 20",
+                        "D. Over 50"
+                ],
+                "correct": 2,
+                "explanation": "The correct answer is C. Under 20. PE ratio is a key valuation metric."
+        },
+        {
+                "question": "What does the current ratio measure?",
+                "options": [
+                        "A. Profitability",
+                        "B. Liquidity of a company",
+                        "C. Market value",
+                        "D. Long-term growth"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Liquidity of a company."
+        },
+        {
+                "question": "How is current ratio calculated?",
+                "options": [
+                        "A. Current liabilities / Current assets",
+                        "B. Current assets / Current liabilities",
+                        "C. Cash / Total debt",
+                        "D. Inventory / Sales"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Current assets / Current liabilities."
+        },
+        {
+                "question": "A guideline for current ratio is approximately:",
+                "options": [
+                        "A. 0.5",
+                        "B. 1",
+                        "C. 2",
+                        "D. 5"
+                ],
+                "correct": 2,
+                "explanation": "The correct answer is C. 2."
+        },
+        {
+                "question": "What is the quick ratio?",
+                "options": [
+                        "A. Current assets including inventory / Current liabilities",
+                        "B. Current assets \u2013 Inventory / Current liabilities",
+                        "C. Net income / Current liabilities",
+                        "D. Cash / Total assets"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Current assets \u2013 Inventory / Current liabilities."
+        },
+        {
+                "question": "The quick ratio is a variation of the:",
+                "options": [
+                        "A. Debt ratio",
+                        "B. Current ratio",
+                        "C. PE ratio",
+                        "D. ROI ratio"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Current ratio."
+        },
+        {
+                "question": "A guideline for quick ratio is:",
+                "options": [
+                        "A. 0.5",
+                        "B. 1.3",
+                        "C. 2.5",
+                        "D. 5"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. 1.3."
+        },
+        {
+                "question": "What does DSO mean?",
+                "options": [
+                        "A. Days Sales Outstanding",
+                        "B. Debt Sales Obligation",
+                        "C. Days Stock On-hand",
+                        "D. Direct Sales Outcome"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Days Sales Outstanding. DSO tracks how long it takes to collect payments."
+        },
+        {
+                "question": "DSO measures:",
+                "options": [
+                        "A. Inventory replacement speed",
+                        "B. Number of days of average sales yet uncollected",
+                        "C. Profit margin level",
+                        "D. Employee productivity"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Number of days of average sales yet uncollected. DSO tracks how long it takes to collect payments."
+        },
+        {
+                "question": "A lower DSO generally means:",
+                "options": [
+                        "A. Slower collections",
+                        "B. Faster collection of receivables",
+                        "C. Higher debt",
+                        "D. Lower sales"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Faster collection of receivables. DSO tracks how long it takes to collect payments."
+        },
+        {
+                "question": "The ideal DSO is around:",
+                "options": [
+                        "A. 10 days",
+                        "B. 20 days",
+                        "C. 30 days",
+                        "D. 90 days"
+                ],
+                "correct": 2,
+                "explanation": "The correct answer is C. 30 days. DSO tracks how long it takes to collect payments."
+        },
+        {
+                "question": "In practice, DSO is often around:",
+                "options": [
+                        "A. 15 days",
+                        "B. 30 days",
+                        "C. 45 days",
+                        "D. 120 days"
+                ],
+                "correct": 2,
+                "explanation": "The correct answer is C. 45 days. DSO tracks how long it takes to collect payments."
+        },
+        {
+                "question": "How is inventory turnover calculated?",
+                "options": [
+                        "A. Gross sales / Average inventory",
+                        "B. Annual cost of goods sold / Average inventory",
+                        "C. Net income / Average inventory",
+                        "D. Current assets / Inventory"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Annual cost of goods sold / Average inventory."
+        },
+        {
+                "question": "Inventory turnover measures:",
+                "options": [
+                        "A. How quickly inventory leaves the plant and is replaced",
+                        "B. How fast cash is collected",
+                        "C. How much profit is earned",
+                        "D. How much debt is used"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. How quickly inventory leaves the plant and is replaced."
+        },
+        {
+                "question": "A guideline for inventory turnover is:",
+                "options": [
+                        "A. < 1",
+                        "B. > 3",
+                        "C. > 7",
+                        "D. > 20"
+                ],
+                "correct": 2,
+                "explanation": "The correct answer is C. > 7."
+        },
+        {
+                "question": "What is gross profit margin?",
+                "options": [
+                        "A. Gross profit / Gross sales",
+                        "B. Net income / Sales",
+                        "C. EBITDA / Sales",
+                        "D. Operating income / Assets"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Gross profit / Gross sales."
+        },
+        {
+                "question": "Gross profit margin is a good indicator of:",
+                "options": [
+                        "A. Business model quality",
+                        "B. Employee productivity",
+                        "C. Liquidity",
+                        "D. Capital structure"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Business model quality."
+        },
+        {
+                "question": "Gross profit margin can typically range from:",
+                "options": [
+                        "A. 1% to 5%",
+                        "B. 5% to 10%",
+                        "C. 20% to 80%",
+                        "D. 90% to 100%"
+                ],
+                "correct": 2,
+                "explanation": "The correct answer is C. 20% to 80%."
+        },
+        {
+                "question": "What is net profit margin?",
+                "options": [
+                        "A. Net profit / Gross sales",
+                        "B. Gross profit / Net sales",
+                        "C. Operating income / Gross sales",
+                        "D. EBITDA / Gross sales"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Net profit / Gross sales."
+        },
+        {
+                "question": "A net profit margin of 3% would be very bad for:",
+                "options": [
+                        "A. Software, drug, or manufacturing business",
+                        "B. Distribution business",
+                        "C. Retail discount business",
+                        "D. Low-margin wholesaler"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Software, drug, or manufacturing business."
+        },
+        {
+                "question": "To evaluate net profit margin properly, you should:",
+                "options": [
+                        "A. Compare companies in the same industry",
+                        "B. Compare only with cash flow",
+                        "C. Ignore industry differences",
+                        "D. Look only at one month"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Compare companies in the same industry."
+        },
+        {
+                "question": "Which of the following is a cost per sales dollar metric?",
+                "options": [
+                        "A. Sales and marketing costs / Gross sales",
+                        "B. Gross profit / Inventory",
+                        "C. Net income / Equity",
+                        "D. Current assets / Sales"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Sales and marketing costs / Gross sales."
+        },
+        {
+                "question": "Why should cost per sales dollar be tracked?",
+                "options": [
+                        "A. Only once every 10 years",
+                        "B. To look at evolution over time",
+                        "C. Only against debt",
+                        "D. Because it never changes"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. To look at evolution over time."
+        },
+        {
+                "question": "What does backlog of orders mean?",
+                "options": [
+                        "A. Orders received \u2013 Orders shipped and invoiced",
+                        "B. Sales \u2013 Costs",
+                        "C. Inventory \u2013 Receivables",
+                        "D. Cash \u2013 Debt"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Orders received \u2013 Orders shipped and invoiced."
+        },
+        {
+                "question": "Sales per employee is an example of:",
+                "options": [
+                        "A. A leverage metric",
+                        "B. A productivity metric",
+                        "C. A liquidity metric",
+                        "D. A valuation metric"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. A productivity metric."
+        },
+        {
+                "question": "What does debt to equity ratio measure?",
+                "options": [
+                        "A. Liquidity",
+                        "B. Leverage",
+                        "C. Profitability",
+                        "D. Growth"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Leverage."
+        },
+        {
+                "question": "How is debt to equity ratio calculated?",
+                "options": [
+                        "A. Total debt / Total equity",
+                        "B. Total equity / Total debt",
+                        "C. Net income / Total debt",
+                        "D. Gross sales / Total equity"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Total debt / Total equity."
+        },
+        {
+                "question": "A common guideline for debt to equity ratio is:",
+                "options": [
+                        "A. < 1",
+                        "B. > 1",
+                        "C. = 5",
+                        "D. = 10"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. < 1."
+        },
+        {
+                "question": "What does ROE stand for?",
+                "options": [
+                        "A. Return on Equity",
+                        "B. Rate of Earnings",
+                        "C. Return on Expense",
+                        "D. Revenue on Equity"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Return on Equity. ROE measures the profitability of a business in relation to equity."
+        },
+        {
+                "question": "How is ROE calculated?",
+                "options": [
+                        "A. Net income annualized / Stockholders\u2019 equity",
+                        "B. Gross profit / Assets",
+                        "C. Sales / Debt",
+                        "D. Inventory / Equity"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Net income annualized / Stockholders\u2019 equity. ROE measures the profitability of a business in relation to equity."
+        },
+        {
+                "question": "ROE measures:",
+                "options": [
+                        "A. Company earning power",
+                        "B. Customer satisfaction",
+                        "C. Inventory speed",
+                        "D. Short-term liquidity"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Company earning power. ROE measures the profitability of a business in relation to equity."
+        },
+        {
+                "question": "A guideline for ROE is:",
+                "options": [
+                        "A. 1\u20133%",
+                        "B. 5\u201310%",
+                        "C. 15\u201320%",
+                        "D. 50\u201360%"
+                ],
+                "correct": 2,
+                "explanation": "The correct answer is C. 15\u201320%. ROE measures the profitability of a business in relation to equity."
+        },
+        {
+                "question": "What does ROI stand for?",
+                "options": [
+                        "A. Rate of Inventory",
+                        "B. Return on Investment",
+                        "C. Revenue on Income",
+                        "D. Return of Interest"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Return on Investment."
+        },
+        {
+                "question": "Payback period refers to:",
+                "options": [
+                        "A. Time needed to recover the initial investment",
+                        "B. Time to pay employees",
+                        "C. Time to collect receivables",
+                        "D. Time to replace inventory"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Time needed to recover the initial investment."
+        },
+        {
+                "question": "What does PV mean in finance?",
+                "options": [
+                        "A. Present Value",
+                        "B. Profit Volume",
+                        "C. Price Variation",
+                        "D. Payment Value"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Present Value."
+        },
+        {
+                "question": "What does FV mean in finance?",
+                "options": [
+                        "A. Final Value",
+                        "B. Future Value",
+                        "C. Financial Value",
+                        "D. Funded Value"
+                ],
+                "correct": 1,
+                "explanation": "The correct answer is B. Future Value."
+        },
+        {
+                "question": "What does NPV stand for?",
+                "options": [
+                        "A. Net Present Value",
+                        "B. Net Profit Variation",
+                        "C. Normal Profit Value",
+                        "D. New Project Value"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Net Present Value."
+        },
+        {
+                "question": "What does IRR stand for?",
+                "options": [
+                        "A. Internal Rate of Return",
+                        "B. Investment Rate Ratio",
+                        "C. Income Return Rate",
+                        "D. Internal Revenue Return"
+                ],
+                "correct": 0,
+                "explanation": "The correct answer is A. Internal Rate of Return."
+        }
+];
+
+    const userAnswers = new Array(questions.length).fill(null);
+    const quizContainer = document.getElementById('quiz-container');
+
+    function initQuiz() {
+        if (!questions || questions.length === 0) {
+            quizContainer.innerHTML = '<p>No questions found.</p>';
+            return;
+        }
+        
+        questions.forEach((q, index) => {
+            const qBlock = document.createElement('div');
+            qBlock.className = 'question-block';
+            qBlock.id = `q-block-${index}`;
+
+            const qText = document.createElement('div');
+            qText.className = 'question-text';
+            qText.innerText = `${index + 1}. ${q.question}`;
+            qBlock.appendChild(qText);
+
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'options';
+
+            q.options.forEach((opt, optIdx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => handleAnswer(index, optIdx, btn);
+                optionsDiv.appendChild(btn);
+            });
+
+            qBlock.appendChild(optionsDiv);
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            feedback.id = `feedback-${index}`;
+            qBlock.appendChild(feedback);
+
+            quizContainer.appendChild(qBlock);
+        });
+    }
+
+    function handleAnswer(qIdx, optIdx, btn) {
+        if (userAnswers[qIdx] !== null) return; // Already answered
+
+        const correctIdx = questions[qIdx].correct;
+        userAnswers[qIdx] = optIdx;
+
+        // Disable all buttons in this block
+        const buttons = document.querySelectorAll(`#q-block-${qIdx} .option-btn`);
+        buttons.forEach(b => b.classList.add('disabled'));
+
+        const feedbackDiv = document.getElementById(`feedback-${qIdx}`);
+        
+        if (optIdx === correctIdx) {
+            btn.classList.add('correct');
+            feedbackDiv.innerText = "Correct! " + questions[qIdx].explanation;
+            feedbackDiv.className = 'feedback show correct-msg';
+        } else {
+            btn.classList.add('wrong');
+            buttons[correctIdx].classList.add('correct');
+            feedbackDiv.innerText = "Incorrect. " + questions[qIdx].explanation;
+            feedbackDiv.className = 'feedback show wrong-msg';
+        }
+    }
+
+    function submitQuiz() {
+        const answeredCount = userAnswers.filter(a => a !== null).length;
+        let score = 0;
+        let wrongTopics = [];
+
+        questions.forEach((q, i) => {
+            if (userAnswers[i] === q.correct) {
+                score++;
+            } else if (userAnswers[i] !== null) {
+                wrongTopics.push(q.question.split('?')[0]);
+            }
+        });
+
+        // Hide quiz, show recap
+        quizContainer.style.display = 'none';
+        const recapDiv = document.getElementById('recap');
+        recapDiv.style.display = 'block';
+
+        document.getElementById('final-score').innerText = `Your Score: ${score} / ${questions.length}`;
+        
+        let recapHtml = `<h3>Summary</h3>
+            <p>You answered <strong>${answeredCount}</strong> out of <strong>${questions.length}</strong> questions.</p>
+            <p>Accuracy: <strong>${Math.round((score / (answeredCount || 1)) * 100)}%</strong></p>`;
+        
+        document.getElementById('recap-content').innerHTML = recapHtml;
+
+        if (wrongTopics.length > 0) {
+            let improvementHtml = `<h3>Areas for Improvement</h3>
+                <p>You might want to review the following topics:</p>
+                <ul>`;
+            // Take unique topics or first few
+            const uniqueTopics = [...new Set(wrongTopics)].slice(0, 5);
+            uniqueTopics.forEach(topic => {
+                improvementHtml += `<li>${topic}</li>`;
+            });
+            improvementHtml += `</ul>`;
+            document.getElementById('improvement-content').innerHTML = improvementHtml;
+        } else if (answeredCount < questions.length) {
+            document.getElementById('improvement-content').innerHTML = "<h3>Keep Going!</h3><p>Try to answer all questions to get a full assessment.</p>";
+        } else {
+            document.getElementById('improvement-content').innerHTML = "<h3>Excellent!</h3><p>You have a strong grasp of these Finance KPIs.</p>";
+        }
+
+        window.scrollTo(0, 0);
+    }
+
+    // Initialize the quiz immediately
+    document.addEventListener('DOMContentLoaded', initQuiz);
+</script>
+
+</body>
+</html>

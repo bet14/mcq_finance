@@ -1,17 +1,212 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Finance Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finance Quiz</title>
+  <style>
+    :root{
+      --bg1:#0f172a;
+      --bg2:#111827;
+      --card:#1f2937;
+      --card2:#0b1220;
+      --text:#f8fafc;
+      --muted:#cbd5e1;
+      --accent:#38bdf8;
+      --accent2:#22c55e;
+      --border:rgba(148,163,184,.22);
+      --shadow:0 20px 50px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,197,94,.14), transparent 28%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:32px 18px 56px;
+    }
+    .hero{
+      background:linear-gradient(135deg, rgba(56,189,248,.16), rgba(34,197,94,.08));
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      margin-bottom:24px;
+    }
+    .hero h1{
+      margin:0;
+      font-size:clamp(34px, 5vw, 58px);
+      line-height:1.05;
+      letter-spacing:-.03em;
+    }
+    .hero p{
+      margin:14px 0 0;
+      font-size:18px;
+      line-height:1.7;
+      color:var(--muted);
+      max-width:900px;
+    }
+    .section-title{
+      font-size:26px;
+      margin:18px 0 16px;
+      letter-spacing:-.02em;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:18px;
+    }
+    .card{
+      background:rgba(17,24,39,.92);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      transition:transform .18s ease, border-color .18s ease, background .18s ease;
+      min-height:170px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(56,189,248,.45);
+      background:rgba(17,24,39,.98);
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:28px;
+      line-height:1.15;
+    }
+    .card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.6;
+    }
+    .links{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    a.btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      color:white;
+      font-weight:800;
+      font-size:16px;
+      padding:13px 18px;
+      border-radius:14px;
+      background:linear-gradient(135deg, var(--accent), #2563eb);
+      box-shadow:0 10px 24px rgba(37,99,235,.25);
+      transition:transform .18s ease, opacity .18s ease;
+    }
+    a.btn:hover{transform:translateY(-2px); opacity:.96}
+    a.btn.secondary{
+      background:linear-gradient(135deg, var(--accent2), #0f766e);
+      box-shadow:0 10px 24px rgba(34,197,94,.18);
+    }
+    .footer{
+      margin-top:22px;
+      color:var(--muted);
+      font-size:14px;
+      text-align:center;
+    }
+    @media (max-width: 800px){
+      .grid{grid-template-columns:1fr}
+      .hero{padding:22px}
+      .card h2{font-size:24px}
+      .card p{font-size:16px}
+    }
+  </style>
 </head>
 <body>
-    <h1>Finance Quiz</h1>
+  <div class="container">
+    <section class="hero">
+      <h1>Finance Quiz</h1>
+      <p>
+        Select a topic below to start your finance learning quiz. The layout is designed in two columns,
+        with larger text and a cleaner, modern look for easier navigation.
+      </p>
+    </section>
 
-    <ul>
-        <li><a href="fin_quiz1.html">Quiz 1</a></li>
-        <li><a href="fin_quiz2.html">Quiz 2</a></li>
-        <li><a href="fin_quiz3.html">Quiz 3</a></li>
-        <li><a href="fin_quiz4.html">Quiz 4</a></li>
-    </ul>
+    <h2 class="section-title">Available Quizzes</h2>
+
+    <div class="grid">
+      <div class="card">
+        <div>
+          <h2>Income Statement</h2>
+          <p>Practice revenue, cost of sales, gross profit, operating income, net income, and income statement structure.</p>
+        </div>
+        <div class="links">
+          <a class="btn" href="IncStatement.html">Open Quiz</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>Balance Sheet</h2>
+          <p>Review assets, liabilities, equity, liquidity, and the key structure of the balance sheet.</p>
+        </div>
+        <div class="links">
+          <a class="btn" href="BalanceSheet.html">Open Quiz</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>Financial KPI Metrics</h2>
+          <p>Learn liquidity, leverage, profitability, productivity, ROE, margins, and other finance KPIs.</p>
+        </div>
+        <div class="links">
+          <a class="btn secondary" href="Fin_KPI_Metrics.html">Open Quiz</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>Quiz 1</h2>
+
+        </div>
+        <div class="links">
+          <a class="btn" href="fin_quiz1.html">Open Quiz</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>Quiz 2</h2>
+          
+        </div>
+        <div class="links">
+          <a class="btn" href="fin_quiz2.html">Open Quiz</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>Quiz 3</h2>
+         
+        </div>
+        <div class="links">
+          <a class="btn secondary" href="fin_quiz3.html">Open Quiz</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Finance Quiz Library
+    </div>
+  </div>
 </body>
 </html>

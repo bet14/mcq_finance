@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Quiz</title>
+  <style>
+    :root{
+      --bg:#f5f9ff;
+      --card:#ffffff;
+      --text:#17324d;
+      --muted:#5f7287;
+      --blue:#2563eb;
+      --blue-2:#3b82f6;
+      --green:#16a34a;
+      --red:#dc2626;
+      --amber:#f59e0b;
+      --border:#cfe0ff;
+      --shadow:0 10px 30px rgba(37,99,235,.10);
+      --shadow-2:0 8px 20px rgba(15,23,42,.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(37,99,235,.08), transparent 26%),
+        linear-gradient(180deg, #f8fbff 0%, #f4f8ff 100%);
+      color:var(--text);
+      min-height:100vh;
+      padding-top:92px;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .topbar{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:1000;
+      background:rgba(255,255,255,.88);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(207,224,255,.9);
+      box-shadow:0 2px 18px rgba(37,99,235,.06);
+    }
+
+    .topbar-inner{
+      max-width:1200px;
+      margin:0 auto;
+      padding:14px 18px 12px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .left-group,.right-group{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .back-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--blue), var(--blue-2));
+      color:white;
+      font-weight:700;
+      box-shadow:0 8px 18px rgba(37,99,235,.18);
+      transition:.2s ease;
+      white-space:nowrap;
+    }
+
+    .back-btn:hover{transform:translateY(-1px);filter:brightness(1.02)}
+
+    .score-pill,.count-pill{
+      background:#eef5ff;
+      border:1px solid var(--border);
+      color:var(--blue);
+      padding:9px 14px;
+      border-radius:999px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .progress-wrap{
+      min-width:240px;
+      flex:1;
+      max-width:420px;
+    }
+
+    .progress-meta{
+      display:flex;
+      justify-content:space-between;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .progress-bar{
+      width:100%;
+      height:12px;
+      border-radius:999px;
+      background:#e7eefc;
+      overflow:hidden;
+      border:1px solid #d7e4ff;
+    }
+
+    .progress-fill{
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background:linear-gradient(90deg, var(--blue), #60a5fa);
+      transition:width .3s ease;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:28px 18px 50px;
+    }
+
+    .hero{
+      text-align:center;
+      margin:14px auto 26px;
+      padding:28px 16px 8px;
+    }
+
+    .hero h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem, 4vw, 3.4rem);
+      line-height:1.1;
+      letter-spacing:-0.03em;
+      color:#0f2f5f;
+    }
+
+    .hero p{
+      margin:0 auto;
+      max-width:820px;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.7;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .quiz-card{
+      padding:22px;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .section-title h2{
+      margin:0;
+      font-size:1.1rem;
+      color:#0f2f5f;
+    }
+
+    .quiz-area{
+      display:grid;
+      gap:16px;
+    }
+
+    .question-card{
+      border:1px solid #dbe8ff;
+      border-radius:16px;
+      background:linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      box-shadow:var(--shadow-2);
+      overflow:hidden;
+    }
+
+    .question-head{
+      padding:16px 16px 10px;
+      border-bottom:1px solid #edf3ff;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    .q-num{
+      font-weight:800;
+      color:var(--blue);
+      background:#eef5ff;
+      border:1px solid #dce8ff;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    .q-text{
+      margin:0;
+      font-size:1rem;
+      line-height:1.55;
+      color:#17324d;
+      font-weight:700;
+      flex:1;
+    }
+
+    .options{
+      display:grid;
+      gap:10px;
+      padding:16px;
+    }
+
+    .option{
+      width:100%;
+      text-align:left;
+      padding:13px 14px;
+      border-radius:14px;
+      border:1px solid #d9e6ff;
+      background:#fff;
+      color:#24405f;
+      cursor:pointer;
+      transition:.18s ease;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      font-size:.98rem;
+      line-height:1.45;
+    }
+
+    .option:hover{transform:translateY(-1px);border-color:#b8cffb;box-shadow:0 6px 14px rgba(37,99,235,.08)}
+    .option:disabled{cursor:not-allowed;opacity:1}
+
+    .opt-key{
+      flex:0 0 auto;
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      background:#eff6ff;
+      color:var(--blue);
+      border:1px solid #d7e6ff;
+      margin-top:-1px;
+    }
+
+    .option.correct{
+      border-color:#86efac;
+      background:#f0fdf4;
+      color:#14532d;
+    }
+
+    .option.correct .opt-key{
+      background:#dcfce7;
+      color:#166534;
+      border-color:#bbf7d0;
+    }
+
+    .option.wrong{
+      border-color:#fca5a5;
+      background:#fef2f2;
+      color:#7f1d1d;
+    }
+
+    .option.wrong .opt-key{
+      background:#fee2e2;
+      color:#991b1b;
+      border-color:#fecaca;
+    }
+
+    .feedback{
+      margin:0 16px 16px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid #dbe8ff;
+      background:#f8fbff;
+      color:#35506d;
+      line-height:1.6;
+      display:none;
+    }
+
+    .feedback.show{display:block}
+
+    .feedback strong{color:#0f2f5f}
+
+    .actions{
+      margin-top:18px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .primary-btn,.secondary-btn{
+      border:none;
+      border-radius:999px;
+      padding:13px 20px;
+      font-weight:800;
+      font-size:1rem;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .primary-btn{
+      background:linear-gradient(135deg, var(--blue), var(--blue-2));
+      color:#fff;
+      box-shadow:0 10px 20px rgba(37,99,235,.18);
+    }
+
+    .secondary-btn{
+      background:#eef5ff;
+      color:var(--blue);
+      border:1px solid #cfe0ff;
+    }
+
+    .primary-btn:hover,.secondary-btn:hover{transform:translateY(-1px)}
+
+    .results-card{
+      margin-top:20px;
+      padding:22px;
+      display:none;
+    }
+
+    .results-card.show{display:block}
+
+    .result-summary{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .stat{
+      background:#f8fbff;
+      border:1px solid #dbe8ff;
+      border-radius:16px;
+      padding:16px;
+      text-align:center;
+    }
+
+    .stat .label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:8px;
+    }
+
+    .stat .value{
+      font-size:1.4rem;
+      font-weight:900;
+      color:#0f2f5f;
+    }
+
+    .recap-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .recap-item{
+      padding:15px 16px;
+      border-radius:16px;
+      border:1px solid #dbe8ff;
+      background:#fff;
+    }
+
+    .recap-item.bad{border-color:#fecaca;background:#fffafa}
+    .recap-item.skip{border-color:#fde68a;background:#fffcf1}
+
+    .recap-item h3{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#0f2f5f;
+    }
+
+    .recap-item p{
+      margin:6px 0;
+      color:#334e68;
+      line-height:1.6;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .tag.bad{background:#fee2e2;color:#991b1b}
+    .tag.skip{background:#fef3c7;color:#92400e}
+
+    .hide{display:none !important}
+
+    @media (max-width: 860px){
+      .result-summary{grid-template-columns:repeat(2, minmax(0, 1fr))}
+      .progress-wrap{min-width:100%;max-width:none}
+      .topbar-inner{gap:10px}
+    }
+
+    @media (max-width: 640px){
+      body{padding-top:132px}
+      .topbar-inner{padding:12px 14px}
+      .quiz-card,.results-card{padding:16px}
+      .question-head{flex-direction:column}
+      .result-summary{grid-template-columns:1fr}
+      .hero{padding-top:12px}
+      .primary-btn,.secondary-btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="left-group">
+        <a class="back-btn" href="index.html" aria-label="Back to index">← Back to index</a>
+        <div class="score-pill">Score: <span id="score">0</span>/<span id="totalCount">60</span></div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span>Progress</span>
+          <span id="answeredMeta">0 answered</span>
+        </div>
+        <div class="progress-bar" aria-label="Quiz progress">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div class="right-group">
+        <div class="count-pill">Answered: <span id="answeredCount">0</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Financial Concepts Quiz</h1>
+      <p>
+        Test your understanding of PV, FV, ROI, Payback Period, NPV, IRR, and Profitability Index.
+        Answer all questions, then review your results and the explanations for any mistakes or skipped items.
+      </p>
+    </section>
+
+    <section class="card quiz-card">
+      <div class="section-title">
+        <h2>Quiz Area</h2>
+        <span style="color:var(--muted);font-size:13px;">Choose one answer per question</span>
+      </div>
+      <div id="quizArea" class="quiz-area"></div>
+
+      <div class="actions">
+        <button id="submitBtn" class="primary-btn">Submit & See Results</button>
+      </div>
+    </section>
+
+    <section id="resultsCard" class="card results-card">
+      <div class="section-title">
+        <h2>Recap Results</h2>
+        <button id="retryBtn" class="secondary-btn">Retry Quiz</button>
+      </div>
+
+      <div class="result-summary">
+        <div class="stat"><span class="label">Score</span><span class="value" id="finalScore">0</span></div>
+        <div class="stat"><span class="label">Answered</span><span class="value" id="finalAnswered">0</span></div>
+        <div class="stat"><span class="label">Wrong</span><span class="value" id="finalWrong">0</span></div>
+        <div class="stat"><span class="label">Skipped</span><span class="value" id="finalSkipped">0</span></div>
+      </div>
+
+      <div id="recapList" class="recap-list"></div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      { q: "What does PV stand for?", opts: ["Profit Value","Present Value","Payment Value","Principal Value"], ans: 1, exp: "PV means Present Value." },
+      { q: "What does FV stand for?", opts: ["Fixed Value","Future Value","Final Value","Financial Value"], ans: 1, exp: "FV means Future Value." },
+      { q: "Which formula is correct for Present Value?", opts: ["PV=FV×(1+r)^n","PV=FV/(1+r)^n","PV=FV+r+n","PV=FV/(r+n)"], ans: 1, exp: "Present Value discounts the future cash flow by the rate over time." },
+      { q: "Which formula is correct for Future Value?", opts: ["FV=PV×(1+r)^n","FV=PV/(1+r)^n","FV=PV-r-n","FV=PV/(r+n)"], ans: 0, exp: "Future Value compounds the present value forward." },
+      { q: "In the PV formula, what does r represent?", opts: ["Revenue","Rate of return or discount rate","Risk ratio","Residual value"], ans: 1, exp: "r is the rate of return or discount rate." },
+      { q: "In the FV formula, what does n represent?", opts: ["Number of years or periods","Net income","Nominal value","New investment"], ans: 0, exp: "n is the number of years or periods." },
+      { q: "If the discount rate increases, what happens to PV, assuming FV stays constant?", opts: ["PV increases","PV decreases","PV stays the same","PV becomes negative automatically"], ans: 1, exp: "A higher discount rate lowers the present value." },
+      { q: "If the number of periods increases, what happens to FV, assuming PV stays constant and r>0?", opts: ["FV decreases","FV increases","FV stays the same","FV becomes zero"], ans: 1, exp: "More periods mean more compounding, so FV increases." },
+      { q: "A payment of $1,000 received in 3 years at 10% discount rate has a PV closest to:", opts: ["$600.00","$751.31","$900.00","$1,331.00"], ans: 1, exp: "PV = 1000 / 1.1^3 ≈ 751.31." },
+      { q: "An investment of $1,000 today at 10% annual interest for 3 years has a FV closest to:", opts: ["$751.31","$1,100.00","$1,331.00","$1,500.00"], ans: 2, exp: "FV = 1000 × 1.1^3 = 1331." },
+      { q: "Which statement best describes PV?", opts: ["The value of money in the future","The value of money today","The total profits from a project","The number of years until maturity"], ans: 1, exp: "PV is the value of money today." },
+      { q: "Which statement best describes FV?", opts: ["The value of money today","The value of money after interest accumulation","The amount lost due to inflation only","The cash flow at time zero"], ans: 1, exp: "FV is the value after interest accumulates over time." },
+      { q: "If PV=500, r=5%, and n=2, what is FV approximately?", opts: ["$525.00","$550.00","$551.25","$575.00"], ans: 2, exp: "FV = 500 × 1.05^2 = 551.25." },
+      { q: "If FV=1,000, r=5%, and n=2, what is PV approximately?", opts: ["$907.03","$950.00","$980.00","$1,050.00"], ans: 0, exp: "PV = 1000 / 1.05^2 ≈ 907.03." },
+      { q: "The formula FV=PV(1+r)^n assumes:", opts: ["Simple subtraction","Compound growth","No interest","Negative returns only"], ans: 1, exp: "This is compound growth." },
+      { q: "The formula PV=FV/(1+r)^n is an example of:", opts: ["Discounting","Compounding","Amortization","Depreciation"], ans: 0, exp: "It discounts future value back to present value." },
+      { q: "If money is received sooner, its present value is generally:", opts: ["Lower","Higher","Unchanged","Equal to FV"], ans: 1, exp: "Receiving money sooner increases its present value." },
+      { q: "Which factor does NOT appear in the basic PV/FV formulas?", opts: ["r","n","Cash flow amount","Market share"], ans: 3, exp: "Market share is not part of the basic formulas." },
+      { q: "If the discount rate is 0%, then PV equals:", opts: ["0","FV","FV divided by 2","Negative FV"], ans: 1, exp: "At 0% discount rate, PV = FV." },
+      { q: "If the interest rate is 0%, then FV equals:", opts: ["PV","PV squared","Zero","PV divided by n"], ans: 0, exp: "At 0% interest, FV = PV." },
+
+      { q: "If interest is compounded m times per year, the FV formula becomes:", opts: ["FV=PV(1+r)^mt","FV=PV(1+r/m)^(mt)","FV=PV/(1+r/m)^(mt)","FV=PV+r+mt"], ans: 1, exp: "For compounding m times per year, use FV = PV(1+r/m)^(mt)." },
+      { q: "If interest is compounded m times per year, the PV formula becomes:", opts: ["PV=FV(1+r/m)^(mt)","PV=FV/(1+r/m)^(mt)","PV=FV(1-r/m)^(mt)","PV=FV/rmt"], ans: 1, exp: "PV discounts using the same compounding structure." },
+      { q: "In the compound interest formula, m refers to:", opts: ["Monthly margin","Number of compounding periods per year","Maximum return","Market multiple"], ans: 1, exp: "m is the number of compounding periods per year." },
+      { q: "If an investment compounds quarterly, then m=", opts: ["2","4","12","365"], ans: 1, exp: "Quarterly compounding means 4 periods per year." },
+      { q: "If an investment compounds monthly, then m=", opts: ["4","6","12","24"], ans: 2, exp: "Monthly compounding means 12 periods per year." },
+      { q: "If annual nominal rate is 12% compounded monthly, the periodic rate is:", opts: ["12%","6%","1%","0.12%"], ans: 2, exp: "12% divided by 12 = 1% per month." },
+      { q: "Which formula correctly discounts with monthly compounding?", opts: ["PV=FV/(1+r)^n","PV=FV/(1+r/12)^(12t)","PV=FV(1+r)^n","PV=FV/12r"], ans: 1, exp: "Use the monthly periodic rate and 12t periods." },
+      { q: "If compounding frequency increases and the nominal rate stays the same, FV will generally:", opts: ["Decrease","Increase slightly","Stay unchanged","Become negative"], ans: 1, exp: "More frequent compounding usually increases FV." },
+      { q: "The time variable t in the multi-compounding formula usually means:", opts: ["Total cash flow","Number of years","Tax rate","Terminal value"], ans: 1, exp: "t usually represents years." },
+      { q: "Which option is closest to the meaning of “compound interest”?", opts: ["Interest earned only on the original principal","Interest earned on principal plus accumulated interest","Interest paid only at maturity","Interest ignored in calculations"], ans: 1, exp: "Compound interest is interest on principal plus accumulated interest." },
+
+      { q: "What does ROI stand for?", opts: ["Rate of Investment","Return on Investment","Revenue of Income","Result of Interest"], ans: 1, exp: "ROI means Return on Investment." },
+      { q: "The formula for ROI is:", opts: ["ROI=Net profit / Investment cost ×100%","ROI=Investment cost / Net profit ×100%","ROI=Profit+Cost","ROI=Cash flow / r"], ans: 0, exp: "ROI = net profit divided by investment cost, times 100%." },
+      { q: "If an investor spends $100 and earns $130, ROI is:", opts: ["13%","20%","30%","130%"], ans: 2, exp: "Net profit is $30, so ROI = 30%." },
+      { q: "Net profit in ROI is generally:", opts: ["Revenue minus investment cost","Investment cost minus revenue","Revenue divided by cost","Discount rate minus cost"], ans: 0, exp: "Net profit = revenue minus investment cost." },
+      { q: "A higher ROI generally means:", opts: ["Lower profitability","Better return on investment","Longer payback only","Lower cash flows always"], ans: 1, exp: "Higher ROI indicates a better return." },
+      { q: "ROI is usually expressed as:", opts: ["Dollars","Days","Percentage","Years"], ans: 2, exp: "ROI is usually shown as a percentage." },
+
+      { q: "What does Payback Period measure?", opts: ["Total accounting profit","Time required to recover initial investment","Future value of cash flows","Rate of inflation"], ans: 1, exp: "Payback period measures the time needed to recover the initial investment." },
+      { q: "For equal annual cash inflows, Payback Period is:", opts: ["Initial investment / annual net cash inflow","Annual net cash inflow / initial investment","Initial investment × annual net cash inflow","Discount rate × years"], ans: 0, exp: "For equal inflows, divide initial investment by annual inflow." },
+      { q: "If initial investment is $200 and annual cash inflow is $50, payback period is:", opts: ["2 years","3 years","4 years","5 years"], ans: 2, exp: "200 / 50 = 4 years." },
+      { q: "A shorter payback period generally indicates:", opts: ["Slower recovery of capital","Faster recovery of capital","Lower cash inflows only","Higher discount rate only"], ans: 1, exp: "A shorter period means faster recovery." },
+      { q: "Payback Period ignores:", opts: ["The time value of money in its simple version","The initial investment","Cash inflows","Project duration"], ans: 0, exp: "The simple payback period ignores the time value of money." },
+      { q: "Which of the following is true about payback period with uneven cash flows?", opts: ["You simply divide investment by the first-year inflow","You accumulate cash flows until the initial investment is recovered","It cannot be calculated","It is always equal to one year"], ans: 1, exp: "For uneven cash flows, you accumulate them until recovery." },
+
+      { q: "What does NPV stand for?", opts: ["Net Profit Value","Net Present Value","New Project Value","Nominal Present Value"], ans: 1, exp: "NPV means Net Present Value." },
+      { q: "The formula for NPV is:", opts: ["NPV=∑(CF_t)/(1+r)^t - C_0","NPV=∑C F_t(1+r)^t + C_0","NPV=C_0/(CF_t)","NPV=IRR-r"], ans: 0, exp: "NPV discounts all future cash flows and subtracts the initial investment." },
+      { q: "In the NPV formula, CF_t represents:", opts: ["Cash flow at time t","Capital financing","Current fixed cost","Company fee"], ans: 0, exp: "CF_t is the cash flow at time t." },
+      { q: "In the NPV formula, C_0 represents:", opts: ["Final cash flow","Initial investment","Discount factor","Tax rate"], ans: 1, exp: "C_0 is the initial investment." },
+      { q: "If NPV is positive, the project:", opts: ["Should generally be accepted","Should automatically be rejected","Has zero return","Has no cash flow"], ans: 0, exp: "Positive NPV generally means accept the project." },
+      { q: "If NPV is negative, the project:", opts: ["Creates value","Should generally be rejected","Is always profitable","Has IRR above the discount rate"], ans: 1, exp: "Negative NPV generally means reject the project." },
+      { q: "NPV takes into account:", opts: ["Time value of money","Only accounting profit","Only tax rate","Only sales volume"], ans: 0, exp: "NPV includes the time value of money." },
+      { q: "When NPV equals zero, the project is:", opts: ["Unprofitable","At break-even in present value terms","Guaranteed to fail","Worthless"], ans: 1, exp: "NPV = 0 means break-even in present value terms." },
+
+      { q: "What does IRR stand for?", opts: ["Internal Return Ratio","Internal Rate of Return","Investment Recovery Rate","Income Rate Ratio"], ans: 1, exp: "IRR means Internal Rate of Return." },
+      { q: "IRR is the discount rate that makes:", opts: ["ROI = 100%","NPV = 0","FV = 0","Payback Period = 0"], ans: 1, exp: "IRR is the rate that sets NPV to zero." },
+      { q: "If IRR is greater than the required rate of return, the project should generally be:", opts: ["Rejected","Accepted","Ignored","Doubled"], ans: 1, exp: "If IRR exceeds the required return, accept the project." },
+      { q: "If IRR is lower than the required rate of return, the project should generally be:", opts: ["Accepted","Rejected","Guaranteed profitable","Converted to NPV"], ans: 1, exp: "If IRR is below the required return, reject the project." },
+      { q: "IRR is often found using:", opts: ["Manual division only","Excel or financial software","A calculator with no memory","Simple addition"], ans: 1, exp: "IRR is usually computed with Excel or financial software." },
+      { q: "In Excel, the function used to calculate IRR is:", opts: ["=NPV()","=IRR()","=FV()","=ROI()"], ans: 1, exp: "Excel uses the IRR function." },
+
+      { q: "What does PI stand for?", opts: ["Profit Index","Performance Index","Profitability Index","Present Interest"], ans: 2, exp: "PI means Profitability Index." },
+      { q: "The formula for PI is:", opts: ["PI=PV of future cash inflows / Initial investment","PI=Initial investment / PV of future cash inflows","PI=NPV+ROI","PI=FV-PV"], ans: 0, exp: "PI is the PV of inflows divided by initial investment." },
+      { q: "If PI is greater than 1, the project:", opts: ["Should generally be accepted","Should generally be rejected","Has zero profit","Has negative cash flows only"], ans: 0, exp: "PI > 1 generally indicates acceptance." },
+      { q: "If PI equals 1, the project is:", opts: ["Highly profitable","Break-even in present value terms","Impossible to evaluate","Always losing money"], ans: 1, exp: "PI = 1 means break-even in present value terms." }
+    ];
+
+    const state = {
+      answers: Array(questions.length).fill(null),
+      locked: Array(questions.length).fill(false),
+      submitted: false
+    };
+
+    const quizArea = document.getElementById("quizArea");
+    const scoreEl = document.getElementById("score");
+    const totalCountEl = document.getElementById("totalCount");
+    const answeredCountEl = document.getElementById("answeredCount");
+    const answeredMetaEl = document.getElementById("answeredMeta");
+    const progressFillEl = document.getElementById("progressFill");
+    const submitBtn = document.getElementById("submitBtn");
+    const resultsCard = document.getElementById("resultsCard");
+    const finalScoreEl = document.getElementById("finalScore");
+    const finalAnsweredEl = document.getElementById("finalAnswered");
+    const finalWrongEl = document.getElementById("finalWrong");
+    const finalSkippedEl = document.getElementById("finalSkipped");
+    const recapList = document.getElementById("recapList");
+    const retryBtn = document.getElementById("retryBtn");
+
+    totalCountEl.textContent = questions.length;
+
+    function keyLabel(i){ return String.fromCharCode(65 + i); }
+
+    function updateTopbar(){
+      const answered = state.answers.filter(v => v !== null).length;
+      const score = state.answers.reduce((acc, ans, i) => acc + (ans === questions[i].ans ? 1 : 0), 0);
+      scoreEl.textContent = state.submitted ? score : score;
+      answeredCountEl.textContent = answered;
+      answeredMetaEl.textContent = `${answered} answered`;
+      progressFillEl.style.width = `${(answered / questions.length) * 100}%`;
+    }
+
+    function renderQuiz(){
+      quizArea.innerHTML = "";
+      questions.forEach((item, index) => {
+        const card = document.createElement("article");
+        card.className = "question-card";
+        card.dataset.index = index;
+
+        const head = document.createElement("div");
+        head.className = "question-head";
+
+        const num = document.createElement("div");
+        num.className = "q-num";
+        num.textContent = `Question ${index + 1}`;
+
+        const q = document.createElement("p");
+        q.className = "q-text";
+        q.textContent = item.q;
+
+        head.appendChild(num);
+        head.appendChild(q);
+
+        const options = document.createElement("div");
+        options.className = "options";
+
+        item.opts.forEach((opt, optIndex) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "option";
+          btn.innerHTML = `<span class="opt-key">${keyLabel(optIndex)}</span><span>${opt}</span>`;
+          btn.addEventListener("click", () => selectAnswer(index, optIndex));
+          options.appendChild(btn);
+        });
+
+        const feedback = document.createElement("div");
+        feedback.className = "feedback";
+        feedback.id = `feedback-${index}`;
+
+        card.appendChild(head);
+        card.appendChild(options);
+        card.appendChild(feedback);
+        quizArea.appendChild(card);
+      });
+    }
+
+    function selectAnswer(qIndex, optIndex){
+      if(state.locked[qIndex]) return;
+      state.answers[qIndex] = optIndex;
+      state.locked[qIndex] = true;
+
+      const card = quizArea.querySelector(`.question-card[data-index="${qIndex}"]`);
+      const buttons = card.querySelectorAll(".option");
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if(i === questions[qIndex].ans) btn.classList.add("correct");
+        if(i === optIndex && optIndex !== questions[qIndex].ans) btn.classList.add("wrong");
+      });
+
+      const feedback = card.querySelector(".feedback");
+      const correctText = `${keyLabel(questions[qIndex].ans)}. ${questions[qIndex].opts[questions[qIndex].ans]}`;
+      const chosenText = `${keyLabel(optIndex)}. ${questions[qIndex].opts[optIndex]}`;
+      feedback.innerHTML = state.submitted
+        ? ""
+        : `<strong>Your answer:</strong> ${chosenText}<br><strong>Correct answer:</strong> ${correctText}<br>${questions[qIndex].exp}`;
+      feedback.classList.add("show");
+      updateTopbar();
+    }
+
+    function submitQuiz(){
+      state.submitted = true;
+
+      let score = 0;
+      let wrong = 0;
+      let skipped = 0;
+
+      recapList.innerHTML = "";
+
+      questions.forEach((item, index) => {
+        const card = quizArea.querySelector(`.question-card[data-index="${index}"]`);
+        const buttons = card.querySelectorAll(".option");
+        const feedback = card.querySelector(".feedback");
+        const ans = state.answers[index];
+
+        buttons.forEach((btn, i) => {
+          btn.disabled = true;
+          btn.classList.remove("correct", "wrong");
+          if(i === item.ans) btn.classList.add("correct");
+          if(ans !== null && i === ans && ans !== item.ans) btn.classList.add("wrong");
+        });
+
+        if(ans === null){
+          skipped++;
+          const recap = document.createElement("div");
+          recap.className = "recap-item skip";
+          recap.innerHTML = `
+            <div class="tag skip">Skipped</div>
+            <h3>Question ${index + 1}</h3>
+            <p><strong>${item.q}</strong></p>
+            <p><strong>Correct answer:</strong> ${keyLabel(item.ans)}. ${item.opts[item.ans]}</p>
+            <p>${item.exp}</p>
+          `;
+          recapList.appendChild(recap);
+          feedback.innerHTML = `<strong>Skipped.</strong><br><strong>Correct answer:</strong> ${keyLabel(item.ans)}. ${item.opts[item.ans]}<br>${item.exp}`;
+          feedback.classList.add("show");
+        } else if(ans === item.ans){
+          score++;
+          feedback.innerHTML = `<strong>Correct.</strong><br>${item.exp}`;
+          feedback.classList.add("show");
+        } else {
+          wrong++;
+          const recap = document.createElement("div");
+          recap.className = "recap-item bad";
+          recap.innerHTML = `
+            <div class="tag bad">Wrong</div>
+            <h3>Question ${index + 1}</h3>
+            <p><strong>${item.q}</strong></p>
+            <p><strong>Your answer:</strong> ${keyLabel(ans)}. ${item.opts[ans]}</p>
+            <p><strong>Correct answer:</strong> ${keyLabel(item.ans)}. ${item.opts[item.ans]}</p>
+            <p>${item.exp}</p>
+          `;
+          recapList.appendChild(recap);
+          feedback.innerHTML = `<strong>Your answer:</strong> ${keyLabel(ans)}. ${item.opts[ans]}<br><strong>Correct answer:</strong> ${keyLabel(item.ans)}. ${item.opts[item.ans]}<br>${item.exp}`;
+          feedback.classList.add("show");
+        }
+      });
+
+      scoreEl.textContent = score;
+      finalScoreEl.textContent = `${score}/${questions.length}`;
+      finalAnsweredEl.textContent = questions.filter((_, i) => state.answers[i] !== null).length;
+      finalWrongEl.textContent = wrong;
+      finalSkippedEl.textContent = skipped;
+
+      resultsCard.classList.add("show");
+      updateTopbar();
+      resultsCard.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    function retryQuiz(){
+      state.answers = Array(questions.length).fill(null);
+      state.locked = Array(questions.length).fill(false);
+      state.submitted = false;
+      renderQuiz();
+      resultsCard.classList.remove("show");
+      scoreEl.textContent = "0";
+      updateTopbar();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    submitBtn.addEventListener("click", submitQuiz);
+    retryBtn.addEventListener("click", retryQuiz);
+
+    renderQuiz();
+    updateTopbar();
+  </script>
+</body>
+</html>

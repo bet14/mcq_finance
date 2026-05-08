@@ -550,7 +550,17 @@
       { q: "What does PI stand for?", opts: ["Profit Index","Performance Index","Profitability Index","Present Interest"], ans: 2, exp: "PI means Profitability Index." },
       { q: "The formula for PI is:", opts: ["PI=PV of future cash inflows / Initial investment","PI=Initial investment / PV of future cash inflows","PI=NPV+ROI","PI=FV-PV"], ans: 0, exp: "PI is the PV of inflows divided by initial investment." },
       { q: "If PI is greater than 1, the project:", opts: ["Should generally be accepted","Should generally be rejected","Has zero profit","Has negative cash flows only"], ans: 0, exp: "PI > 1 generally indicates acceptance." },
-      { q: "If PI equals 1, the project is:", opts: ["Highly profitable","Break-even in present value terms","Impossible to evaluate","Always losing money"], ans: 1, exp: "PI = 1 means break-even in present value terms." }
+      { q: "If PI equals 1, the project is:", opts: ["Highly profitable","Break-even in present value terms","Impossible to evaluate","Always losing money"], ans: 1, exp: "PI = 1 means break-even in present value terms." },
+   { q: "What does DCF stand for?", opts: ["Discounted Cost of Finance", "Discounted Cash Flow", "Direct Cash Forecast", "Debt Cash Formula"], ans: 1, exp: "DCF stands for Discounted Cash Flow." },
+{ q: "The main idea behind DCF is that:", opts: ["Future cash flows are worth more than present cash flows", "Present and future cash flows have equal value", "Future cash flows are discounted to present value", "Only accounting profit matters"], ans: 2, exp: "DCF values future cash flows by discounting them back to today." },
+{ q: "Which formula correctly represents DCF?", opts: ["∑CF_t(1+r)^t", "∑CF_t/(1+r)^t", "∑CF_t(1−r)^t", "∑CF_t−r^t"], ans: 1, exp: "DCF is calculated by discounting each future cash flow by (1+r)^t." },
+{ q: "In a DCF model, the discount rate often reflects:", opts: ["Marketing cost only", "Inflation only", "Risk and time value of money", "Book value of assets"], ans: 2, exp: "The discount rate includes risk and the time value of money." },
+{ q: "What is usually used as the discount rate for firm valuation in DCF?", opts: ["ROE", "EPS", "WACC", "EBITDA"], ans: 2, exp: "WACC is commonly used as the discount rate in firm valuation." },
+{ q: "Free Cash Flow is best described as:", opts: ["Cash available after operating expenses and capital expenditures", "Net income before taxes only", "Revenue after discounts", "Cash held in bank accounts only"], ans: 0, exp: "Free Cash Flow is the cash left after operating expenses and capital expenditures." },
+{ q: "Terminal Value in DCF is used to estimate:", opts: ["The value of the first year only", "The value of cash flows beyond the forecast period", "Historical cost of assets", "Tax liabilities only"], ans: 1, exp: "Terminal Value captures the value of cash flows after the explicit forecast period." },
+{ q: "Which of the following is a common terminal value formula?", opts: ["TV=FCF×r", "TV=FCF_(n+1)/(WACC−g)", "TV=WACC/FCF_(n+1)", "TV=FCF_n+g"], ans: 1, exp: "A common terminal value formula is TV = FCF_(n+1) / (WACC − g)." },
+{ q: "DCF is most sensitive to changes in:", opts: ["Office rent", "Discount rate and terminal growth rate", "Number of employees", "Inventory turnover only"], ans: 1, exp: "DCF results are highly sensitive to the discount rate and terminal growth rate." },
+{ q: "If the discount rate increases, the present value of future cash flows will:", opts: ["Increase", "Decrease", "Stay the same", "Become zero immediately"], ans: 1, exp: "A higher discount rate lowers the present value of future cash flows." }
     ];
 
     const state = {

@@ -602,72 +602,75 @@
                 "correct": 2,
                 "explanation": "The correct answer is C. 15\u201320%. ROE measures the profitability of a business in relation to equity."
         },
-        {
-                "question": "What does ROI stand for?",
-                "options": [
-                        "A. Rate of Inventory",
-                        "B. Return on Investment",
-                        "C. Revenue on Income",
-                        "D. Return of Interest"
-                ],
-                "correct": 1,
-                "explanation": "The correct answer is B. Return on Investment."
-        },
-        {
-                "question": "Payback period refers to:",
-                "options": [
-                        "A. Time needed to recover the initial investment",
-                        "B. Time to pay employees",
-                        "C. Time to collect receivables",
-                        "D. Time to replace inventory"
-                ],
-                "correct": 0,
-                "explanation": "The correct answer is A. Time needed to recover the initial investment."
-        },
-        {
-                "question": "What does PV mean in finance?",
-                "options": [
-                        "A. Present Value",
-                        "B. Profit Volume",
-                        "C. Price Variation",
-                        "D. Payment Value"
-                ],
-                "correct": 0,
-                "explanation": "The correct answer is A. Present Value."
-        },
-        {
-                "question": "What does FV mean in finance?",
-                "options": [
-                        "A. Final Value",
-                        "B. Future Value",
-                        "C. Financial Value",
-                        "D. Funded Value"
-                ],
-                "correct": 1,
-                "explanation": "The correct answer is B. Future Value."
-        },
-        {
-                "question": "What does NPV stand for?",
-                "options": [
-                        "A. Net Present Value",
-                        "B. Net Profit Variation",
-                        "C. Normal Profit Value",
-                        "D. New Project Value"
-                ],
-                "correct": 0,
-                "explanation": "The correct answer is A. Net Present Value."
-        },
-        {
-                "question": "What does IRR stand for?",
-                "options": [
-                        "A. Internal Rate of Return",
-                        "B. Investment Rate Ratio",
-                        "C. Income Return Rate",
-                        "D. Internal Revenue Return"
-                ],
-                "correct": 0,
-                "explanation": "The correct answer is A. Internal Rate of Return."
-        }
+     
+
+  {
+    "question": "What is the formula for ROI?",
+    "options": [
+      "A. ROI = Net Profit / Total Investment Cost",
+      "B. ROI = Total Revenue / Total Cost",
+      "C. ROI = Gross Profit / Revenue",
+      "D. ROI = Investment Cost / Net Profit"
+    ],
+    "correct": 0,
+    "explanation": "The correct answer is A. ROI = Net Profit / Total Investment Cost."
+  },
+  {
+    "question": "How is the payback period calculated?",
+    "options": [
+      "A. Initial Investment / Annual Net Cash Flow",
+      "B. Annual Net Cash Flow / Initial Investment",
+      "C. Net Profit / Revenue",
+      "D. Revenue / Operating Cost"
+    ],
+    "correct": 0,
+    "explanation": "The correct answer is A. Payback period = Initial Investment / Annual Net Cash Flow."
+  },
+  {
+    "question": "What is the formula for present value (PV) of a future amount?",
+    "options": [
+      "A. PV = FV / (1 + r)^n",
+      "B. PV = FV × (1 + r)^n",
+      "C. PV = FV - r^n",
+      "D. PV = FV / r"
+    ],
+    "correct": 0,
+    "explanation": "The correct answer is A. PV = FV / (1 + r)^n."
+  },
+  {
+    "question": "What is the formula for future value (FV) of a present amount?",
+    "options": [
+      "A. FV = PV / (1 + r)^n",
+      "B. FV = PV × (1 + r)^n",
+      "C. FV = PV - r^n",
+      "D. FV = PV / r"
+    ],
+    "correct": 1,
+    "explanation": "The correct answer is B. FV = PV × (1 + r)^n."
+  },
+  {
+    "question": "What is the formula for NPV?",
+    "options": [
+      "A. NPV = Σ CF_t / (1 + r)^t - C_0",
+      "B. NPV = Σ CF_t × (1 + r)^t + C_0",
+      "C. NPV = Revenue - Operating Cost",
+      "D. NPV = FV - PV"
+    ],
+    "correct": 0,
+    "explanation": "The correct answer is A. NPV = Σ CF_t / (1 + r)^t - C_0."
+  },
+  {
+    "question": "What is the formula for IRR?",
+    "options": [
+      "A. The discount rate that makes NPV = 0",
+      "B. The rate that maximizes profit",
+      "C. The interest rate on loans",
+      "D. The average annual return"
+    ],
+    "correct": 0,
+    "explanation": "The correct answer is A. The discount rate that makes NPV = 0."
+  }
+
 ];
 
     const userAnswers = new Array(questions.length).fill(null);

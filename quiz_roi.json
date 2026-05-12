@@ -1,0 +1,707 @@
+{
+  "title": "Calculating ROI for Technology Investments",
+  "subtitle": "Practice MCQ based on the white paper about business case analysis, ROI, NPV, payback period, and best practices.",
+  "totalQuestions": 50,
+  "questions": [
+    {
+      "question": "What is the main purpose of a business case analysis?",
+      "options": [
+        "To guarantee project approval",
+        "To help make an informed financial decision about an investment",
+        "To replace management judgment entirely",
+        "To maximize employee satisfaction"
+      ],
+      "answerIndex": 1,
+      "explanation": "A business case analysis helps determine whether an investment is in the company’s best financial interest.",
+      "category": "Core Concepts",
+      "level": "Easy",
+      "tags": ["Business Case", "Decision Making"]
+    },
+    {
+      "question": "A business case analysis is also commonly known as:",
+      "options": [
+        "A marketing forecast",
+        "A cost-benefit analysis",
+        "A balance sheet",
+        "A depreciation schedule"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper says business case analysis, cost-benefit analysis, and ROI analysis are used interchangeably.",
+      "category": "Core Concepts",
+      "level": "Easy",
+      "tags": ["CBA", "ROI"]
+    },
+    {
+      "question": "What does ROI stand for?",
+      "options": [
+        "Rate of Internalization",
+        "Return on Investment",
+        "Revenue over Income",
+        "Risk of Inflation"
+      ],
+      "answerIndex": 1,
+      "explanation": "ROI means Return on Investment.",
+      "category": "Core Concepts",
+      "level": "Easy",
+      "tags": ["ROI"]
+    },
+    {
+      "question": "Why are business case analyses especially useful in resource-constrained environments?",
+      "options": [
+        "Because all projects can then be funded",
+        "Because they help prioritize limited resources",
+        "Because they eliminate project risk",
+        "Because they remove the need for assumptions"
+      ],
+      "answerIndex": 1,
+      "explanation": "When resources are limited, a business case helps prioritize among competing projects.",
+      "category": "Core Concepts",
+      "level": "Medium",
+      "tags": ["Resource Allocation", "Prioritization"]
+    },
+    {
+      "question": "Which of the following best describes a business case analysis?",
+      "options": [
+        "A legal document for compliance",
+        "A financial assessment of expected inflows and outflows from a decision",
+        "A list of employee tasks",
+        "A sales contract template"
+      ],
+      "answerIndex": 1,
+      "explanation": "A business case analysis is a depiction of the capital inflows and outflows resulting from a decision.",
+      "category": "Core Concepts",
+      "level": "Easy",
+      "tags": ["Financial Assessment"]
+    },
+    {
+      "question": "One reason to produce a business case analysis is to avoid:",
+      "options": [
+        "Spending too much time on management reporting",
+        "Using resources on a project whose cost exceeds its benefit",
+        "Hiring skilled employees",
+        "Planning ahead"
+      ],
+      "answerIndex": 1,
+      "explanation": "It helps avoid spending more on a project than the expected benefit is worth.",
+      "category": "Why Produce a Business Case",
+      "level": "Easy",
+      "tags": ["Cost-Benefit", "Decision Quality"]
+    },
+    {
+      "question": "Which statement best reflects the paper’s view on business case analysis?",
+      "options": [
+        "It is usually wasteful",
+        "It helps reduce the chance of bad investment decisions",
+        "It should only be done after project completion",
+        "It is useful only for small projects"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper argues that business case analysis reduces the likelihood of wasting scarce resources.",
+      "category": "Why Produce a Business Case",
+      "level": "Easy",
+      "tags": ["ROI", "Investment"]
+    },
+    {
+      "question": "Without a business case analysis, a company may:",
+      "options": [
+        "Always choose the best project",
+        "Make decisions randomly or favor 'pet projects'",
+        "Eliminate bias entirely",
+        "Avoid all costs"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper warns that decisions may become haphazard or influenced by favored projects.",
+      "category": "Why Produce a Business Case",
+      "level": "Medium",
+      "tags": ["Bias", "Governance"]
+    },
+    {
+      "question": "A business case analysis is most important when:",
+      "options": [
+        "The project has no financial impact",
+        "The company has unlimited resources",
+        "The investment is significant and resources are limited",
+        "The project is already approved"
+      ],
+      "answerIndex": 2,
+      "explanation": "It is especially valuable for high-magnitude decisions and constrained environments.",
+      "category": "Why Produce a Business Case",
+      "level": "Medium",
+      "tags": ["Prioritization", "Capital Allocation"]
+    },
+    {
+      "question": "The paper suggests that a business case analysis should be:",
+      "options": [
+        "Static and never revised",
+        "Iterative and refined over time",
+        "Based only on intuition",
+        "Confidential to one person only"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper says business case production should be iterative, with changes made along the way.",
+      "category": "Process",
+      "level": "Easy",
+      "tags": ["Iteration", "Review"]
+    },
+    {
+      "question": "Which is a common objection to producing a business case analysis?",
+      "options": [
+        "It is too inexpensive",
+        "It takes effort and time",
+        "It always produces the same answer",
+        "It cannot be reviewed"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper explicitly lists effort and time as a common objection.",
+      "category": "Objections",
+      "level": "Easy",
+      "tags": ["Time", "Effort"]
+    },
+    {
+      "question": "The paper’s response to the 'it takes too much effort' objection is:",
+      "options": [
+        "Effort is unnecessary",
+        "The cost of analysis is small compared with the cost of a bad project",
+        "Only accountants can do it",
+        "ROI is impossible to calculate"
+      ],
+      "answerIndex": 1,
+      "explanation": "The cost of doing the analysis is minor compared with wasting resources on a poor investment.",
+      "category": "Objections",
+      "level": "Medium",
+      "tags": ["Opportunity Cost", "Risk"]
+    },
+    {
+      "question": "One way companies may manage the burden of business case analysis is by:",
+      "options": [
+        "Requiring every tiny task to have a full ROI model",
+        "Setting a cost threshold above which a business case is required",
+        "Removing all approval processes",
+        "Ignoring project size"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper suggests using a scale qualification or threshold for requiring a business case.",
+      "category": "Objections",
+      "level": "Medium",
+      "tags": ["Threshold", "Governance"]
+    },
+    {
+      "question": "What does 'gaming' a business case analysis mean?",
+      "options": [
+        "Playing a simulation game",
+        "Distorting inputs to make a project look better",
+        "Improving data quality",
+        "Building a dashboard"
+      ],
+      "answerIndex": 1,
+      "explanation": "Gaming means manipulating assumptions, deliberately or unintentionally, to create a favorable outcome.",
+      "category": "Objections",
+      "level": "Easy",
+      "tags": ["Bias", "Assumptions"]
+    },
+    {
+      "question": "Why is 'gaming' especially likely in some cases?",
+      "options": [
+        "Because no one cares about the project",
+        "Because the person preparing the analysis may personally benefit if the project is approved",
+        "Because the analysis is always public",
+        "Because costs cannot be estimated"
+      ],
+      "answerIndex": 1,
+      "explanation": "Incentives such as influence, compensation, or job security can bias projections.",
+      "category": "Objections",
+      "level": "Medium",
+      "tags": ["Conflict of Interest", "Bias"]
+    },
+    {
+      "question": "Which is recommended to reduce the risk of gaming?",
+      "options": [
+        "A corporate-approved template",
+        "Avoiding any documentation",
+        "Letting each manager create their own format",
+        "Hiding key assumptions"
+      ],
+      "answerIndex": 0,
+      "explanation": "A standardized template makes it harder to adjust assumptions without review.",
+      "category": "Objections",
+      "level": "Easy",
+      "tags": ["Template", "Transparency"]
+    },
+    {
+      "question": "Why is documentation important in a business case analysis?",
+      "options": [
+        "To make the file longer",
+        "To support and defend the assumptions and projections",
+        "To avoid financial modeling",
+        "To eliminate the need for review"
+      ],
+      "answerIndex": 1,
+      "explanation": "Documentation improves transparency and helps defend the analysis.",
+      "category": "Objections",
+      "level": "Easy",
+      "tags": ["Documentation", "Defensibility"]
+    },
+    {
+      "question": "The paper suggests that third parties can be used to:",
+      "options": [
+        "Replace all managers",
+        "Produce unbiased business case analyses",
+        "Ignore financial metrics",
+        "Approve projects automatically"
+      ],
+      "answerIndex": 1,
+      "explanation": "A third party may have less incentive to exaggerate projections and can provide BCA expertise.",
+      "category": "Objections",
+      "level": "Medium",
+      "tags": ["Third Party", "Objectivity"]
+    },
+    {
+      "question": "What are the four main steps of business case production described in the paper?",
+      "options": [
+        "Hire staff, buy software, train users, launch project",
+        "Forecast benefits, project costs, map benefit and cost projections, calculate key financial metrics",
+        "Build dashboard, publish report, sign contract, evaluate team",
+        "Identify risks, create schedule, write memo, close project"
+      ],
+      "answerIndex": 1,
+      "explanation": "These are the four steps listed in the paper.",
+      "category": "Process",
+      "level": "Easy",
+      "tags": ["Process", "Workflow"]
+    },
+    {
+      "question": "In which step does the analyst estimate the value of future gains from the project?",
+      "options": [
+        "Project costs",
+        "Forecast benefits",
+        "Map benefit and cost projections",
+        "Payback calculation"
+      ],
+      "answerIndex": 1,
+      "explanation": "Forecasting benefits means estimating the future value created by the investment.",
+      "category": "Process",
+      "level": "Easy",
+      "tags": ["Benefits", "Forecasting"]
+    },
+    {
+      "question": "What is often the most challenging step?",
+      "options": [
+        "Forecasting benefits",
+        "Printing the report",
+        "Closing the project",
+        "Choosing fonts"
+      ],
+      "answerIndex": 0,
+      "explanation": "The paper explicitly says forecasting benefits is often the most challenging step.",
+      "category": "Process",
+      "level": "Easy",
+      "tags": ["Benefits", "Analysis"]
+    },
+    {
+      "question": "Why is forecasting benefits difficult?",
+      "options": [
+        "Because benefits are always fixed and obvious",
+        "Because it requires understanding the current and future state and assigning financial value to the difference",
+        "Because no data is ever available",
+        "Because it only involves accounting depreciation"
+      ],
+      "answerIndex": 1,
+      "explanation": "The analyst must compare current versus future conditions and monetize the change.",
+      "category": "Process",
+      "level": "Medium",
+      "tags": ["Forecasting", "Value Creation"]
+    },
+    {
+      "question": "What type of work may be essential for forecasting benefits?",
+      "options": [
+        "Data collection and process mapping",
+        "Graphic design",
+        "Customer service scripting",
+        "Payroll processing"
+      ],
+      "answerIndex": 0,
+      "explanation": "The paper says data collection and process mapping may be essential.",
+      "category": "Process",
+      "level": "Easy",
+      "tags": ["Data", "Process Mapping"]
+    },
+    {
+      "question": "What is the primary role of project costs in a business case?",
+      "options": [
+        "To describe only future revenue",
+        "To estimate all expenses associated with the project",
+        "To replace benefit estimates",
+        "To avoid data gathering"
+      ],
+      "answerIndex": 1,
+      "explanation": "Project costs include acquisition and internal costs associated with the project.",
+      "category": "Process",
+      "level": "Easy",
+      "tags": ["Costs", "Budgeting"]
+    },
+    {
+      "question": "Compared with benefits, costs are often:",
+      "options": [
+        "More difficult to project",
+        "More straightforward to project",
+        "Impossible to estimate",
+        "Unimportant in ROI analysis"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper says projecting costs is often more straightforward than projecting benefits.",
+      "category": "Process",
+      "level": "Easy",
+      "tags": ["Costs", "Projection"]
+    },
+    {
+      "question": "For a technology investment, vendor-provided cost projections often cover:",
+      "options": [
+        "Only revenue growth",
+        "Acquisition and ongoing maintenance",
+        "Employee satisfaction scores",
+        "Stock price forecasts"
+      ],
+      "answerIndex": 1,
+      "explanation": "Vendors typically provide costs for acquisition and maintenance.",
+      "category": "Costs",
+      "level": "Easy",
+      "tags": ["Vendor", "Maintenance"]
+    },
+    {
+      "question": "Why must internal costs also be included?",
+      "options": [
+        "Because internal costs never matter",
+        "Because employee time and other internal resources are consumed by the project",
+        "Because only outside vendors should be paid",
+        "Because internal costs are always zero"
+      ],
+      "answerIndex": 1,
+      "explanation": "Projects consume internal labor and support resources, so those costs must be counted.",
+      "category": "Costs",
+      "level": "Medium",
+      "tags": ["Internal Costs", "Labor"]
+    },
+    {
+      "question": "Which of the following is an example of an internal cost?",
+      "options": [
+        "Vendor license fee",
+        "Employee time spent implementing software",
+        "Revenue from a new product",
+        "Customer demand growth"
+      ],
+      "answerIndex": 1,
+      "explanation": "Internal labor is a project cost.",
+      "category": "Costs",
+      "level": "Easy",
+      "tags": ["Internal Cost", "Implementation"]
+    },
+    {
+      "question": "“Map benefit and cost projections” mainly refers to:",
+      "options": [
+        "Matching benefits and costs over time periods",
+        "Choosing a font for the report",
+        "Eliminating all uncertainties",
+        "Converting the report into a legal contract"
+      ],
+      "answerIndex": 0,
+      "explanation": "Mapping means aligning the timing of inflows and outflows across periods.",
+      "category": "Process",
+      "level": "Medium",
+      "tags": ["Timing", "Cash Flow"]
+    },
+    {
+      "question": "Why is timing important in ROI analysis?",
+      "options": [
+        "Because benefits and costs occur in the same moment in all projects",
+        "Because future values must be compared over the correct periods",
+        "Because timing makes the analysis optional",
+        "Because timing only matters for accounting taxes"
+      ],
+      "answerIndex": 1,
+      "explanation": "Financial metrics depend on when money is spent or received.",
+      "category": "Process",
+      "level": "Medium",
+      "tags": ["Timing", "Valuation"]
+    },
+    {
+      "question": "In a business case, benefits should usually be:",
+      "options": [
+        "Estimated conservatively",
+        "Exaggerated",
+        "Ignored if uncertain",
+        "Fixed by policy only"
+      ],
+      "answerIndex": 0,
+      "explanation": "The paper emphasizes transparency and conservatism.",
+      "category": "Best Practices",
+      "level": "Easy",
+      "tags": ["Conservative", "Assumptions"]
+    },
+    {
+      "question": "A conservative business case is one that:",
+      "options": [
+        "Uses unrealistic upside assumptions",
+        "Avoids all projections",
+        "Uses reasonable, defensible estimates",
+        "Ignores costs"
+      ],
+      "answerIndex": 2,
+      "explanation": "Conservative means careful and not overstated.",
+      "category": "Best Practices",
+      "level": "Easy",
+      "tags": ["Conservative", "Defensible"]
+    },
+    {
+      "question": "Which of the following is explicitly mentioned as a key financial metric?",
+      "options": [
+        "Gross margin only",
+        "ROI, NPV, and payback period",
+        "EBITDA and EPS only",
+        "Market share and churn rate"
+      ],
+      "answerIndex": 1,
+      "explanation": "The abstract names ROI, NPV, and payback period.",
+      "category": "Financial Metrics",
+      "level": "Easy",
+      "tags": ["ROI", "NPV", "Payback Period"]
+    },
+    {
+      "question": "NPV stands for:",
+      "options": [
+        "Net Present Value",
+        "New Project Value",
+        "Net Profit Variation",
+        "Normalized Portfolio Value"
+      ],
+      "answerIndex": 0,
+      "explanation": "NPV means Net Present Value.",
+      "category": "Financial Metrics",
+      "level": "Easy",
+      "tags": ["NPV"]
+    },
+    {
+      "question": "Payback period measures:",
+      "options": [
+        "The total profit over ten years",
+        "How long it takes to recover the initial investment",
+        "The average salary cost",
+        "The number of project team members"
+      ],
+      "answerIndex": 1,
+      "explanation": "Payback period shows how long it takes for benefits to recover the initial outlay.",
+      "category": "Financial Metrics",
+      "level": "Easy",
+      "tags": ["Payback", "Recovery"]
+    },
+    {
+      "question": "NPV is useful because it:",
+      "options": [
+        "Ignores the time value of money",
+        "Accounts for the time value of money",
+        "Measures employee morale",
+        "Only works for costs, not benefits"
+      ],
+      "answerIndex": 1,
+      "explanation": "NPV discounts future cash flows to present value.",
+      "category": "Financial Metrics",
+      "level": "Medium",
+      "tags": ["Time Value of Money", "Discounting"]
+    },
+    {
+      "question": "ROI generally helps answer which question?",
+      "options": [
+        "How many employees should be hired?",
+        "Whether the project’s returns justify its costs",
+        "Whether the company needs a new logo",
+        "How to write a press release"
+      ],
+      "answerIndex": 1,
+      "explanation": "ROI measures the attractiveness of an investment relative to its cost.",
+      "category": "Financial Metrics",
+      "level": "Easy",
+      "tags": ["ROI", "Justification"]
+    },
+    {
+      "question": "Why are multiple financial metrics useful instead of relying on only one?",
+      "options": [
+        "Because one metric always tells the complete story",
+        "Because different metrics capture different aspects of the investment",
+        "Because metrics replace assumptions",
+        "Because the company must report many numbers regardless of relevance"
+      ],
+      "answerIndex": 1,
+      "explanation": "ROI, NPV, and payback period each provide different insights.",
+      "category": "Financial Metrics",
+      "level": "Medium",
+      "tags": ["Metrics", "Comparison"]
+    },
+    {
+      "question": "A project with a good payback period is:",
+      "options": [
+        "Always the best project automatically",
+        "One that recovers its cost relatively quickly",
+        "One with no risk",
+        "One that has no upfront cost"
+      ],
+      "answerIndex": 1,
+      "explanation": "Payback period focuses on the speed of recovering the initial investment.",
+      "category": "Financial Metrics",
+      "level": "Medium",
+      "tags": ["Payback", "Investment Recovery"]
+    },
+    {
+      "question": "What does 'go/no-go decision' mean in this context?",
+      "options": [
+        "A marketing slogan",
+        "A decision whether to approve or reject a project",
+        "A technical code deployment choice only",
+        "A decision about office furniture"
+      ],
+      "answerIndex": 1,
+      "explanation": "It means deciding whether to proceed with the project.",
+      "category": "Governance",
+      "level": "Easy",
+      "tags": ["Approval", "Decision"]
+    },
+    {
+      "question": "Business case analyses are intended to support decisions that are in the best interests of:",
+      "options": [
+        "Individual project managers",
+        "Shareholders",
+        "Software vendors",
+        "Contractors only"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper frames business case analysis around shareholder interests.",
+      "category": "Governance",
+      "level": "Easy",
+      "tags": ["Shareholder Value"]
+    },
+    {
+      "question": "Why should assumptions be visible to reviewers?",
+      "options": [
+        "To make the analysis more confusing",
+        "So changes can be detected and challenged",
+        "To increase the file size",
+        "To eliminate the need for numbers"
+      ],
+      "answerIndex": 1,
+      "explanation": "Transparency helps detect gaming and improves credibility.",
+      "category": "Best Practices",
+      "level": "Medium",
+      "tags": ["Transparency", "Review"]
+    },
+    {
+      "question": "Which best describes the tone of a strong business case analysis?",
+      "options": [
+        "Promotional and emotional",
+        "Transparent, conservative, and defensible",
+        "Secretive and vague",
+        "Aggressive and speculative"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper emphasizes transparency, conservatism, and documentation.",
+      "category": "Best Practices",
+      "level": "Easy",
+      "tags": ["Best Practices", "Credibility"]
+    },
+    {
+      "question": "A business case analysis should be defended:",
+      "options": [
+        "Only by the finance team, with no input from project managers",
+        "In writing and/or in a live meeting with financial decision makers",
+        "Without any explanation",
+        "After the project has failed"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper suggests project managers defend assumptions in writing or in live discussion.",
+      "category": "Governance",
+      "level": "Medium",
+      "tags": ["Defense", "Stakeholders"]
+    },
+    {
+      "question": "Which of the following is the best summary of the paper’s overall message?",
+      "options": [
+        "Technology investments should never be analyzed",
+        "A structured business case analysis improves decision-making for major investments",
+        "ROI is only useful for accounting departments",
+        "Every project should be approved if the manager likes it"
+      ],
+      "answerIndex": 1,
+      "explanation": "The paper advocates a structured, data-driven approach to evaluating significant investments.",
+      "category": "Summary",
+      "level": "Easy",
+      "tags": ["Summary", "Decision Making"]
+    },
+    {
+      "question": "The paper implies that business case analysis is especially valuable when:",
+      "options": [
+        "There is only one possible project",
+        "Several projects compete for limited funding",
+        "The project cost is always trivial",
+        "No one is responsible for the result"
+      ],
+      "answerIndex": 1,
+      "explanation": "The analysis helps compare competing opportunities when funding is limited.",
+      "category": "Summary",
+      "level": "Medium",
+      "tags": ["Competition", "Funding"]
+    },
+    {
+      "question": "Which of the following is most likely a benefit rather than a cost?",
+      "options": [
+        "Additional maintenance fee",
+        "Employee implementation time",
+        "Labor savings from automation",
+        "Vendor support charge"
+      ],
+      "answerIndex": 2,
+      "explanation": "Labor savings are a positive outcome of the project.",
+      "category": "Benefits vs Costs",
+      "level": "Easy",
+      "tags": ["Benefits", "Automation"]
+    },
+    {
+      "question": "What makes business case analysis 'transparent'?",
+      "options": [
+        "Hidden assumptions",
+        "Clearly documented inputs and projections",
+        "No formulas",
+        "No review process"
+      ],
+      "answerIndex": 1,
+      "explanation": "Transparency comes from clearly showing assumptions and calculations.",
+      "category": "Best Practices",
+      "level": "Easy",
+      "tags": ["Transparency", "Documentation"]
+    },
+    {
+      "question": "Why might a company hire a third party to create the business case?",
+      "options": [
+        "To make the analysis less objective",
+        "To reduce the risk of biased projections",
+        "To avoid any need for documentation",
+        "To eliminate costs entirely"
+      ],
+      "answerIndex": 1,
+      "explanation": "A third party may have less incentive to distort assumptions and can add expertise.",
+      "category": "Objections",
+      "level": "Medium",
+      "tags": ["Third Party", "Bias Reduction"]
+    },
+    {
+      "question": "The business case should help answer whether the project:",
+      "options": [
+        "Looks impressive",
+        "Is worth the resources it consumes",
+        "Has the newest technology",
+        "Will make everyone happy"
+      ],
+      "answerIndex": 1,
+      "explanation": "The core comparison is between expected value and required resources.",
+      "category": "Summary",
+      "level": "Easy",
+      "tags": ["Resources", "Value"]
+    }
+  ]
+}
